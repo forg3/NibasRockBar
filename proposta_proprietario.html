@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pulseira Inteligente — Proposta</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#1B1410;
+    --bg-panel:#241B15;
+    --paper:#F6EFE2;
+    --ink:#2A2118;
+    --ink-light:#F1E7D6;
+    --ink-muted:#C9BBA4;
+    --copper:#C1873B;
+    --copper-deep:#8C5A22;
+    --hop:#5C7A5F;
+    --rule:#3A2E23;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink-light);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    margin:0;
+    color:var(--ink-light);
+  }
+  a{color:var(--copper);}
+  .wrap{max-width:760px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:100px 0 80px;
+    position:relative;
+  }
+  .hero .wrap{display:flex;flex-direction:column;gap:34px;}
+  .mark{width:86px;height:86px;flex:none;}
+  .mark circle.ring{fill:none;stroke:var(--copper);stroke-width:1.4;opacity:0;transform-origin:43px 43px;}
+  .mark circle.ring.r1{animation:pulse 2.8s ease-out .3s infinite;}
+  .mark circle.ring.r2{animation:pulse 2.8s ease-out 1s infinite;}
+  .mark circle.disc{fill:var(--copper);}
+  .mark path.strap{stroke:var(--ink-muted);stroke-width:2.5;fill:none;stroke-linecap:round;}
+  @keyframes pulse{
+    0%{opacity:.55; transform:scale(.55);}
+    75%{opacity:0; transform:scale(1.55);}
+    100%{opacity:0; transform:scale(1.55);}
+  }
+  h1{font-size:44px;line-height:1.12;letter-spacing:-.01em;max-width:15ch;}
+  .hero p.lede{
+    font-size:19px;
+    color:var(--ink-muted);
+    max-width:46ch;
+    margin-top:4px;
+  }
+  .hero .context{
+    margin-top:18px;
+    padding-top:26px;
+    border-top:1px solid var(--rule);
+    color:var(--ink-muted);
+    font-size:16px;
+    max-width:52ch;
+  }
+  .hero .context strong{color:var(--ink-light);font-weight:600;}
+
+  /* ---------- Section shell ---------- */
+  section{padding:64px 0;border-top:1px solid var(--rule);}
+  section > .wrap > h2{font-size:28px;margin-bottom:8px;}
+  section > .wrap > p.intro{color:var(--ink-muted);max-width:54ch;margin:0 0 40px;font-size:16.5px;}
+
+  /* ---------- Como funciona (timeline) ---------- */
+  .flow{display:flex;flex-direction:column;}
+  .step{
+    display:grid;
+    grid-template-columns:28px 1fr;
+    gap:22px;
+    position:relative;
+    padding-bottom:36px;
+  }
+  .step:last-child{padding-bottom:0;}
+  .step .line{
+    position:relative;
+    display:flex;justify-content:center;
+  }
+  .step .dot{
+    width:9px;height:9px;border-radius:50%;
+    background:var(--copper);
+    margin-top:6px;
+    flex:none;
+    z-index:1;
+  }
+  .step .line::after{
+    content:'';
+    position:absolute;
+    top:20px;bottom:-36px;
+    width:1px;
+    background:var(--rule);
+  }
+  .step:last-child .line::after{display:none;}
+  .step h3{font-size:19px;color:var(--ink-light);margin-bottom:6px;}
+  .step p{margin:0;color:var(--ink-muted);font-size:15.5px;max-width:50ch;}
+
+  /* ---------- Benefícios ---------- */
+  .benefits{display:flex;flex-direction:column;}
+  .benefit{
+    display:grid;
+    grid-template-columns:3px 1fr;
+    gap:20px;
+    padding:22px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .benefit:first-child{padding-top:0;}
+  .benefit:last-child{border-bottom:none;}
+  .benefit .bar{background:var(--hop);border-radius:2px;}
+  .benefit h3{font-size:18px;margin-bottom:6px;}
+  .benefit p{margin:0;color:var(--ink-muted);font-size:15.5px;max-width:52ch;}
+
+  /* ---------- Investimento ---------- */
+  .paper{
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:6px;
+    padding:36px 40px;
+  }
+  .paper h3{color:var(--ink);font-size:20px;margin-bottom:22px;}
+  table{width:100%;border-collapse:collapse;font-size:15px;}
+  td{padding:11px 0;border-bottom:1px solid #E1D4BC;}
+  tr:last-child td{border-bottom:none;}
+  td.label{color:#5C5140;}
+  td.value{text-align:right;font-variant-numeric:tabular-nums;font-weight:500;}
+  tr.total td{padding-top:16px;border-top:1.5px solid var(--ink);border-bottom:none;font-size:17px;}
+  tr.total td.value{color:var(--copper-deep);font-weight:600;}
+  .paper .footnote{margin-top:18px;font-size:13.5px;color:#6B5F4C;}
+
+  /* ---------- Próximos passos ---------- */
+  .next{counter-reset:step;}
+  .next li{
+    counter-increment:step;
+    list-style:none;
+    display:grid;
+    grid-template-columns:30px 1fr;
+    gap:18px;
+    padding:16px 0;
+  }
+  .next li::before{
+    content:counter(step);
+    font-family:'Fraunces',serif;
+    color:var(--copper);
+    font-size:20px;
+  }
+  .next li p{margin:0;color:var(--ink-muted);font-size:15.5px;}
+  .next li strong{color:var(--ink-light);display:block;margin-bottom:2px;font-size:16.5px;font-weight:600;}
+  .next ul{margin:0;padding:0;}
+
+  footer{padding:56px 0 90px;}
+  footer p{color:var(--ink-muted);font-size:14.5px;max-width:50ch;}
+
+  @media (max-width:620px){
+    .hero{padding:70px 0 56px;}
+    h1{font-size:33px;}
+    .hero p.lede{font-size:17px;}
+    section{padding:48px 0;}
+    .paper{padding:28px 24px;}
+  }
+
+  @media print{
+    body{background:#fff;color:#111;}
+    section{border-top:1px solid #ddd;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <svg class="mark" viewBox="0 0 86 86" xmlns="http://www.w3.org/2000/svg">
+      <path class="strap" d="M8,43 C8,20 78,20 78,43 M8,43 C8,66 78,66 78,43"/>
+      <circle class="ring r1" cx="43" cy="43" r="18"/>
+      <circle class="ring r2" cx="43" cy="43" r="18"/>
+      <circle class="disc" cx="43" cy="43" r="10"/>
+    </svg>
+    <div>
+      <h1>Uma pulseira que sabe quem é o cliente e onde ele está</h1>
+      <p class="lede">Identificação e localização para agilizar o atendimento do salão — sem trocar o sistema de caixa, sem self-service, sem fila.</p>
+    </div>
+    <div class="context">
+      Hoje, comanda de papel se perde, pedido vai pra mesa errada e o garçom passa parte do
+      turno procurando quem pediu o quê. <strong>A pulseira resolve isso identificando o
+      cliente e mostrando, em tempo real, em qual área do salão ele está</strong> — o
+      atendimento continua 100% humano: garçom tira o pedido, equipe serve as bebidas e a
+      cozinha prepara os pratos, como sempre.
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Como funciona no dia a dia</h2>
+    <p class="intro">Quatro passos, do check-in do cliente até a devolução da pulseira no caixa.</p>
+    <div class="flow">
+      <div class="step">
+        <div class="line"><div class="dot"></div></div>
+        <div>
+          <h3>Check-in</h3>
+          <p>Na chegada, a equipe entrega uma pulseira livre e abre a comanda do cliente
+             direto no sistema de caixa já usado pela casa.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="line"><div class="dot"></div></div>
+        <div>
+          <h3>Pedido</h3>
+          <p>O garçom aproxima o celular da pulseira para lançar o pedido na comanda certa —
+             chope, drinks autorais ou pratos da cozinha, em qualquer mesa.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="line"><div class="dot"></div></div>
+        <div>
+          <h3>Localização</h3>
+          <p>O app do garçom mostra em qual área do salão está cada comanda aberta — sem
+             precisar perguntar "qual é sua mesa?" pro cliente de novo.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="line"><div class="dot"></div></div>
+        <div>
+          <h3>Conferência e saída</h3>
+          <p>No caixa, o operador confere tudo o que foi consumido, o cliente paga, a comanda
+             é encerrada e a pulseira já libera automaticamente para o próximo cliente.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Por que vale a pena</h2>
+    <div class="benefits">
+      <div class="benefit">
+        <div class="bar"></div>
+        <div>
+          <h3>Menos erro, mais agilidade</h3>
+          <p>Pedido lançado na comanda certa por leitura, não por número decorado ou
+             digitado — menos retrabalho, menos prejuízo com comanda perdida.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="bar"></div>
+        <div>
+          <h3>Equipe encontra o cliente mais rápido</h3>
+          <p>Em noite cheia, o garçom vê a área aproximada de cada comanda aberta em vez de
+             rodar o salão inteiro procurando.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="bar"></div>
+        <div>
+          <h3>Funciona mesmo se a internet cair</h3>
+          <p>A localização roda em um servidor dentro da própria casa — não depende de nuvem
+             para continuar funcionando durante o serviço.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="bar"></div>
+        <div>
+          <h3>Pulseira é reutilizável</h3>
+          <p>Devolvida no caixa e pronta pro próximo cliente — sem custo recorrente por
+             atendimento, só o investimento único do equipamento.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Investimento para o teste piloto</h2>
+    <p class="intro">5 pulseiras protótipo, prontas para testar em uma noite de movimento real
+       antes de qualquer decisão de expandir para o salão todo.</p>
+    <div class="paper">
+      <h3>Lote de 5 pulseiras protótipo</h3>
+      <table>
+        <tr><td class="label">Fabricação da placa e componentes eletrônicos</td><td class="value">R$ 1.364,75</td></tr>
+        <tr><td class="label">Montagem, cápsula e pulseira de silicone (5 un.)</td><td class="value">R$ 892,24</td></tr>
+        <tr><td class="label">Frete internacional</td><td class="value">R$ 257,50</td></tr>
+        <tr class="total"><td>Total do lote</td><td class="value">R$ 2.514,00</td></tr>
+      </table>
+      <p class="footnote">≈ R$ 503 por unidade no lote-teste. Valor orçamentário, sujeito a
+         cotação final do fabricante; produção em maior escala reduz o custo por unidade.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Próximos passos</h2>
+    <ul class="next">
+      <li>
+        <div><strong>Aprovar o lote de teste</strong>
+        <p>5 unidades, prazo estimado de fabricação e envio de cerca de 4 semanas.</p></div>
+      </li>
+      <li>
+        <div><strong>Testar em operação real</strong>
+        <p>Rodar as 5 pulseiras por algumas semanas em noites de movimento, com a equipe já
+           usando no atendimento normal.</p></div>
+      </li>
+      <li>
+        <div><strong>Decidir a expansão</strong>
+        <p>Com o teste validado, dimensionar o lote para cobrir todo o salão.</p></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Proposta técnica e orçamento detalhado disponíveis à parte, para quem for executar a
+       fabricação e a integração com o sistema de caixa.</p>
+  </div>
+</footer>
+
+</body>
+</html>

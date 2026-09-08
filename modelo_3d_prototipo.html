@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modelo 3D — Pulseira Inteligente</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#1B1410;
+    --paper:#F6EFE2;
+    --ink:#2A2118;
+    --ink-light:#F1E7D6;
+    --ink-muted:#C9BBA4;
+    --copper:#C1873B;
+    --rule:#3A2E23;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;background:var(--bg);font-family:'Inter',sans-serif;color:var(--ink-light);overflow:hidden;}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:20px;margin:0;color:var(--ink-light);}
+  .top{
+    position:absolute;top:0;left:0;right:0;z-index:2;
+    padding:22px 26px;
+    display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+    pointer-events:none;
+  }
+  .top *{pointer-events:auto;}
+  .sub{color:var(--ink-muted);font-size:13.5px;margin-top:4px;max-width:38ch;}
+  #stage{position:absolute;inset:0;}
+  canvas{display:block;touch-action:none;cursor:grab;}
+  canvas:active{cursor:grabbing;}
+
+  button{
+    background:var(--copper);
+    color:#1B1410;
+    border:none;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:13.5px;
+    padding:10px 16px;
+    border-radius:5px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  button.ghost{
+    background:transparent;
+    border:1px solid var(--rule);
+    color:var(--ink-light);
+  }
+  .controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+
+  .legend{
+    position:absolute;bottom:0;left:0;right:0;z-index:2;
+    padding:18px 26px 22px;
+    background:linear-gradient(180deg, rgba(27,20,16,0) 0%, rgba(27,20,16,.92) 40%);
+    display:flex;gap:22px;flex-wrap:wrap;
+    font-size:12.5px;
+    color:var(--ink-muted);
+  }
+  .legend .item{display:flex;align-items:center;gap:7px;white-space:nowrap;}
+  .legend .swatch{width:9px;height:9px;border-radius:2px;flex:none;}
+  .legend .dims{margin-left:auto;color:var(--ink-light);font-weight:500;}
+
+  .note{
+    position:absolute;top:22px;left:26px;
+    max-width:1px; /* placeholder, unused */
+  }
+  .disclaimer{
+    font-size:11.5px;color:var(--ink-muted);opacity:.75;margin-top:2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div>
+    <h1>Modelo 3D — protótipo da pulseira</h1>
+    <p class="sub">Arraste para girar, role para dar zoom.</p>
+  </div>
+  <div class="controls">
+    <button id="btnExplode">Ver camadas internas</button>
+    <button id="btnSpin" class="ghost">Pausar giro</button>
+  </div>
+</div>
+
+<div id="stage"></div>
+
+<div class="legend">
+  <div class="item"><span class="swatch" style="background:#d8cdbe"></span>Pulso (referência de escala)</div>
+  <div class="item"><span class="swatch" style="background:#2B2B2B"></span>Pulseira de silicone</div>
+  <div class="item"><span class="swatch" style="background:#E9E2D3"></span>Cápsula (base e tampa)</div>
+  <div class="item"><span class="swatch" style="background:#B0B0B0"></span>Bateria CR2032</div>
+  <div class="item"><span class="swatch" style="background:#555555"></span>Blindagem de ferrite</div>
+  <div class="item"><span class="swatch" style="background:#2E5B3E"></span>Placa (PCB)</div>
+  <div class="item"><span class="swatch" style="background:#C1873B"></span>Antena NFC / módulo BLE</div>
+  <div class="dims">Ø 32 mm · ≈ 7 mm de espessura</div>
+</div>
+
+<script>
+// ---------- Setup ----------
+const stage = document.getElementById('stage');
+const scene = new THREE.Scene();
+scene.background = null;
+
+const camera = new THREE.PerspectiveCamera(38, window.innerWidth/window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+stage.appendChild(renderer.domElement);
+
+// Lights
+scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+const key = new THREE.DirectionalLight(0xfff2df, 1.0);
+key.position.set(30, 50, 40);
+scene.add(key);
+const rim = new THREE.PointLight(0xc1873b, 0.6, 300);
+rim.position.set(-40, 20, -30);
+scene.add(rim);
+const fill = new THREE.DirectionalLight(0x8fa0b8, 0.25);
+fill.position.set(-30, -10, 20);
+scene.add(fill);
+
+// Ground shadow-ish disc
+const ground = new THREE.Mesh(
+  new THREE.CircleGeometry(58, 48),
+  new THREE.MeshBasicMaterial({color:0x000000, transparent:true, opacity:0.25})
+);
+ground.rotation.x = -Math.PI/2;
+ground.position.y = -24;
+scene.add(ground);
+
+// ---------- Rig (everything rotates together) ----------
+const rig = new THREE.Group();
+scene.add(rig);
+
+// ---------- Pulso (referência de escala, semi-transparente) ----------
+const wristR = 21, wristLen = 84;
+const wristMat = new THREE.MeshStandardMaterial({color:0xd8cdbe, roughness:0.9, metalness:0, transparent:true, opacity:0.4});
+const wrist = new THREE.Mesh(new THREE.CylinderGeometry(wristR, wristR, wristLen, 32, 1, true), wristMat);
+wrist.rotation.z = Math.PI/2; // eixo do pulso deitado ao longo de X
+rig.add(wrist);
+[-1,1].forEach(sign=>{
+  const cap = new THREE.Mesh(new THREE.SphereGeometry(wristR, 32, 16), wristMat);
+  cap.position.x = sign * wristLen/2;
+  rig.add(cap);
+});
+
+// ---------- Pulseira de silicone (laço fechado, envolve o pulso) ----------
+const bandR = 23.2, bandTube = 2.6;
+const band = new THREE.Mesh(
+  new THREE.TorusGeometry(bandR, bandTube, 20, 100), // laço fechado, sem arco
+  new THREE.MeshStandardMaterial({color:0x2b2b2b, roughness:0.85, metalness:0.05})
+);
+band.rotation.y = Math.PI/2; // alinha o eixo do laço com o eixo do pulso (X)
+rig.add(band);
+
+const discTopY = bandR + bandTube + 1.5;
+
+// ---------- Disc assembly (exploded layers) ----------
+const assembly = new THREE.Group();
+assembly.position.y = discTopY; // apoiado sobre a face externa da pulseira
+rig.add(assembly);
+
+const layers = []; // {mesh, restY, explodedY}
+
+function addLayer(mesh, restY, explodedOffset){
+  mesh.position.y = restY;
+  assembly.add(mesh);
+  layers.push({mesh, restY, explodedY: restY + explodedOffset});
+}
+
+// Cápsula base
+addLayer(
+  new THREE.Mesh(new THREE.CylinderGeometry(17, 17, 1.6, 48),
+    new THREE.MeshStandardMaterial({color:0xe9e2d3, roughness:0.6, metalness:0.02})),
+  -2.4, -10
+);
+// Bateria CR2032
+addLayer(
+  new THREE.Mesh(new THREE.CylinderGeometry(10, 10, 1.6, 40),
+    new THREE.MeshStandardMaterial({color:0xb0b0b0, roughness:0.35, metalness:0.85})),
+  -1.0, -5
+);
+// Blindagem de ferrite
+addLayer(
+  new THREE.Mesh(new THREE.CylinderGeometry(10.5, 10.5, 0.3, 40),
+    new THREE.MeshStandardMaterial({color:0x555555, roughness:0.7, metalness:0.3})),
+  -0.05, 0
+);
+// PCB (verde)
+addLayer(
+  new THREE.Mesh(new THREE.CylinderGeometry(16, 16, 0.8, 48),
+    new THREE.MeshStandardMaterial({color:0x2e5b3e, roughness:0.55, metalness:0.1})),
+  0.55, 5
+);
+// Anel de antena NFC (sobre a PCB, perto da borda) — anel achatado (sem volume em Y)
+const nfcRing = new THREE.Mesh(
+  new THREE.RingGeometry(12.6, 13.8, 64),
+  new THREE.MeshStandardMaterial({color:0xc1873b, roughness:0.3, metalness:0.7, side:THREE.DoubleSide})
+);
+nfcRing.rotation.x = -Math.PI/2; // deita o anel com a face voltada pra cima
+addLayer(
+  nfcRing,
+  1.05, 5
+);
+// Módulo BLE (caixinha retangular, deslocado do centro)
+const bleModule = new THREE.Mesh(
+  new THREE.BoxGeometry(10, 1.4, 6.2),
+  new THREE.MeshStandardMaterial({color:0x1c1c1c, roughness:0.4, metalness:0.4})
+);
+bleModule.position.set(2, 1.65, -2);
+assembly.add(bleModule);
+layers.push({mesh:bleModule, restY:1.65, explodedY:1.65+9});
+
+// Cápsula tampa (translúcida)
+addLayer(
+  new THREE.Mesh(new THREE.CylinderGeometry(17, 16.3, 2.2, 48),
+    new THREE.MeshStandardMaterial({color:0xf6efe2, roughness:0.25, metalness:0.05, transparent:true, opacity:0.55})),
+  2.9, 15
+);
+
+camera.position.set(58, 34, 92);
+camera.lookAt(0, 14, 0);
+
+// ---------- Custom orbit (drag) + zoom ----------
+let isDragging = false, prevX = 0, prevY = 0;
+let rotY = 0.5, rotX = 0.15;
+let autoSpin = true;
+
+renderer.domElement.addEventListener('pointerdown', e=>{
+  isDragging = true; prevX = e.clientX; prevY = e.clientY;
+});
+window.addEventListener('pointerup', ()=> isDragging = false);
+window.addEventListener('pointermove', e=>{
+  if(!isDragging) return;
+  const dx = e.clientX - prevX, dy = e.clientY - prevY;
+  prevX = e.clientX; prevY = e.clientY;
+  rotY += dx * 0.008;
+  rotX += dy * 0.008;
+  rotX = Math.max(-0.9, Math.min(0.9, rotX));
+});
+renderer.domElement.addEventListener('wheel', e=>{
+  e.preventDefault();
+  const dist = camera.position.length();
+  const newDist = Math.max(45, Math.min(150, dist + e.deltaY*0.08));
+  camera.position.multiplyScalar(newDist/dist);
+}, {passive:false});
+
+// ---------- Explode toggle ----------
+let exploded = false;
+let explodeT = 0; // 0..1 animado
+document.getElementById('btnExplode').addEventListener('click', e=>{
+  exploded = !exploded;
+  e.target.textContent = exploded ? 'Ver montado' : 'Ver camadas internas';
+});
+
+document.getElementById('btnSpin').addEventListener('click', e=>{
+  autoSpin = !autoSpin;
+  e.target.textContent = autoSpin ? 'Pausar giro' : 'Retomar giro';
+});
+
+// ---------- Render loop ----------
+function animate(){
+  requestAnimationFrame(animate);
+
+  if(autoSpin && !isDragging) rotY += 0.0025;
+
+  rig.rotation.y = rotY;
+  rig.rotation.x = rotX;
+
+  const target = exploded ? 1 : 0;
+  explodeT += (target - explodeT) * 0.08;
+  layers.forEach(l=>{
+    l.mesh.position.y = l.restY + (l.explodedY - l.restY) * explodeT;
+  });
+
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', ()=>{
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>

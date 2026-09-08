@@ -1,0 +1,12 @@
+Designator,Componente,Fonte de preco,Preco unitario USD (qtd. protótipo),Qtd por unidade,Custo por unidade USD
+U1,Modulo BLE certificado (ex: Raytac MDBT42Q-512KV2),LCSC/DigiKey - preco unitario verificado,6.50,1,6.50
+TAG1,NTAG213 inlay adesivo 25mm,Varejo BR (pacotes pequenos) - preco unitario verificado,1.00,1,1.00
+SHLD1,Folha de ferrite blindagem ~20mm,Estimativa (folha cortada sob medida),0.80,1,0.80
+BT1,Suporte CR2032 Keystone 1059,Estimativa distribuidor,0.40,1,0.40
+BAT1,Bateria CR2032,Estimativa distribuidor,0.30,1,0.30
+C1,Capacitor 10uF 0603,Estimativa distribuidor,0.10,1,0.10
+C2,Capacitor 100nF 0402,Estimativa distribuidor,0.05,1,0.05
+--,Capsula SLA (2 partes) + O-ring,Estimativa servico PCBWay/Seeed SLA,10.50,1,10.50
+--,Berco de pulseira esportiva (comprado pronto),Estimativa varejo,3.00,1,3.00
+--,Mao de obra de montagem (por unidade - alem do NRE),Estimativa PCBA baixo volume,12.00,1,12.00
+,,,,TOTAL POR UNIDADE (sem NRE),34.65

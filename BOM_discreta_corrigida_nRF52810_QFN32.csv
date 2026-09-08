@@ -1,0 +1,19 @@
+Designator,Value,Footprint,Pin_nRF52810_QFN32,Description,Notes
+U1,nRF52810-QCAA,QFN32 5x5mm,--,SoC BLE,Ver tabela de pinos abaixo
+ANT1,Johanson 2450AT18A100E,SMD1206,--,Antena chip 2.4GHz,Requer ajuste de rede com VNA na placa fisica
+X1,32MHz +-10ppm CL=8pF,XTAL SMD2016,Pinos 23(XC1)/24(XC2),Cristal principal,CORRIGIDO: doc original citava pinos 2/3 (errado)
+C1,12pF NP0 +-2%,0402,Pino 23 para GND,Carga do cristal X1,
+C2,12pF NP0 +-2%,0402,Pino 24 para GND,Carga do cristal X1,
+C3,0.8pF NP0 +-5%,0402,Rede de casamento ANT (posicao 1),Casamento RF - AJUSTAR EM BANCADA,CORRIGIDO: doc original tinha 1 unico cap de 1.0pF (errado - sao 2 capacitores em posicoes diferentes)
+C7,100pF NP0 +-5%,0402,Rede de casamento ANT (posicao 2),Casamento RF - AJUSTAR EM BANCADA,Faltava no doc original
+L1,3.9nH +-5%,0402,Rede de casamento ANT,Casamento RF,Valor OK no doc original - confirmado com Nordic ref
+L2,10uH Isat>50mA +-20%,0603,DCC(31)-DEC4(30),Indutor do DC/DC,Valor OK no doc original
+L3,15nH +-10%,0402,Rede de casamento ANT,Casamento RF,Valor OK no doc original
+C4,100nF X7R +-10%,0402,VDD (pino 9/25/32) para GND,Desacoplo VDD,
+C5,100nF X7R +-10%,0402,DEC1 (pino 1) para GND,Desacoplo DEC1,
+C8,100nF X7R +-10%,0402,DEC2(21)+DEC3(22) para GND,"CRITICO - AUSENTE no doc original. Sem isso o radio nao atende ao datasheet",ADICIONADO nesta revisao
+C9,4.7uF X5R +-10%,0603,VDD para GND (proximo do IC),Desacoplo bulk VDD,CORRIGIDO: doc original usava 10uF (fora da ref Nordic - nao é erro fatal mas sai da referencia validada)
+C10,1.0uF X7R +-10%,0603,DEC4 (pino 30) para GND,Estabilizacao saida DC/DC,Valor OK no doc original
+TAG1,NTAG213 Inlay adesivo ~25mm,Adesivo,--,Tag NFC passiva,Usar inlay pronto, nao die nu; manter longe da bateria/blindado
+TP1-TP4,Test pads 1.0mm,SMD,VDD/SWDIO(18)/SWDCLK(17)/GND,Pontos de gravacao SWD,CORRIGIDO: doc original citava pinos 24/25 (invertidos e errados)
+BT1,Suporte CR2032,Keystone 1059,--,Retentor bateria,Adicionar folha de ferrite entre bateria e TAG1
