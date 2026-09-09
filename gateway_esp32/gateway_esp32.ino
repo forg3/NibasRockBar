@@ -21,13 +21,20 @@
 #include <ArduinoJson.h>
 #include <map>
 
-// ---------- Configuracao ----------
+// ---------- CONFIG (placeholders - preencher por device antes do deploy) ----------
+// TODO: provisioning via Preferences/NVS - gravar os valores por device na flash
+// (NVS do ESP32) no primeiro boot e ler aqui; nao commitar credenciais reais.
 const char* WIFI_SSID      = "PUB_WIFI";
 const char* WIFI_PASSWORD  = "SENHA_AQUI";
 const char* MQTT_BROKER    = "192.168.0.10";     // IP do servidor local (Mosquitto)
 const int   MQTT_PORT      = 1883;
 const char* GATEWAY_ID     = "gateway_teto_02";  // TROCAR por gateway - identifica a zona
-const char* MFG_COMPANY_ID_HEX = "FFFF";         // deve bater com o firmware da pulseira
+const char* MFG_COMPANY_ID_HEX = "FFFF";         // referencial: deve bater com MANUFACTURER_ID em firmware/main.c
+
+// Filtro do manufacturer data - deve bater com MANUFACTURER_ID (0xFFFF) em firmware/main.c
+const uint16_t EXPECTED_COMPANY_ID = 0xFFFF;
+
+const unsigned long CONNECT_TIMEOUT_MS = 15000;  // timeout de conexao Wi-Fi/MQTT
 
 const float  EWMA_ALPHA        = 0.2f;   // 0.1 (mais suave/lento) .. 0.3 (mais reativo)
 const int    SCAN_WINDOW_MS    = 1000;   // janela de cada ciclo de scan
@@ -46,19 +53,30 @@ struct TagState {
 std::map<std::string, TagState> g_tags; // chave = MAC address da pulseira
 
 // ---------- Wi-Fi / MQTT ----------
-void connectWiFi() {
+// Conexoes com timeout (nunca travam o boot indefinidamente).
+bool connectWiFi() {
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+    uint32_t t0 = millis();
     while (WiFi.status() != WL_CONNECTED) {
+        if (millis() - t0 >= CONNECT_TIMEOUT_MS) {
+            // TODO: apos falhas repetidas, entrar em modo de configuracao (AP
+            // proprio de provisioning) em vez de retentar no proximo loop.
+            return false;
+        }
         delay(300);
     }
+    return true;
 }
 
-void connectMQTT() {
+bool connectMQTT() {
+    uint32_t t0 = millis();
     while (!mqttClient.connected()) {
         String clientId = String("gw_") + GATEWAY_ID;
-        mqttClient.connect(clientId.c_str());
-        if (!mqttClient.connected()) delay(1000);
+        if (mqttClient.connect(clientId.c_str())) return true;
+        if (millis() - t0 >= CONNECT_TIMEOUT_MS) return false;
+        delay(1000);
     }
+    return true;
 }
 
 // ---------- Filtro EWMA ----------
@@ -74,29 +92,35 @@ class GatewayCallback : public BLEAdvertisedDeviceCallbacks {
         // Filtra apenas pacotes com o Company ID esperado (manufacturer specific data)
         if (!advertisedDevice.haveManufacturerData()) return;
 
-        std::string manuf = advertisedDevice.getManufacturerData();
+        // Core esp32 3.x: getManufacturerData() retorna String (binario preservado com length)
+        String manuf = advertisedDevice.getManufacturerData();
         // company_id(2) + proto_version(1) + battery(1) + seq(2) = 6 bytes.
         // Indices acessados abaixo vao ate manuf[5], entao o minimo e' 6, nao 5.
         if (manuf.length() < 6) return;
 
+        // company_id little-endian (mesma ordem escrita pelo ble_advdata_encode no firmware)
         uint16_t company_id = (uint8_t)manuf[0] | ((uint8_t)manuf[1] << 8);
-        char expected[5];
-        sprintf(expected, "%04X", company_id);
-        // (comparacao simplificada - ajustar conforme endianness real do payload)
+        if (company_id != EXPECTED_COMPANY_ID) return; // advertiser desconhecido: descarta
 
-        std::string mac = advertisedDevice.getAddress().toString();
+        std::string mac = advertisedDevice.getAddress().toString().c_str(); // toString() = String no core 3.x
         int rssi = advertisedDevice.getRSSI();
         uint8_t battery_pct = (uint8_t)manuf[3];
         uint16_t seq = (uint8_t)manuf[4] | ((uint8_t)manuf[5] << 8);
 
+        uint32_t now = millis();
         auto it = g_tags.find(mac);
         bool first = (it == g_tags.end());
+
+        // Rate-limit por tag: publica no maximo 1x a cada PUBLISH_PERIOD_MS.
+        // Pacotes dentro do periodo sao descartados (last_seen_ms marca o ultimo
+        // ciclo efetivamente medido/publicado pela tag).
+        if (!first && (now - it->second.last_seen_ms) < PUBLISH_PERIOD_MS) return;
+
         float prev = first ? 0.0f : it->second.rssi_ewma;
         float filt = applyEWMA(prev, rssi, first);
 
-        g_tags[mac] = { filt, millis(), seq };
+        g_tags[mac] = { filt, now, seq };
 
-        // Publica imediatamente (poderia ser agregado por PUBLISH_PERIOD_MS se o volume for alto)
         publishTelemetry(mac, filt, rssi, battery_pct, seq);
     }
 };
@@ -118,13 +142,18 @@ void publishTelemetry(const std::string& mac, float rssi_filt, int rssi_raw,
     char topic[64];
     snprintf(topic, sizeof(topic), "pub/telemetria/%s", GATEWAY_ID);
 
-    mqttClient.publish(topic, buffer, n);
+    // Cast explicito: sem ele a overload (topic, payload, retained) e' escolhida e o
+    // tamanho n vira flag retained. O correto e' o publish length-based.
+    mqttClient.publish(topic, (const uint8_t*)buffer, (unsigned int)n);
 }
 
 // ---------- Setup / Loop ----------
 void setup() {
     Serial.begin(115200);
-    connectWiFi();
+    if (!connectWiFi()) {
+        // Timeout - nao trava o boot; reconnect e retomado no loop().
+        Serial.println("WiFi: timeout na conexao - seguindo sem rede");
+    }
     mqttClient.setServer(MQTT_BROKER, MQTT_PORT);
 
     BLEDevice::init("");

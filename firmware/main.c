@@ -26,6 +26,7 @@
 #define ADV_INTERVAL_UNITS      MSEC_TO_UNITS(ADV_INTERVAL_MS, UNIT_0_625_MS)
 #define DEVICE_NAME             "PUBBADGE"
 #define MANUFACTURER_ID         0xFFFF                  // trocar por ID registrado se for a mercado
+#define APP_BLE_CONN_CFG_TAG    1                       // tag de conn_cfg usada nas chamadas sd_ble_*
 
 APP_TIMER_DEF(m_battery_timer);
 
@@ -41,6 +42,8 @@ static adv_payload_t m_payload = { .company_id = MANUFACTURER_ID, .proto_version
 static ble_gap_adv_params_t m_adv_params;
 static ble_gap_adv_data_t   m_adv_data;
 static uint8_t              m_enc_advdata[BLE_GAP_ADV_SET_DATA_SIZE_MAX];
+static uint32_t             ram_start     = 0;      // RAM requisitada ao SoftDevice (preenchida por nrf_sdh_ble_default_cfg_set)
+static uint8_t              m_adv_handle;           // handle do advertising set
 
 /* --- 1. Energia: habilita DC/DC interno no boot --- */
 static void power_init(void)
@@ -53,19 +56,47 @@ static void power_init(void)
     APP_ERROR_CHECK(err_code);
 }
 
-/* --- 2. Leitura de bateria via SAADC (divisor resistivo opcional ou VDD direto) ---
- * Para CR2032 sem divisor, ler VDD via canal interno do SAADC (INPUT_VDD).
- * Mapeamento aproximado 3.0V=100% .. 2.0V=0% (curva de descarga da CR2032 e' bem plana,
- * entao esse mapeamento e' grosseiro por natureza - suficiente para "bateria fraca/ok").
+/* --- 2. Leitura de bateria via SAADC (VDD direto, sem divisor resistivo) ---
+ * Canal 0 = NRF_SAADC_INPUT_VDD; gain 1/6 com referencia interna 0.6V ->
+ * full-scale = 0.6V * 6 = 3.6V (CR2032 ~3.0V cabe com folga).
+ * Mapa 3.0V=100% .. 2.0V=0% (curva de descarga da CR2032 e' bem plana, entao esse
+ * mapeamento e' grosseiro por natureza - suficiente para "bateria fraca/ok").
+ * Matematica em mV inteiros (nRF52810 roda soft-float por padrao no SDK).
  */
+#define SAADC_CH_VDD            0                       // canal 0 ligado ao VDD
+#define BATTERY_EMPTY_MV        2000                    // 0% do mapa
+#define BATTERY_FULL_MV         3000                    // 100% do mapa
+#define SAADC_FULL_SCALE_MV     3600                    // ref 0.6V / gain 1/6
+#define SAADC_MAX_COUNTS        4096                    // resolucao 12 bits
+
+static void battery_saadc_init(void)
+{
+    nrf_drv_saadc_config_t saadc_cfg = NRF_DRV_SAADC_DEFAULT_CONFIG;
+    saadc_cfg.resolution = NRF_SAADC_RESOLUTION_12BIT;
+    saadc_cfg.oversample = NRF_SAADC_OVERSAMPLE_4X;
+
+    // Config SE padrao do SDK: gain 1/6 + referencia interna 0.6V + acq 10us
+    nrf_saadc_channel_config_t ch_cfg =
+        NRF_DRV_SAADC_DEFAULT_CHANNEL_CONFIG_SE(NRF_SAADC_INPUT_VDD);
+    ch_cfg.burst = NRF_SAADC_BURST_ENABLED; // com burst, 1 gatilho de SAMPLE entrega a media das 4 amostras
+
+    ret_code_t err_code = nrf_drv_saadc_init(&saadc_cfg, NULL); // handler NULL = modo bloqueante
+    APP_ERROR_CHECK(err_code);
+
+    err_code = nrf_drv_saadc_channel_init(SAADC_CH_VDD, &ch_cfg);
+    APP_ERROR_CHECK(err_code);
+}
+
 static uint8_t read_battery_percent(void)
 {
     nrf_saadc_value_t raw;
-    // nrf_drv_saadc_sample_convert(0, &raw);  // canal 0 configurado para AIN_VDD
-    float vbat = 3.0f; // placeholder - substituir pela leitura real convertida
-    if (vbat > 3.0f) vbat = 3.0f;
-    if (vbat < 2.0f) vbat = 2.0f;
-    return (uint8_t)((vbat - 2.0f) / (3.0f - 2.0f) * 100.0f);
+    ret_code_t err_code = nrf_drv_saadc_sample_convert(SAADC_CH_VDD, &raw);
+    APP_ERROR_CHECK(err_code);
+
+    int32_t vbat_mv = ((int32_t)raw * SAADC_FULL_SCALE_MV) / SAADC_MAX_COUNTS;
+    if (vbat_mv > BATTERY_FULL_MV)  vbat_mv = BATTERY_FULL_MV;
+    if (vbat_mv < BATTERY_EMPTY_MV) vbat_mv = BATTERY_EMPTY_MV;
+    return (uint8_t)(((vbat_mv - BATTERY_EMPTY_MV) * 100) / (BATTERY_FULL_MV - BATTERY_EMPTY_MV));
 }
 
 /* --- 3. Monta e atualiza o payload de advertising --- */
@@ -120,6 +151,7 @@ static void battery_timer_handler(void *p_context)
 int main(void)
 {
     power_init();
+    battery_saadc_init();
     advertising_init();
 
     app_timer_create(&m_battery_timer, APP_TIMER_MODE_REPEATED, battery_timer_handler);
