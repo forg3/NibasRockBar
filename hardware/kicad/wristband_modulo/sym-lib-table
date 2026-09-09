@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "nibas_wristband")(type "KiCad")(uri "${KIPRJMOD}/libs/nibas_wristband.kicad_sym")(options "")(descr "Nibas wristband custom symbols - fixed local copy, see NOTA 6"))
+)

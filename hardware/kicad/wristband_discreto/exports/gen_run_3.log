@@ -1,0 +1,15 @@
+/builddir/build/BUILD/kicad-10.0.6-build/kicad-10.0.6/include/properties/property.h(607): assert "m_choices.GetCount() > 0" failed in PROPERTY_ENUM(): No enum choices defined
+/builddir/build/BUILD/kicad-10.0.6-build/kicad-10.0.6/include/properties/property.h(607): assert "m_choices.GetCount() > 0" failed in PROPERTY_ENUM(): No enum choices defined
+/builddir/build/BUILD/kicad-10.0.6-build/kicad-10.0.6/include/properties/property.h(607): assert "m_choices.GetCount() > 0" failed in PROPERTY_ENUM(): No enum choices defined
+trilhas roteadas: 298
+vias: 22
+pendências (14): [('VDD_BAT', 'U1.25', 'U1.32'), ('VDD_BAT', 'U1.32', 'U1.9'), ('NET_ANT', 'L1.1', 'U1.19'), ('NET_XC1', 'C1.1', 'U1.23'), ('NET_XC1', 'U1.23', 'X1.1'), ('NET_XC2', 'C2.1', 'U1.24'), ('NET_DCC', 'L2.2', 'U1.31'), ('NET_DEC4', 'C10.1', 'L3.2'), ('NET_DEC4', 'L3.2', 'U1.30'), ('NET_DEC1', 'C5.1', 'U1.1'), ('NET_DEC2', 'C7.1', 'U1.21'), ('NET_DEC3', 'C6.1', 'U1.22'), ('NET_SWDCLK', 'TP3.1', 'U1.17'), ('NET_SWDIO', 'TP2.1', 'U1.18')]
+vias GND adicionadas: 7 (malha die pad: 9)
+SHLD1: anéis F.Cu removidos: 2, segs obstáculo B.Cu: 0
+pendências de via GND (8): [('C2.2', 'nenhuma das 4 direções livre (via+trilha)'), ('C4.2', 'nenhuma das 4 direções livre (via+trilha)'), ('C5.2', 'nenhuma das 4 direções livre (via+trilha)'), ('C6.2', 'nenhuma das 4 direções livre (via+trilha)'), ('C7.2', 'nenhuma das 4 direções livre (via+trilha)'), ('C8.2', 'nenhuma das 4 direções livre (via+trilha)'), ('U1.20', 'nenhuma das 4 direções livre (via+trilha)'), ('U1.29', 'nenhuma das 4 direções livre (via+trilha)')]
+footprints colocados: 24
+nets atribuídas: 56 pads
+pontos da grade: 2821
+nós bloqueados para GND: 448
+teste A* (100,100,0)->(108,108,0): comprimento do caminho = 33
+board salvo em: /home/forg3/projetos/NibasRockBar/hardware/kicad/wristband_discreto/wristband_discreto.kicad_pcb

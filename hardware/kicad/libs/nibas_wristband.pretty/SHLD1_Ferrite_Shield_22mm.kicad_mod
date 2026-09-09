@@ -1,0 +1,146 @@
+(footprint "SHLD1_Ferrite_Shield_22mm"
+  (version 20260206)
+  (generator "pcbnew")
+  (generator_version "10.0.6")
+  (layer "F.Cu")
+  (descr "Ferrite shielding sheet disc ~22mm diameter, placed between CR2032 battery and NTAG213 coil, connected to GND. Source: Fair-Rite ferrite shielding sheets https://www.fair-rite.com/products/shielding-materials/ferrite-shielding-sheets/")
+  (tags "ferrite shield shielding sheet EMI GND")
+  (property "Reference" "REF**"
+    (at 0 13.97 0)
+    (layer "F.SilkS")
+    (uuid "1a2b3c4d-5e6f-7890-abcd-ef1234567891")
+    (effects
+      (font
+        (size 1 1)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Value" "Ferrite_Shield_22mm"
+    (at 0 -13.97 0)
+    (layer "F.Fab")
+    (uuid "2b3c4d5e-6f7a-8901-bcde-f23456789013")
+    (effects
+      (font
+        (size 1 1)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Datasheet" "https://www.fair-rite.com/products/shielding-materials/ferrite-shielding-sheets/"
+    (at 0 0 0)
+    (unlocked yes)
+    (layer "F.Fab")
+    (hide yes)
+    (uuid "3c4d5e6f-7a8b-9012-cdef-345678901235")
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Description" ""
+    (at 0 0 0)
+    (unlocked yes)
+    (layer "F.Fab")
+    (hide yes)
+    (uuid "4d5e6f7a-8b9c-0123-def0-456789012346")
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (attr smd)
+  (duplicate_pad_numbers_are_jumpers no)
+  (fp_circle
+    (center 0 0)
+    (end 11 0)
+    (stroke
+      (width 0.12)
+      (type dash)
+    )
+    (fill no)
+    (layer "F.SilkS")
+    (uuid "5e6f7a8b-9c0d-1234-ef01-567890123457")
+  )
+  (fp_circle
+    (center 0 0)
+    (end 11 0)
+    (stroke
+      (width 0.1)
+      (type solid)
+    )
+    (fill no)
+    (layer "F.Fab")
+    (uuid "6f7a8b9c-0d1e-2345-f012-678901234568")
+  )
+  (fp_circle
+    (center 0 0)
+    (end 11 0)
+    (stroke
+      (width 0.2)
+      (type solid)
+    )
+    (fill no)
+    (layer "F.Cu")
+    (uuid "7a8b9c0d-1e2f-3456-0123-789012345679")
+  )
+  (fp_circle
+    (center 0 0)
+    (end 11 0)
+    (stroke
+      (width 0.2)
+      (type solid)
+    )
+    (fill no)
+    (layer "B.Cu")
+    (uuid "8b9c0d1e-2f3a-4567-1234-890123456780")
+  )
+  (fp_text user "FERRITE"
+    (at 0 0 0)
+    (layer "F.SilkS")
+    (uuid "9c0d1e2f-3a4b-5678-2345-901234567891")
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text user "%R"
+    (at 0 12.7 0)
+    (layer "F.SilkS")
+    (uuid "0d1e2f3a-4b5c-6789-3456-012345678902")
+    (effects
+      (font
+        (size 1 1)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text user "%V"
+    (at 0 -12.7 0)
+    (layer "F.Fab")
+    (uuid "1e2f3a4b-5c6d-7890-4567-123456789013")
+    (effects
+      (font
+        (size 1 1)
+        (thickness 0.15)
+      )
+    )
+  )
+  (pad "1" smd rect
+    (at 0 0)
+    (size 1 1)
+    (layers "F.Cu" "B.Cu" "F.Mask" "B.Mask" "F.Paste" "B.Paste")
+    (options
+      (clearance outline)
+      (anchor rect)
+    )
+    (uuid "2f3a4b5c-6d7e-8901-5678-234567890124")
+  )
+  (embedded_fonts no)
+)

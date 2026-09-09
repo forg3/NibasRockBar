@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "nibas_gateway")(type "KiCad")(uri "${KIPRJMOD}/nibas_gateway.kicad_sym")(options "")(descr "Simbolos do gateway NibasRockBar (DevKitC-32E, conector 5V, botao EN, power)"))
+)

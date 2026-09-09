@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "nibas_wristband")(type "KiCad")(uri "${KIPRJMOD}/../libs/nibas_wristband.pretty")(options "")(descr "NibasRockBar wristband custom footprints"))
+)

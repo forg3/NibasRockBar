@@ -4,3 +4,6 @@ __pycache__/
 .remember/
 .env
 *.env
+.bob/
+.opencode/
+hardware/kicad/_spike/

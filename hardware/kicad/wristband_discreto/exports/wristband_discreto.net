@@ -1,0 +1,2598 @@
+(export
+	(version "E")
+	(design
+		(source "/home/forg3/projetos/NibasRockBar/hardware/kicad/wristband_discreto/wristband_discreto.kicad_sch")
+		(date "2026-09-09T14:54:16")
+		(tool "Eeschema 10.0.6-1.fc44")
+		(sheet
+			(number "1")
+			(name "/")
+			(tstamps "/")
+			(title_block
+				(title "Wristband Discreta nRF52810")
+				(company "NibasRockBar")
+				(rev "A")
+				(date "2026-09-09")
+				(source "wristband_discreto.kicad_sch")
+				(comment
+					(number "1")
+					(value "Variante B - rota discreta nRF52810-QCAA QFN32 5x5mm (sem modulo certificado)")
+				)
+				(comment
+					(number "2")
+					(value "Pinagem QFN32: Nordic nRF52810 PS Table 99 - VDD=9/25/32 DEC4=30 DCC=31")
+				)
+				(comment
+					(number "3")
+					(value "BOM: BOM_discreta_corrigida_nRF52810_QFN32.csv")
+				)
+				(comment
+					(number "4")
+					(value "")
+				)
+				(comment
+					(number "5")
+					(value "")
+				)
+				(comment
+					(number "6")
+					(value "")
+				)
+				(comment
+					(number "7")
+					(value "")
+				)
+				(comment
+					(number "8")
+					(value "")
+				)
+				(comment
+					(number "9")
+					(value "")
+				)
+			)
+		)
+	)
+	(components
+		(comp
+			(ref "ANT1")
+			(value "2450AT18A100E")
+			(footprint "RF_Antenna:Johanson_2450AT18x100")
+			(description "Antena chip 2.4GHz Johanson")
+			(fields
+				(field
+					(name "Footprint") "RF_Antenna:Johanson_2450AT18x100")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Antena chip 2.4GHz Johanson")
+			)
+			(libsource
+				(lib "Device")
+				(part "Antenna_Chip")
+				(description "Ceramic chip antenna with pin for PCB trace")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "antenna")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "2284a5dc-25d4-49d9-8e29-7a3f7acb2cbb")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "BT1")
+			(value "Keystone_1059")
+			(footprint "nibas_wristband:Keystone_1059_CR2032_SMT")
+			(description "Suporte CR2032 polo positivo (negativo via J1)")
+			(fields
+				(field
+					(name "Footprint") "nibas_wristband:Keystone_1059_CR2032_SMT")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Suporte CR2032 polo positivo (negativo via J1)")
+			)
+			(libsource
+				(lib "nibas_wristband")
+				(part "Keystone_1059")
+				(description "Keystone 1059 SMT coin cell holder for CR2032/CR2025, positive contact only (negative via J1). UNVERIFIED dims.")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "coin cell holder CR2032 SMT Keystone 1059")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "Keystone_1059*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "a98c8927-5427-40eb-b994-57fa53aa9393")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C1")
+			(value "12pF")
+			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(description "Carga XC1")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Carga XC1")
+			)
+			(libsource
+				(lib "Device")
+				(part "C")
+				(description "Unpolarized capacitor")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "cap capacitor")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "C_*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "002b1025-fb28-477a-93be-4c969f88aef1")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C2")
+			(value "12pF")
+			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(description "Carga XC2")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Carga XC2")
+			)
+			(libsource
+				(lib "Device")
+				(part "C")
+				(description "Unpolarized capacitor")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "cap capacitor")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "C_*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "42ba0716-687e-4678-a016-5ac853fdb1fc")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C3")
+			(value "0.8pF")
+			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(description "RF shunt no no ANT (PS Fig. 146)")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "RF shunt no no ANT (PS Fig. 146)")
+			)
+			(libsource
+				(lib "Device")
+				(part "C")
+				(description "Unpolarized capacitor")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "cap capacitor")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "C_*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "c1281d7f-2d8c-4b13-bc05-ff5185797966")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C4")
+			(value "100nF")
+			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(description "Desacoplo VDD")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Desacoplo VDD")
+			)
+			(libsource
+				(lib "Device")
+				(part "C")
+				(description "Unpolarized capacitor")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "cap capacitor")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "C_*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "280f6aba-24bd-44ae-bc80-5b268fd57fca")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C5")
+			(value "100nF")
+			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(description "Desacoplo DEC1")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Desacoplo DEC1")
+			)
+			(libsource
+				(lib "Device")
+				(part "C")
+				(description "Unpolarized capacitor")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "cap capacitor")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "C_*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "720eaeba-da1b-4e1d-8fbb-bbb8a55b840f")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C6")
+			(value "100pF")
+			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(description "Desacoplo DEC3 100pF (PS Fig. 146/Tabela 123)")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Desacoplo DEC3 100pF (PS Fig. 146/Tabela 123)")
+			)
+			(libsource
+				(lib "Device")
+				(part "C")
+				(description "Unpolarized capacitor")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "cap capacitor")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "C_*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "44938cf7-e47b-48fe-9fdb-05511156d919")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C7")
+			(value "100nF")
+			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(description "DEC2: posicao N.C. na referencia Nordic (Tabela 123) - DNP")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "DEC2: posicao N.C. na referencia Nordic (Tabela 123) - DNP")
+			)
+			(libsource
+				(lib "Device")
+				(part "C")
+				(description "Unpolarized capacitor")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "dnp")
+			)
+			(property
+				(name "ki_keywords")
+				(value "cap capacitor")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "C_*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "cd3f2586-0680-4298-a05a-528b0ae04fdd")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C8")
+			(value "100nF")
+			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(description "DEC2+DEC3 unidos (critico)")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "DEC2+DEC3 unidos (critico)")
+			)
+			(libsource
+				(lib "Device")
+				(part "C")
+				(description "Unpolarized capacitor")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "cap capacitor")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "C_*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "98e1c762-b4b1-4970-b11a-d2379fe1f8e9")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C9")
+			(value "4.7uF")
+			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(description "Bulk VDD")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Bulk VDD")
+			)
+			(libsource
+				(lib "Device")
+				(part "C")
+				(description "Unpolarized capacitor")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "cap capacitor")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "C_*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "cd935901-af98-4c57-a75c-8a9a3cd8eff0")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C10")
+			(value "1.0uF")
+			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(description "DEC4")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "DEC4")
+			)
+			(libsource
+				(lib "Device")
+				(part "C")
+				(description "Unpolarized capacitor")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "cap capacitor")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "C_*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "c0312022-261d-4931-a6a2-a2aad9d551ea")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J1")
+			(value "Battery_Negative_Contact")
+			(footprint "nibas_wristband:J1_Battery_Negative_Contact")
+			(description "Contato negativo CR2032 (pad SMT ENIG no verso)")
+			(fields
+				(field
+					(name "Footprint") "nibas_wristband:J1_Battery_Negative_Contact")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Contato negativo CR2032 (pad SMT ENIG no verso)")
+			)
+			(libsource
+				(lib "nibas_wristband")
+				(part "J1_Battery_Negative")
+				(description "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1059 positive holder")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "battery contact negative CR2032 SMT")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "Battery_Contact*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "2f54eefd-1cbe-4490-8574-9b266cb67c97")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "L1")
+			(value "3.9nH")
+			(footprint "Inductor_SMD:L_0402_1005Metric")
+			(description "RF serie ANT->no A")
+			(fields
+				(field
+					(name "Footprint") "Inductor_SMD:L_0402_1005Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "RF serie ANT->no A")
+			)
+			(libsource
+				(lib "Device")
+				(part "L")
+				(description "Inductor")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "inductor choke coil reactor magnetic")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "Choke_* *Coil* Inductor_* L_*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "12ef38e7-4240-4286-809d-823c17b5ccfb")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "L2")
+			(value "10uH")
+			(footprint "Inductor_SMD:L_0603_1608Metric")
+			(description "DC/DC DCC->L3->DEC4")
+			(fields
+				(field
+					(name "Footprint") "Inductor_SMD:L_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "DC/DC DCC->L3->DEC4")
+			)
+			(libsource
+				(lib "Device")
+				(part "L")
+				(description "Inductor")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "inductor choke coil reactor magnetic")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "Choke_* *Coil* Inductor_* L_*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "35d3d1bd-d222-478a-8408-049eb1414fd1")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "L3")
+			(value "15nH")
+			(footprint "Inductor_SMD:L_0402_1005Metric")
+			(description "DC/DC serie DCC->DEC4 (PS Fig. 146)")
+			(fields
+				(field
+					(name "Footprint") "Inductor_SMD:L_0402_1005Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "DC/DC serie DCC->DEC4 (PS Fig. 146)")
+			)
+			(libsource
+				(lib "Device")
+				(part "L")
+				(description "Inductor")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "inductor choke coil reactor magnetic")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "Choke_* *Coil* Inductor_* L_*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "e613b795-5409-41f3-a627-fff0796674fe")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R1")
+			(value "10k")
+			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(description "Pull-up nRESET (DNP; nRF52810 tem pull-up interno)")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Pull-up nRESET (DNP; nRF52810 tem pull-up interno)")
+			)
+			(libsource
+				(lib "Device")
+				(part "R")
+				(description "Resistor")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "dnp")
+			)
+			(property
+				(name "ki_keywords")
+				(value "R res resistor")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "R_*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "b61c5aa6-691b-4c52-b11d-7b8db8f0a21d")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "SHLD1")
+			(value "Ferrite_Shield")
+			(footprint "nibas_wristband:SHLD1_Ferrite_Shield_22mm")
+			(description "Folha de ferrite ~22mm entre bateria e bobina NFC, ligada a GND")
+			(fields
+				(field
+					(name "Footprint") "nibas_wristband:SHLD1_Ferrite_Shield_22mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Folha de ferrite ~22mm entre bateria e bobina NFC, ligada a GND")
+			)
+			(libsource
+				(lib "nibas_wristband")
+				(part "SHLD1_Ferrite_Shield")
+				(description "Ferrite shielding sheet disc ~22mm diameter, GND connected, placed between battery and NFC coil")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "ferrite shield shielding NFC")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "SHLD*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "8b4f4182-2e1e-4b33-b248-fb785bffaa14")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "TAG1")
+			(value "NTAG213_Inlay")
+			(footprint "nibas_wristband:NTAG213_Inlay_25mm")
+			(description "Inlay NFC passivo ~25mm (2 pads de antena, sem conexao eletrica)")
+			(fields
+				(field
+					(name "Footprint") "nibas_wristband:NTAG213_Inlay_25mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Inlay NFC passivo ~25mm (2 pads de antena, sem conexao eletrica)")
+			)
+			(libsource
+				(lib "nibas_wristband")
+				(part "NTAG213_Inlay")
+				(description "NTAG213 NFC inlay adhesive ~25mm diameter, 2 antenna pads (passive)")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "NFC NTAG213 inlay tag")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "NTAG*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "0d8c21d8-7cc3-4fc2-8140-36dc2fe419ab")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "TP1")
+			(value "TestPoint")
+			(footprint "TestPoint:TestPoint_Pad_D1.0mm")
+			(description "Pad de teste 1.0mm")
+			(fields
+				(field
+					(name "Footprint") "TestPoint:TestPoint_Pad_D1.0mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Pad de teste 1.0mm")
+			)
+			(libsource
+				(lib "Connector")
+				(part "TestPoint")
+				(description "test point")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "test point tp")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "Pin* Test*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "089d3f1a-f6d2-44eb-b6ed-2ed50b6dbaf4")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "TP2")
+			(value "TestPoint")
+			(footprint "TestPoint:TestPoint_Pad_D1.0mm")
+			(description "Pad de teste 1.0mm")
+			(fields
+				(field
+					(name "Footprint") "TestPoint:TestPoint_Pad_D1.0mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Pad de teste 1.0mm")
+			)
+			(libsource
+				(lib "Connector")
+				(part "TestPoint")
+				(description "test point")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "test point tp")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "Pin* Test*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "f9d686b9-1efe-40d2-b1a8-683c136d5714")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "TP3")
+			(value "TestPoint")
+			(footprint "TestPoint:TestPoint_Pad_D1.0mm")
+			(description "Pad de teste 1.0mm")
+			(fields
+				(field
+					(name "Footprint") "TestPoint:TestPoint_Pad_D1.0mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Pad de teste 1.0mm")
+			)
+			(libsource
+				(lib "Connector")
+				(part "TestPoint")
+				(description "test point")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "test point tp")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "Pin* Test*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "6df721ff-7b7d-4fa2-9f64-bb0dcbed783c")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "TP4")
+			(value "TestPoint")
+			(footprint "TestPoint:TestPoint_Pad_D1.0mm")
+			(description "Pad de teste 1.0mm")
+			(fields
+				(field
+					(name "Footprint") "TestPoint:TestPoint_Pad_D1.0mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Pad de teste 1.0mm")
+			)
+			(libsource
+				(lib "Connector")
+				(part "TestPoint")
+				(description "test point")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "test point tp")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "Pin* Test*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "b82ccac3-9933-4885-89e0-cac3d8da4e90")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U1")
+			(value "nRF52810-QCAA")
+			(footprint "Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.6x3.6mm")
+			(description "Multiprotocol BLE/2.4GHz Cortex-M4 SoC, QFN32 5x5mm (pinagem Table 99, nRF52810 PS)")
+			(fields
+				(field
+					(name "Footprint") "Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.6x3.6mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Multiprotocol BLE/2.4GHz Cortex-M4 SoC, QFN32 5x5mm (pinagem Table 99, nRF52810 PS)")
+			)
+			(libsource
+				(lib "MCU_Nordic")
+				(part "nRF52810-QCxx")
+				(description "Multiprotocol BLE/2.4GHz Cortex-M4 SoC, QFN-32")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "MCU ARM BLE 2.4GHz")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "QFN*1EP*5x5mm*P0.5mm*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "5b3f07be-f10a-4810-a390-6f06f6630d85")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "19")
+						)
+						(pin
+							(num "23")
+						)
+						(pin
+							(num "24")
+						)
+						(pin
+							(num "16")
+						)
+						(pin
+							(num "17")
+						)
+						(pin
+							(num "18")
+						)
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "21")
+						)
+						(pin
+							(num "22")
+						)
+						(pin
+							(num "30")
+						)
+						(pin
+							(num "32")
+						)
+						(pin
+							(num "25")
+						)
+						(pin
+							(num "9")
+						)
+						(pin
+							(num "33")
+						)
+						(pin
+							(num "29")
+						)
+						(pin
+							(num "20")
+						)
+						(pin
+							(num "31")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "6")
+						)
+						(pin
+							(num "7")
+						)
+						(pin
+							(num "8")
+						)
+						(pin
+							(num "10")
+						)
+						(pin
+							(num "11")
+						)
+						(pin
+							(num "12")
+						)
+						(pin
+							(num "13")
+						)
+						(pin
+							(num "14")
+						)
+						(pin
+							(num "15")
+						)
+						(pin
+							(num "26")
+						)
+						(pin
+							(num "27")
+						)
+						(pin
+							(num "28")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "X1")
+			(value "32MHz CL=8pF")
+			(footprint "Crystal:Crystal_SMD_2016-4Pin_2.0x1.6mm")
+			(description "Cristal 32 MHz HFXO")
+			(fields
+				(field
+					(name "Footprint") "Crystal:Crystal_SMD_2016-4Pin_2.0x1.6mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Cristal 32 MHz HFXO")
+			)
+			(libsource
+				(lib "Device")
+				(part "Crystal")
+				(description "Two pin crystal")
+			)
+			(property
+				(name "Sheetname")
+				(value "wristband_discreto")
+			)
+			(property
+				(name "Sheetfile")
+				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "quartz ceramic resonator oscillator")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "Crystal*")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "1f444974-c7fb-4849-9a44-f4e69c1352a3")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+	)
+	(groups)
+	(variants)
+	(libparts
+		(libpart
+			(lib "Connector")
+			(part "TestPoint")
+			(description "test point")
+			(footprints
+				(fp "Pin*")
+				(fp "Test*")
+			)
+			(fields
+				(field
+					(name "Reference") "TP")
+				(field
+					(name "Value") "TestPoint")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "test point")
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "Device")
+			(part "Antenna_Chip")
+			(description "Ceramic chip antenna with pin for PCB trace")
+			(fields
+				(field
+					(name "Reference") "AE")
+				(field
+					(name "Value") "Antenna_Chip")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Ceramic chip antenna with pin for PCB trace")
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "FEED")
+					(type "input")
+				)
+				(pin
+					(num "2")
+					(name "PCB_Trace")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "Device")
+			(part "C")
+			(description "Unpolarized capacitor")
+			(footprints
+				(fp "C_*")
+			)
+			(fields
+				(field
+					(name "Reference") "C")
+				(field
+					(name "Value") "C")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Unpolarized capacitor")
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "")
+					(type "passive")
+				)
+				(pin
+					(num "2")
+					(name "")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "Device")
+			(part "Crystal")
+			(description "Two pin crystal")
+			(footprints
+				(fp "Crystal*")
+			)
+			(fields
+				(field
+					(name "Reference") "Y")
+				(field
+					(name "Value") "Crystal")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Two pin crystal")
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "passive")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "Device")
+			(part "L")
+			(description "Inductor")
+			(footprints
+				(fp "Choke_*")
+				(fp "*Coil*")
+				(fp "Inductor_*")
+				(fp "L_*")
+			)
+			(fields
+				(field
+					(name "Reference") "L")
+				(field
+					(name "Value") "L")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Inductor")
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "passive")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "Device")
+			(part "R")
+			(description "Resistor")
+			(footprints
+				(fp "R_*")
+			)
+			(fields
+				(field
+					(name "Reference") "R")
+				(field
+					(name "Value") "R")
+				(field
+					(name "Footprint")
+				)
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Resistor")
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "")
+					(type "passive")
+				)
+				(pin
+					(num "2")
+					(name "")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "MCU_Nordic")
+			(part "nRF52810-QCxx")
+			(description "Multiprotocol BLE/2.4GHz Cortex-M4 SoC, QFN-32")
+			(docs "http://infocenter.nordicsemi.com/pdf/nRF52810_PS_v1.1.pdf")
+			(footprints
+				(fp "QFN*1EP*5x5mm*P0.5mm*")
+			)
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "nRF52810-QCxx")
+				(field
+					(name "Footprint") "Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.6x3.6mm")
+				(field
+					(name "Datasheet") "http://infocenter.nordicsemi.com/pdf/nRF52810_PS_v1.1.pdf")
+				(field
+					(name "Description") "Multiprotocol BLE/2.4GHz Cortex-M4 SoC, QFN-32")
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "DEC1")
+					(type "passive")
+				)
+				(pin
+					(num "2")
+					(name "P0.00/XL1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "3")
+					(name "P0.01/XL2")
+					(type "bidirectional")
+				)
+				(pin
+					(num "4")
+					(name "P0.04/AIN2")
+					(type "bidirectional")
+				)
+				(pin
+					(num "5")
+					(name "P0.05/AIN3")
+					(type "bidirectional")
+				)
+				(pin
+					(num "6")
+					(name "P0.06")
+					(type "bidirectional")
+				)
+				(pin
+					(num "7")
+					(name "P0.09")
+					(type "bidirectional")
+				)
+				(pin
+					(num "8")
+					(name "P0.10")
+					(type "bidirectional")
+				)
+				(pin
+					(num "9")
+					(name "VDD")
+					(type "power_in")
+				)
+				(pin
+					(num "10")
+					(name "P0.12")
+					(type "bidirectional")
+				)
+				(pin
+					(num "11")
+					(name "P0.14")
+					(type "bidirectional")
+				)
+				(pin
+					(num "12")
+					(name "P0.15")
+					(type "bidirectional")
+				)
+				(pin
+					(num "13")
+					(name "P0.16")
+					(type "bidirectional")
+				)
+				(pin
+					(num "14")
+					(name "P0.18")
+					(type "bidirectional")
+				)
+				(pin
+					(num "15")
+					(name "P0.20")
+					(type "bidirectional")
+				)
+				(pin
+					(num "16")
+					(name "P0.21/~{RESET}")
+					(type "bidirectional")
+				)
+				(pin
+					(num "17")
+					(name "SWDCLK")
+					(type "input")
+				)
+				(pin
+					(num "18")
+					(name "SWDIO")
+					(type "bidirectional")
+				)
+				(pin
+					(num "19")
+					(name "ANT")
+					(type "passive")
+				)
+				(pin
+					(num "20")
+					(name "VSS")
+					(type "power_in")
+				)
+				(pin
+					(num "21")
+					(name "DEC2")
+					(type "passive")
+				)
+				(pin
+					(num "22")
+					(name "DEC3")
+					(type "passive")
+				)
+				(pin
+					(num "23")
+					(name "XC1")
+					(type "input")
+				)
+				(pin
+					(num "24")
+					(name "XC2")
+					(type "input")
+				)
+				(pin
+					(num "25")
+					(name "VDD")
+					(type "passive")
+				)
+				(pin
+					(num "26")
+					(name "P0.25")
+					(type "bidirectional")
+				)
+				(pin
+					(num "27")
+					(name "P0.28/AIN4")
+					(type "bidirectional")
+				)
+				(pin
+					(num "28")
+					(name "P0.30/AIN6")
+					(type "bidirectional")
+				)
+				(pin
+					(num "29")
+					(name "VSS")
+					(type "passive")
+				)
+				(pin
+					(num "30")
+					(name "DEC4")
+					(type "passive")
+				)
+				(pin
+					(num "31")
+					(name "DCC")
+					(type "power_out")
+				)
+				(pin
+					(num "32")
+					(name "VDD")
+					(type "passive")
+				)
+				(pin
+					(num "33")
+					(name "VSS")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "nibas_wristband")
+			(part "J1_Battery_Negative")
+			(description "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1059 positive holder")
+			(docs "https://energy.panasonic.com/dam/master/pdf/en/datasheet/lithium/CR2032_Datasheet_EN.pdf")
+			(footprints
+				(fp "Battery_Contact*")
+			)
+			(fields
+				(field
+					(name "Reference") "J1")
+				(field
+					(name "Value") "Battery_Negative_Contact")
+				(field
+					(name "Footprint") "nibas_wristband:J1_Battery_Negative_Contact")
+				(field
+					(name "Datasheet") "https://energy.panasonic.com/dam/master/pdf/en/datasheet/lithium/CR2032_Datasheet_EN.pdf")
+				(field
+					(name "Description") "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1059 positive holder")
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "GND")
+					(type "power_in")
+				)
+			)
+		)
+		(libpart
+			(lib "nibas_wristband")
+			(part "Keystone_1059")
+			(description "Keystone 1059 SMT coin cell holder for CR2032/CR2025, positive contact only (negative via J1). UNVERIFIED dims.")
+			(docs "http://www.keyelco.com/product.cfm/THM-20mm-Holders-All-sizes/1059/product_id/725")
+			(footprints
+				(fp "Keystone_1059*")
+			)
+			(fields
+				(field
+					(name "Reference") "BT1")
+				(field
+					(name "Value") "Keystone_1059")
+				(field
+					(name "Footprint") "nibas_wristband:Keystone_1059_CR2032_SMT")
+				(field
+					(name "Datasheet") "http://www.keyelco.com/product.cfm/THM-20mm-Holders-All-sizes/1059/product_id/725")
+				(field
+					(name "Description") "Keystone 1059 SMT coin cell holder for CR2032/CR2025, positive contact only (negative via J1). UNVERIFIED dims.")
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "VDD")
+					(type "power_in")
+				)
+			)
+		)
+		(libpart
+			(lib "nibas_wristband")
+			(part "NTAG213_Inlay")
+			(description "NTAG213 NFC inlay adhesive ~25mm diameter, 2 antenna pads (passive)")
+			(docs "https://www.nxp.com/products/rfid-nfc/nfc-hf/ntag213-215-216:NTAG213")
+			(footprints
+				(fp "NTAG*")
+			)
+			(fields
+				(field
+					(name "Reference") "TAG1")
+				(field
+					(name "Value") "NTAG213_Inlay")
+				(field
+					(name "Footprint") "nibas_wristband:NTAG213_Inlay_25mm")
+				(field
+					(name "Datasheet") "https://www.nxp.com/products/rfid-nfc/nfc-hf/ntag213-215-216:NTAG213")
+				(field
+					(name "Description") "NTAG213 NFC inlay adhesive ~25mm diameter, 2 antenna pads (passive)")
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "ANT1")
+					(type "passive")
+				)
+				(pin
+					(num "2")
+					(name "ANT2")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "nibas_wristband")
+			(part "SHLD1_Ferrite_Shield")
+			(description "Ferrite shielding sheet disc ~22mm diameter, GND connected, placed between battery and NFC coil")
+			(docs "https://www.fair-rite.com/products/shielding-materials/ferrite-shielding-sheets/")
+			(footprints
+				(fp "SHLD*")
+			)
+			(fields
+				(field
+					(name "Reference") "SHLD1")
+				(field
+					(name "Value") "Ferrite_Shield")
+				(field
+					(name "Footprint") "nibas_wristband:SHLD1_Ferrite_Shield_22mm")
+				(field
+					(name "Datasheet") "https://www.fair-rite.com/products/shielding-materials/ferrite-shielding-sheets/")
+				(field
+					(name "Description") "Ferrite shielding sheet disc ~22mm diameter, GND connected, placed between battery and NFC coil")
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "GND")
+					(type "passive")
+				)
+			)
+		)
+	)
+	(libraries
+		(library
+			(logical "Connector")
+			(uri "${KICAD10_SYMBOL_DIR}/Connector.kicad_sym")
+		)
+		(library
+			(logical "Device")
+			(uri "${KICAD10_SYMBOL_DIR}/Device.kicad_sym")
+		)
+		(library
+			(logical "MCU_Nordic")
+			(uri "${KICAD10_SYMBOL_DIR}/MCU_Nordic.kicad_sym")
+		)
+		(library
+			(logical "nibas_wristband")
+			(uri "${KIPRJMOD}/../libs/nibas_wristband.kicad_sym")
+		)
+	)
+	(nets
+		(net
+			(code "1")
+			(name "/NET_ANT")
+			(class "Default")
+			(node
+				(ref "C3")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "L1")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "19")
+				(pinfunction "ANT_19")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "2")
+			(name "/NET_DCC")
+			(class "Default")
+			(node
+				(ref "L2")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "31")
+				(pinfunction "DCC_31")
+				(pintype "power_out")
+			)
+		)
+		(net
+			(code "3")
+			(name "/NET_DEC1")
+			(class "Default")
+			(node
+				(ref "C5")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "1")
+				(pinfunction "DEC1_1")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "4")
+			(name "/NET_DEC2")
+			(class "Default")
+			(node
+				(ref "C7")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "21")
+				(pinfunction "DEC2_21")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "5")
+			(name "/NET_DEC3")
+			(class "Default")
+			(node
+				(ref "C6")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "22")
+				(pinfunction "DEC3_22")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "6")
+			(name "/NET_DEC4")
+			(class "Default")
+			(node
+				(ref "C10")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "L3")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "30")
+				(pinfunction "DEC4_30")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "7")
+			(name "/NET_L2_L3")
+			(class "Default")
+			(node
+				(ref "L2")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "L3")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "8")
+			(name "/NET_RESET")
+			(class "Default")
+			(node
+				(ref "R1")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "16")
+				(pinfunction "P0.21/~{RESET}_16")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "9")
+			(name "/NET_RF")
+			(class "Default")
+			(node
+				(ref "ANT1")
+				(pin "1")
+				(pinfunction "FEED_1")
+				(pintype "input")
+			)
+			(node
+				(ref "L1")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "10")
+			(name "/NET_SWDCLK")
+			(class "Default")
+			(node
+				(ref "TP3")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "17")
+				(pinfunction "SWDCLK_17")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "11")
+			(name "/NET_SWDIO")
+			(class "Default")
+			(node
+				(ref "TP2")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "18")
+				(pinfunction "SWDIO_18")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "12")
+			(name "/NET_XC1")
+			(class "Default")
+			(node
+				(ref "C1")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "23")
+				(pinfunction "XC1_23")
+				(pintype "input")
+			)
+			(node
+				(ref "X1")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "13")
+			(name "/NET_XC2")
+			(class "Default")
+			(node
+				(ref "C2")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "24")
+				(pinfunction "XC2_24")
+				(pintype "input")
+			)
+			(node
+				(ref "X1")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "14")
+			(name "GND")
+			(class "Default")
+			(node
+				(ref "ANT1")
+				(pin "2")
+				(pinfunction "PCB_Trace_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C1")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C10")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C2")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C3")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C4")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C5")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C6")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C7")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C8")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C9")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "J1")
+				(pin "1")
+				(pinfunction "GND_1")
+				(pintype "power_in")
+			)
+			(node
+				(ref "SHLD1")
+				(pin "1")
+				(pinfunction "GND_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "TP4")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "20")
+				(pinfunction "VSS_20")
+				(pintype "power_in")
+			)
+			(node
+				(ref "U1")
+				(pin "29")
+				(pinfunction "VSS_29")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "33")
+				(pinfunction "VSS_33")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "15")
+			(name "VDD_BAT")
+			(class "Default")
+			(node
+				(ref "BT1")
+				(pin "1")
+				(pinfunction "VDD_1")
+				(pintype "power_in")
+			)
+			(node
+				(ref "C4")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "C8")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "C9")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R1")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "TP1")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "25")
+				(pinfunction "VDD_25")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "32")
+				(pinfunction "VDD_32")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "9")
+				(pinfunction "VDD_9")
+				(pintype "power_in")
+			)
+		)
+		(net
+			(code "16")
+			(name "unconnected-(TAG1-ANT1-Pad1)")
+			(class "Default")
+			(node
+				(ref "TAG1")
+				(pin "1")
+				(pinfunction "ANT1_1")
+				(pintype "passive+no_connect")
+			)
+		)
+		(net
+			(code "17")
+			(name "unconnected-(TAG1-ANT2-Pad2)")
+			(class "Default")
+			(node
+				(ref "TAG1")
+				(pin "2")
+				(pinfunction "ANT2_2")
+				(pintype "passive+no_connect")
+			)
+		)
+		(net
+			(code "18")
+			(name "unconnected-(U1-P0.00{slash}XL1-Pad2)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "2")
+				(pinfunction "P0.00/XL1_2")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "19")
+			(name "unconnected-(U1-P0.01{slash}XL2-Pad3)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "3")
+				(pinfunction "P0.01/XL2_3")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "20")
+			(name "unconnected-(U1-P0.04{slash}AIN2-Pad4)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "4")
+				(pinfunction "P0.04/AIN2_4")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "21")
+			(name "unconnected-(U1-P0.05{slash}AIN3-Pad5)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "5")
+				(pinfunction "P0.05/AIN3_5")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "22")
+			(name "unconnected-(U1-P0.06-Pad6)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "6")
+				(pinfunction "P0.06_6")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "23")
+			(name "unconnected-(U1-P0.09-Pad7)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "7")
+				(pinfunction "P0.09_7")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "24")
+			(name "unconnected-(U1-P0.10-Pad8)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "8")
+				(pinfunction "P0.10_8")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "25")
+			(name "unconnected-(U1-P0.12-Pad10)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "10")
+				(pinfunction "P0.12_10")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "26")
+			(name "unconnected-(U1-P0.14-Pad11)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "11")
+				(pinfunction "P0.14_11")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "27")
+			(name "unconnected-(U1-P0.15-Pad12)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "12")
+				(pinfunction "P0.15_12")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "28")
+			(name "unconnected-(U1-P0.16-Pad13)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "13")
+				(pinfunction "P0.16_13")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "29")
+			(name "unconnected-(U1-P0.18-Pad14)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "14")
+				(pinfunction "P0.18_14")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "30")
+			(name "unconnected-(U1-P0.20-Pad15)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "15")
+				(pinfunction "P0.20_15")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "31")
+			(name "unconnected-(U1-P0.25-Pad26)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "26")
+				(pinfunction "P0.25_26")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "32")
+			(name "unconnected-(U1-P0.28{slash}AIN4-Pad27)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "27")
+				(pinfunction "P0.28/AIN4_27")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "33")
+			(name "unconnected-(U1-P0.30{slash}AIN6-Pad28)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "28")
+				(pinfunction "P0.30/AIN6_28")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+	)
+)
