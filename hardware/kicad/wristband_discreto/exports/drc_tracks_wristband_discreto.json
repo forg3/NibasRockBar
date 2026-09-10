@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-09-09T18:21:07",
+    "date": "2026-09-10T15:38:42",
     "ignored_checks": [
         {
             "description": "Footprint has no courtyard defined",
@@ -36,43 +36,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Ilha 2 [GND] de C8 no F.Cu",
-                    "pos": {
-                        "x": 91.98,
-                        "y": 110.5
-                    },
-                    "uuid": "509794b7-9a2d-4c55-ba9b-436a374c9777"
-                },
-                {
                     "description": "Trilha [GND] no F.Cu, comprimento 0,8000 mm",
                     "pos": {
-                        "x": 92.275,
-                        "y": 108.2
+                        "x": 95.8,
+                        "y": 110.12
                     },
-                    "uuid": "6031a812-8333-491e-bd8d-bbc2aa84f133"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
+                    "uuid": "7727e2f4-312f-43c1-9f3c-879576a30d12"
+                },
                 {
-                    "description": "Ilha 2 [GND] de C4 no F.Cu",
+                    "description": "Ilha 2 [GND] de C1 no F.Cu",
                     "pos": {
-                        "x": 91.98,
+                        "x": 95.98,
                         "y": 112.8
                     },
-                    "uuid": "cc817729-3436-4592-bc78-c977ba9b3ca7"
-                },
-                {
-                    "description": "Ilha 2 [GND] de C8 no F.Cu",
-                    "pos": {
-                        "x": 91.98,
-                        "y": 110.5
-                    },
-                    "uuid": "509794b7-9a2d-4c55-ba9b-436a374c9777"
+                    "uuid": "46eb5e9f-7fdf-4e31-adf2-4d08b9665c10"
                 }
             ],
             "severity": "error",
@@ -81,21 +58,21 @@
         {
             "description": "Missing connection between items",
             "items": [
-                {
-                    "description": "Via [GND] no F.Cu - B.Cu",
-                    "pos": {
-                        "x": 98.8,
-                        "y": 109.6
-                    },
-                    "uuid": "49b50b09-6a5d-489a-b77a-45702bb35456"
-                },
                 {
                     "description": "Ilha 2 [GND] de C2 no F.Cu",
                     "pos": {
                         "x": 95.98,
                         "y": 109.2
                     },
-                    "uuid": "6b13fb39-260f-4c63-844d-d279d140af04"
+                    "uuid": "57ad44f6-25bd-4d00-b777-0c6e8b130c6c"
+                },
+                {
+                    "description": "Via [GND] no F.Cu - B.Cu",
+                    "pos": {
+                        "x": 96.539314,
+                        "y": 109.814361
+                    },
+                    "uuid": "7762a065-be9f-404f-8614-5234e798b3db"
                 }
             ],
             "severity": "error",
@@ -105,20 +82,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Ilha 2 [GND] de C7 no F.Cu",
+                    "description": "Ilha 2 [GND] de C1 no F.Cu",
                     "pos": {
-                        "x": 98.98,
-                        "y": 114.5
+                        "x": 95.98,
+                        "y": 112.8
                     },
-                    "uuid": "90c36df7-f0a2-41f9-bad1-d45a851a6009"
+                    "uuid": "46eb5e9f-7fdf-4e31-adf2-4d08b9665c10"
                 },
                 {
-                    "description": "Ilha 2 [GND] de C5 no F.Cu",
+                    "description": "Ilha 2 [GND] de C4 no F.Cu",
                     "pos": {
-                        "x": 100.98,
-                        "y": 114.5
+                        "x": 93.68,
+                        "y": 112.9
                     },
-                    "uuid": "a1f11cc8-368f-48d4-add3-80edc97dc4f5"
+                    "uuid": "9feb7575-ba18-43f8-9ab7-3adae59705a5"
                 }
             ],
             "severity": "error",
@@ -128,20 +105,43 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Ilha 29 [GND] de U1 no F.Cu",
+                    "description": "Zona [GND] no B.Cu, prioridade 0",
                     "pos": {
-                        "x": 99.75,
-                        "y": 108.35
+                        "x": 115.5,
+                        "y": 100.0
                     },
-                    "uuid": "580c1a6e-2259-46cc-8c72-9815c3aca241"
+                    "uuid": "3988eded-c2b4-4d74-a120-39e55fe8753c"
                 },
+                {
+                    "description": "Zona [GND] no B.Cu, prioridade 0",
+                    "pos": {
+                        "x": 115.5,
+                        "y": 100.0
+                    },
+                    "uuid": "3988eded-c2b4-4d74-a120-39e55fe8753c"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
                 {
                     "description": "Via [GND] no F.Cu - B.Cu",
                     "pos": {
                         "x": 100.0,
-                        "y": 109.6
+                        "y": 109.1
                     },
-                    "uuid": "168051c5-25ef-4680-864e-b8255589092a"
+                    "uuid": "064aa422-d358-4f5a-a192-680a3d79cbdb"
+                },
+                {
+                    "description": "Ilha 29 [GND] de U1 no F.Cu",
+                    "pos": {
+                        "x": 99.75,
+                        "y": 107.85
+                    },
+                    "uuid": "fb85a28a-e8ce-4e94-8097-6f098e90e639"
                 }
             ],
             "severity": "error",
@@ -150,67 +150,21 @@
         {
             "description": "Missing connection between items",
             "items": [
-                {
-                    "description": "Ilha 2 [GND] de C5 no F.Cu",
-                    "pos": {
-                        "x": 100.98,
-                        "y": 114.5
-                    },
-                    "uuid": "a1f11cc8-368f-48d4-add3-80edc97dc4f5"
-                },
-                {
-                    "description": "Ilha 2 [GND] de C6 no F.Cu",
-                    "pos": {
-                        "x": 102.98,
-                        "y": 114.5
-                    },
-                    "uuid": "3fc21a37-1a3b-4d8c-99d0-88da2ec44469"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Via [GND] no F.Cu - B.Cu",
-                    "pos": {
-                        "x": 101.2,
-                        "y": 110.8
-                    },
-                    "uuid": "f3252067-628a-443e-9c54-77970aa49f5c"
-                },
                 {
                     "description": "Ilha 20 [GND] de U1 no F.Cu",
                     "pos": {
                         "x": 102.45,
-                        "y": 111.05
+                        "y": 110.55
                     },
-                    "uuid": "2f80ceb2-59c0-4ac1-b159-d84f2e183d02"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Via [GND] no F.Cu - B.Cu",
-                    "pos": {
-                        "x": 105.001501,
-                        "y": 113.748203
-                    },
-                    "uuid": "bc7aec6e-5602-42cc-a76a-692ad7c491dd"
+                    "uuid": "19b3e89a-b1f1-4a6b-917f-4641e9f94c18"
                 },
                 {
-                    "description": "Ilha 2 [GND] de C6 no F.Cu",
+                    "description": "Via [GND] no F.Cu - B.Cu",
                     "pos": {
-                        "x": 102.98,
-                        "y": 114.5
+                        "x": 101.2,
+                        "y": 110.3
                     },
-                    "uuid": "3fc21a37-1a3b-4d8c-99d0-88da2ec44469"
+                    "uuid": "45329a8b-ed84-45a0-91cc-c5c27da95d61"
                 }
             ],
             "severity": "error",
@@ -222,18 +176,64 @@
                 {
                     "description": "Via [GND] no F.Cu - B.Cu",
                     "pos": {
-                        "x": 108.891087,
-                        "y": 109.283693
+                        "x": 106.843761,
+                        "y": 108.977155
                     },
-                    "uuid": "40c9952d-6c31-4c9a-b43b-346bb03b1ee0"
+                    "uuid": "ce52cf7f-b0d9-4b37-a6de-de758b0f6b7c"
                 },
                 {
                     "description": "Ilha 2 [GND] de ANT1 no F.Cu",
                     "pos": {
-                        "x": 112.45,
-                        "y": 111.0
+                        "x": 110.85,
+                        "y": 109.4
                     },
-                    "uuid": "b4bcd957-e58c-42c0-a91d-5c4f3b5acba5"
+                    "uuid": "b9358443-b4d5-4b62-ab1b-8f342efc8da0"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Ilha 1 [NET_RESET] de R1 no F.Cu",
+                    "pos": {
+                        "x": 89.49,
+                        "y": 90.0
+                    },
+                    "uuid": "f18c0b61-9d10-45a0-b0c5-6b7d567d59f3"
+                },
+                {
+                    "description": "Ilha 16 [NET_RESET] de U1 no F.Cu",
+                    "pos": {
+                        "x": 101.75,
+                        "y": 112.75
+                    },
+                    "uuid": "1bed578c-5fbc-4807-99d2-51e01b8c29d1"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Ilha 1 [NET_XC1] de C1 no F.Cu",
+                    "pos": {
+                        "x": 95.02,
+                        "y": 112.8
+                    },
+                    "uuid": "b5719218-a465-4c42-8d53-d9ce57c1ae48"
+                },
+                {
+                    "description": "Trilha [NET_XC1] no B.Cu, comprimento 0,5000 mm",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 112.0
+                    },
+                    "uuid": "b1b7121b-05d4-4f23-99f5-e90e4c3ae088"
                 }
             ],
             "severity": "error",
@@ -246,17 +246,17 @@
                     "description": "Ilha 30 [NET_DEC4] de U1 no F.Cu",
                     "pos": {
                         "x": 99.25,
-                        "y": 108.35
+                        "y": 107.85
                     },
-                    "uuid": "d423c736-9780-4dbc-b62e-d30a13af1d78"
+                    "uuid": "12b3985b-5ce3-443d-9ae6-fb0d3e89b560"
                 },
                 {
-                    "description": "Ilha 2 [NET_DEC4] de L3 no F.Cu",
+                    "description": "Trilha [NET_DEC4] no B.Cu, comprimento 0,5000 mm",
                     "pos": {
-                        "x": 94.785,
-                        "y": 108.0
+                        "x": 100.5,
+                        "y": 107.0
                     },
-                    "uuid": "4884d7ec-0245-47ac-8516-107b4a40d911"
+                    "uuid": "ab51de6b-291f-4380-8aba-ebbf5c2edca6"
                 }
             ],
             "severity": "error",
@@ -266,43 +266,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Ilha 1 [NET_DEC4] de C10 no F.Cu",
+                    "description": "Ilha 1 [NET_XC2] de C2 no F.Cu",
                     "pos": {
-                        "x": 103.725,
-                        "y": 114.5
+                        "x": 95.02,
+                        "y": 109.2
                     },
-                    "uuid": "18e650e2-dd7a-4dbc-8cdc-cecf4fefd0e9"
+                    "uuid": "d3b42eb3-3fef-4f78-8561-22e5e18ef0f3"
                 },
                 {
-                    "description": "Ilha 30 [NET_DEC4] de U1 no F.Cu",
+                    "description": "Ilha 2 [NET_XC2] de X1 no F.Cu",
                     "pos": {
-                        "x": 99.25,
-                        "y": 108.35
-                    },
-                    "uuid": "d423c736-9780-4dbc-b62e-d30a13af1d78"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Ilha 1 [NET_XC1] de X1 no F.Cu",
-                    "pos": {
-                        "x": 92.8,
+                        "x": 94.5,
                         "y": 111.55
                     },
-                    "uuid": "ca445e13-d806-476c-96f0-4fc5fca61b43"
-                },
-                {
-                    "description": "Ilha 1 [NET_XC1] de C1 no F.Cu",
-                    "pos": {
-                        "x": 95.02,
-                        "y": 112.8
-                    },
-                    "uuid": "ec93c5e7-dacc-4d82-abe7-ad6c89405dce"
+                    "uuid": "93854140-3d01-4d1a-be78-81f8026f5a70"
                 }
             ],
             "severity": "error",
@@ -312,20 +289,43 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Ilha 1 [NET_XC1] de C1 no F.Cu",
+                    "description": "Ilha 1 [NET_SWDCLK] de TP3 no F.Cu",
                     "pos": {
-                        "x": 95.02,
-                        "y": 112.8
+                        "x": 88.0,
+                        "y": 100.0
                     },
-                    "uuid": "ec93c5e7-dacc-4d82-abe7-ad6c89405dce"
+                    "uuid": "8e255864-e836-484a-8730-8d9447e4e7f0"
                 },
                 {
-                    "description": "Ilha 23 [NET_XC1] de U1 no F.Cu",
+                    "description": "Ilha 17 [NET_SWDCLK] de U1 no F.Cu",
+                    "pos": {
+                        "x": 102.45,
+                        "y": 112.05
+                    },
+                    "uuid": "185e4cd9-795d-471c-aaf3-76073d76e798"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Ilha 22 [NET_DEC3] de U1 no F.Cu",
                     "pos": {
                         "x": 102.45,
                         "y": 109.55
                     },
-                    "uuid": "8152c641-0f60-4070-af41-46f652c4b09d"
+                    "uuid": "6b59545d-e36b-4c21-a0d5-169f86010348"
+                },
+                {
+                    "description": "Ilha 1 [NET_DEC3] de C6 no F.Cu",
+                    "pos": {
+                        "x": 106.52,
+                        "y": 112.4
+                    },
+                    "uuid": "4505381a-21a9-4cf6-b506-e0b69b199e8c"
                 }
             ],
             "severity": "error",
@@ -335,66 +335,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Ilha 32 [VDD_BAT] de U1 no F.Cu",
+                    "description": "Ilha 1 [NET_DEC1] de C5 no F.Cu",
                     "pos": {
-                        "x": 98.25,
-                        "y": 108.35
+                        "x": 95.8,
+                        "y": 111.08
                     },
-                    "uuid": "080e1f98-9906-435a-b87e-02d1b1bbf9e8"
+                    "uuid": "8418d1c6-9271-444a-84b2-556a050b6265"
                 },
                 {
-                    "description": "Trilha [VDD_BAT] no F.Cu, comprimento 0,5000 mm",
+                    "description": "Ilha 1 [NET_DEC1] de U1 no F.Cu",
                     "pos": {
-                        "x": 98.0,
-                        "y": 106.5
+                        "x": 97.55,
+                        "y": 108.55
                     },
-                    "uuid": "e73c17a8-e342-4655-849f-4c1505b83769"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Ilha 32 [VDD_BAT] de U1 no F.Cu",
-                    "pos": {
-                        "x": 98.25,
-                        "y": 108.35
-                    },
-                    "uuid": "080e1f98-9906-435a-b87e-02d1b1bbf9e8"
-                },
-                {
-                    "description": "Ilha 9 [VDD_BAT] de U1 no F.Cu",
-                    "pos": {
-                        "x": 98.25,
-                        "y": 113.25
-                    },
-                    "uuid": "f43bd18e-62c7-4468-8783-a7eaa10c953b"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Trilha [NET_ANT] no F.Cu, comprimento 0,5000 mm",
-                    "pos": {
-                        "x": 106.0,
-                        "y": 110.5
-                    },
-                    "uuid": "0dcba826-ccb5-469c-95c7-25e9de418955"
-                },
-                {
-                    "description": "Ilha 19 [NET_ANT] de U1 no F.Cu",
-                    "pos": {
-                        "x": 102.45,
-                        "y": 111.55
-                    },
-                    "uuid": "7a74b130-5c61-496b-b006-7e6cdf8f73d0"
+                    "uuid": "d2bfb871-4302-43e6-b26a-4266d81635c0"
                 }
             ],
             "severity": "error",
@@ -406,18 +360,18 @@
                 {
                     "description": "Ilha 2 [NET_DCC] de L2 no F.Cu",
                     "pos": {
-                        "x": 97.2875,
+                        "x": 95.3875,
                         "y": 108.0
                     },
-                    "uuid": "cb45f4ab-ea7a-407c-8fe5-aca7fee16826"
+                    "uuid": "2a08e703-0d54-40e9-82e7-143cd6b6a95a"
                 },
                 {
                     "description": "Ilha 31 [NET_DCC] de U1 no F.Cu",
                     "pos": {
                         "x": 98.75,
-                        "y": 108.35
+                        "y": 107.85
                     },
-                    "uuid": "5f95f855-5eac-41da-aac2-1c9d92fe470d"
+                    "uuid": "67f6d317-6448-40dc-a859-f686c3ef86f3"
                 }
             ],
             "severity": "error",
@@ -432,107 +386,15 @@
                         "x": 88.0,
                         "y": 96.0
                     },
-                    "uuid": "1ffe6da3-4350-470e-af3d-5d2900045f3a"
+                    "uuid": "469cfcdd-ca30-48e8-96fe-65536722cd33"
                 },
                 {
                     "description": "Ilha 18 [NET_SWDIO] de U1 no F.Cu",
                     "pos": {
                         "x": 102.45,
-                        "y": 112.05
+                        "y": 111.55
                     },
-                    "uuid": "c4562706-4de3-4aa0-ada7-5a0096811cf0"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Ilha 1 [NET_DEC1] de U1 no F.Cu",
-                    "pos": {
-                        "x": 97.55,
-                        "y": 109.05
-                    },
-                    "uuid": "b6a4cb7a-80c4-4363-824b-fc5dd02d7df6"
-                },
-                {
-                    "description": "Ilha 1 [NET_DEC1] de C5 no F.Cu",
-                    "pos": {
-                        "x": 100.02,
-                        "y": 114.5
-                    },
-                    "uuid": "a2d11107-2e10-47fe-ac2a-1546805401df"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Ilha 1 [NET_SWDCLK] de TP3 no F.Cu",
-                    "pos": {
-                        "x": 88.0,
-                        "y": 100.0
-                    },
-                    "uuid": "7b95ac98-ba51-4ccb-9215-92a71a268bdb"
-                },
-                {
-                    "description": "Ilha 17 [NET_SWDCLK] de U1 no F.Cu",
-                    "pos": {
-                        "x": 102.45,
-                        "y": 112.55
-                    },
-                    "uuid": "14ba96ee-c6de-4963-bd3b-a4bf3c8d2bef"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Ilha 1 [NET_DEC2] de C7 no F.Cu",
-                    "pos": {
-                        "x": 98.02,
-                        "y": 114.5
-                    },
-                    "uuid": "a07736f8-2339-4fec-a265-c5156c4f0da9"
-                },
-                {
-                    "description": "Ilha 21 [NET_DEC2] de U1 no F.Cu",
-                    "pos": {
-                        "x": 102.45,
-                        "y": 110.55
-                    },
-                    "uuid": "5a258e73-eb15-4923-b932-3e45d2b2151c"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Ilha 1 [NET_DEC3] de C6 no F.Cu",
-                    "pos": {
-                        "x": 102.02,
-                        "y": 114.5
-                    },
-                    "uuid": "f851f2f3-eca9-4e18-89d4-b425b4a3e9d3"
-                },
-                {
-                    "description": "Ilha 22 [NET_DEC3] de U1 no F.Cu",
-                    "pos": {
-                        "x": 102.45,
-                        "y": 110.05
-                    },
-                    "uuid": "1e82e603-a04f-4dd6-9952-b67617585d34"
+                    "uuid": "85cbd266-2bef-4bea-8e17-bcdd3f091085"
                 }
             ],
             "severity": "error",
@@ -541,46 +403,23 @@
     ],
     "violations": [
         {
-            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,0000 mm)",
             "items": [
+                {
+                    "description": "Círculo no Edge.Cuts",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "eecbb724-30d3-4a88-9a83-cfbef8154d3c"
+                },
                 {
                     "description": "Ilha 1 [VDD_BAT] de BT1 no F.Cu",
                     "pos": {
-                        "x": 89.84,
-                        "y": 100.0
-                    },
-                    "uuid": "8029f929-0465-46d5-820d-9ee687bc0e4b"
-                },
-                {
-                    "description": "Ilha 1 [NET_SWDCLK] de TP3 no F.Cu",
-                    "pos": {
-                        "x": 88.0,
-                        "y": 100.0
-                    },
-                    "uuid": "7b95ac98-ba51-4ccb-9215-92a71a268bdb"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,0000 mm)",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
-                    "pos": {
                         "x": 100.0,
-                        "y": 100.0
+                        "y": 114.655
                     },
-                    "uuid": "57a7f751-c527-4f7e-87c9-4ba6e0a24d3f"
-                },
-                {
-                    "description": "Trilha [GND] no F.Cu, comprimento 0,8000 mm",
-                    "pos": {
-                        "x": 105.275,
-                        "y": 114.5
-                    },
-                    "uuid": "fc230126-46a6-46e8-9d69-815a656ccd4d"
+                    "uuid": "09200197-9ba8-40b7-a9c7-afb9f230b5c0"
                 }
             ],
             "severity": "error",
@@ -595,646 +434,19 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "57a7f751-c527-4f7e-87c9-4ba6e0a24d3f"
+                    "uuid": "eecbb724-30d3-4a88-9a83-cfbef8154d3c"
                 },
                 {
-                    "description": "Trilha [VDD_BAT] no F.Cu, comprimento 0,8002 mm",
+                    "description": "Ilha 3 [GND] de BT1 no F.Cu",
                     "pos": {
-                        "x": 91.0,
-                        "y": 112.0
+                        "x": 100.0,
+                        "y": 85.345
                     },
-                    "uuid": "013976e0-8baa-4aab-856e-9775c750afd1"
+                    "uuid": "6124bb29-c9fe-4950-a571-6d443a6aabbe"
                 }
             ],
             "severity": "error",
             "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,0000 mm)",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "57a7f751-c527-4f7e-87c9-4ba6e0a24d3f"
-                },
-                {
-                    "description": "Trilha [VDD_BAT] no F.Cu, comprimento 0,8002 mm",
-                    "pos": {
-                        "x": 91.02,
-                        "y": 112.8
-                    },
-                    "uuid": "cd69f4eb-a72c-435d-81ff-99ac68fe1faf"
-                }
-            ],
-            "severity": "error",
-            "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,0000 mm)",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "57a7f751-c527-4f7e-87c9-4ba6e0a24d3f"
-                },
-                {
-                    "description": "Ilha 2 [GND] de C10 no F.Cu",
-                    "pos": {
-                        "x": 105.275,
-                        "y": 114.5
-                    },
-                    "uuid": "39771b7d-56ad-4e74-b535-124671684acd"
-                }
-            ],
-            "severity": "error",
-            "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,0000 mm)",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "57a7f751-c527-4f7e-87c9-4ba6e0a24d3f"
-                },
-                {
-                    "description": "Ilha 1 [NET_RF] de ANT1 no F.Cu",
-                    "pos": {
-                        "x": 109.55,
-                        "y": 111.0
-                    },
-                    "uuid": "d7198e6d-4e3a-49b9-baec-99192119d8e6"
-                }
-            ],
-            "severity": "error",
-            "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,0000 mm)",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "57a7f751-c527-4f7e-87c9-4ba6e0a24d3f"
-                },
-                {
-                    "description": "Ilha 2 [GND] de ANT1 no F.Cu",
-                    "pos": {
-                        "x": 112.45,
-                        "y": 111.0
-                    },
-                    "uuid": "b4bcd957-e58c-42c0-a91d-5c4f3b5acba5"
-                }
-            ],
-            "severity": "error",
-            "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,0000 mm)",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "57a7f751-c527-4f7e-87c9-4ba6e0a24d3f"
-                },
-                {
-                    "description": "Ilha 1 [VDD_BAT] de C4 no F.Cu",
-                    "pos": {
-                        "x": 91.02,
-                        "y": 112.8
-                    },
-                    "uuid": "0b07cc4c-4ae7-43e9-9c29-b62c4c38ad38"
-                }
-            ],
-            "severity": "error",
-            "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,0000 mm)",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "57a7f751-c527-4f7e-87c9-4ba6e0a24d3f"
-                },
-                {
-                    "description": "Ilha 1 [GND] de J1 no B.Cu",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 88.5
-                    },
-                    "uuid": "340d4fad-7c4e-4447-b55f-07d52b266302"
-                }
-            ],
-            "severity": "error",
-            "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Courtyards overlap",
-            "items": [
-                {
-                    "description": "Footprint TP4",
-                    "pos": {
-                        "x": 88.0,
-                        "y": 104.0
-                    },
-                    "uuid": "060d86c7-8f18-4741-83c6-454fa7a5a5ee"
-                },
-                {
-                    "description": "Footprint BT1",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "937acef1-cc61-4a7c-894e-568026c99c34"
-                }
-            ],
-            "severity": "error",
-            "type": "courtyards_overlap"
-        },
-        {
-            "description": "Courtyards overlap",
-            "items": [
-                {
-                    "description": "Footprint C10",
-                    "pos": {
-                        "x": 104.5,
-                        "y": 114.5
-                    },
-                    "uuid": "079c8359-6180-4d96-81fa-8929f788a80f"
-                },
-                {
-                    "description": "Footprint C6",
-                    "pos": {
-                        "x": 102.5,
-                        "y": 114.5
-                    },
-                    "uuid": "a4bd40b9-57ec-47dd-9672-f94860fdb022"
-                }
-            ],
-            "severity": "error",
-            "type": "courtyards_overlap"
-        },
-        {
-            "description": "Courtyards overlap",
-            "items": [
-                {
-                    "description": "Footprint ANT1",
-                    "pos": {
-                        "x": 111.0,
-                        "y": 111.0
-                    },
-                    "uuid": "1ab32074-1df0-417f-94a7-d389ad1b96d8"
-                },
-                {
-                    "description": "Footprint C3",
-                    "pos": {
-                        "x": 107.8,
-                        "y": 109.8
-                    },
-                    "uuid": "1ee99491-36b7-4425-a914-6eea5228fb83"
-                }
-            ],
-            "severity": "error",
-            "type": "courtyards_overlap"
-        },
-        {
-            "description": "Courtyards overlap",
-            "items": [
-                {
-                    "description": "Footprint C9",
-                    "pos": {
-                        "x": 91.5,
-                        "y": 108.2
-                    },
-                    "uuid": "1d00965d-6abf-4acb-a9f2-736750f4b5b1"
-                },
-                {
-                    "description": "Footprint BT1",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "937acef1-cc61-4a7c-894e-568026c99c34"
-                }
-            ],
-            "severity": "error",
-            "type": "courtyards_overlap"
-        },
-        {
-            "description": "Courtyards overlap",
-            "items": [
-                {
-                    "description": "Footprint C8",
-                    "pos": {
-                        "x": 91.5,
-                        "y": 110.5
-                    },
-                    "uuid": "3886dfff-4508-405b-b3bb-7fdfd96baa8c"
-                },
-                {
-                    "description": "Footprint X1",
-                    "pos": {
-                        "x": 93.5,
-                        "y": 111.0
-                    },
-                    "uuid": "70f6fcb9-57e3-467f-8522-5127a50c6724"
-                }
-            ],
-            "severity": "error",
-            "type": "courtyards_overlap"
-        },
-        {
-            "description": "Courtyards overlap",
-            "items": [
-                {
-                    "description": "Footprint L2",
-                    "pos": {
-                        "x": 96.5,
-                        "y": 108.0
-                    },
-                    "uuid": "3ed74799-93dc-44ce-bb8b-29345978a583"
-                },
-                {
-                    "description": "Footprint L3",
-                    "pos": {
-                        "x": 94.3,
-                        "y": 108.0
-                    },
-                    "uuid": "753b6b67-a7f7-44e3-84df-e7ef57adb362"
-                }
-            ],
-            "severity": "error",
-            "type": "courtyards_overlap"
-        },
-        {
-            "description": "Courtyards overlap",
-            "items": [
-                {
-                    "description": "Footprint L2",
-                    "pos": {
-                        "x": 96.5,
-                        "y": 108.0
-                    },
-                    "uuid": "3ed74799-93dc-44ce-bb8b-29345978a583"
-                },
-                {
-                    "description": "Footprint U1",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 110.8
-                    },
-                    "uuid": "87f8cc11-d6a3-4805-8206-a92225a45ae4"
-                }
-            ],
-            "severity": "error",
-            "type": "courtyards_overlap"
-        },
-        {
-            "description": "Courtyards overlap",
-            "items": [
-                {
-                    "description": "Footprint L2",
-                    "pos": {
-                        "x": 96.5,
-                        "y": 108.0
-                    },
-                    "uuid": "3ed74799-93dc-44ce-bb8b-29345978a583"
-                },
-                {
-                    "description": "Footprint BT1",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "937acef1-cc61-4a7c-894e-568026c99c34"
-                }
-            ],
-            "severity": "error",
-            "type": "courtyards_overlap"
-        },
-        {
-            "description": "Courtyards overlap",
-            "items": [
-                {
-                    "description": "Footprint TP2",
-                    "pos": {
-                        "x": 88.0,
-                        "y": 96.0
-                    },
-                    "uuid": "49eee469-4fd7-4591-a56e-6fc15460db76"
-                },
-                {
-                    "description": "Footprint BT1",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "937acef1-cc61-4a7c-894e-568026c99c34"
-                }
-            ],
-            "severity": "error",
-            "type": "courtyards_overlap"
-        },
-        {
-            "description": "Courtyards overlap",
-            "items": [
-                {
-                    "description": "Footprint TP1",
-                    "pos": {
-                        "x": 88.0,
-                        "y": 92.0
-                    },
-                    "uuid": "5724f9be-ceab-42c0-99dc-a417a2aed6b9"
-                },
-                {
-                    "description": "Footprint BT1",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "937acef1-cc61-4a7c-894e-568026c99c34"
-                }
-            ],
-            "severity": "error",
-            "type": "courtyards_overlap"
-        },
-        {
-            "description": "Courtyards overlap",
-            "items": [
-                {
-                    "description": "Footprint L3",
-                    "pos": {
-                        "x": 94.3,
-                        "y": 108.0
-                    },
-                    "uuid": "753b6b67-a7f7-44e3-84df-e7ef57adb362"
-                },
-                {
-                    "description": "Footprint BT1",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "937acef1-cc61-4a7c-894e-568026c99c34"
-                }
-            ],
-            "severity": "error",
-            "type": "courtyards_overlap"
-        },
-        {
-            "description": "Courtyards overlap",
-            "items": [
-                {
-                    "description": "Footprint BT1",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "937acef1-cc61-4a7c-894e-568026c99c34"
-                },
-                {
-                    "description": "Footprint TP3",
-                    "pos": {
-                        "x": 88.0,
-                        "y": 100.0
-                    },
-                    "uuid": "fb22f327-f9f7-4e3f-a9bd-8f08b1ab9d70"
-                }
-            ],
-            "severity": "error",
-            "type": "courtyards_overlap"
-        },
-        {
-            "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,1000 mm)",
-            "items": [
-                {
-                    "description": "Via [NET_L2_L3] no F.Cu - B.Cu",
-                    "pos": {
-                        "x": 96.0,
-                        "y": 108.0
-                    },
-                    "uuid": "928f52ef-3131-46b4-96ff-80bbfbc61602"
-                },
-                {
-                    "description": "Trilha [NET_XC2] no B.Cu, comprimento 0,5000 mm",
-                    "pos": {
-                        "x": 96.5,
-                        "y": 108.5
-                    },
-                    "uuid": "d56e3eb7-6b93-42dc-b34f-b7ef0727f82c"
-                }
-            ],
-            "severity": "error",
-            "type": "clearance"
-        },
-        {
-            "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,1878 mm)",
-            "items": [
-                {
-                    "description": "Trilha [VDD_BAT] no F.Cu, comprimento 0,5000 mm",
-                    "pos": {
-                        "x": 102.0,
-                        "y": 108.0
-                    },
-                    "uuid": "ac7a6926-29e0-43e3-9e83-848d6e39265c"
-                },
-                {
-                    "description": "Ilha 24 [NET_XC2] de U1 no F.Cu",
-                    "pos": {
-                        "x": 102.45,
-                        "y": 109.05
-                    },
-                    "uuid": "c55f6485-fe0c-4eb2-a944-7b0da865943f"
-                }
-            ],
-            "severity": "error",
-            "type": "clearance"
-        },
-        {
-            "description": "Violação do isolamento ( isolamento 0,2 mm; atual 0,2 mm)",
-            "items": [
-                {
-                    "description": "Ilha 1 [VDD_BAT] de BT1 no F.Cu",
-                    "pos": {
-                        "x": 89.84,
-                        "y": 100.0
-                    },
-                    "uuid": "8029f929-0465-46d5-820d-9ee687bc0e4b"
-                },
-                {
-                    "description": "Ilha 1 [NET_SWDCLK] de TP3 no F.Cu",
-                    "pos": {
-                        "x": 88.0,
-                        "y": 100.0
-                    },
-                    "uuid": "7b95ac98-ba51-4ccb-9215-92a71a268bdb"
-                }
-            ],
-            "severity": "error",
-            "type": "clearance"
-        },
-        {
-            "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,0900 mm)",
-            "items": [
-                {
-                    "description": "Ilha 2 [GND] de C8 no F.Cu",
-                    "pos": {
-                        "x": 91.98,
-                        "y": 110.5
-                    },
-                    "uuid": "509794b7-9a2d-4c55-ba9b-436a374c9777"
-                },
-                {
-                    "description": "Ilha 4 [<no net>] de X1 no F.Cu",
-                    "pos": {
-                        "x": 92.8,
-                        "y": 110.45
-                    },
-                    "uuid": "1b9628d5-f072-479f-9bf0-720b2e605eca"
-                }
-            ],
-            "severity": "error",
-            "type": "clearance"
-        },
-        {
-            "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,0150 mm)",
-            "items": [
-                {
-                    "description": "Ilha 1 [NET_DEC4] de C10 no F.Cu",
-                    "pos": {
-                        "x": 103.725,
-                        "y": 114.5
-                    },
-                    "uuid": "18e650e2-dd7a-4dbc-8cdc-cecf4fefd0e9"
-                },
-                {
-                    "description": "Ilha 2 [GND] de C6 no F.Cu",
-                    "pos": {
-                        "x": 102.98,
-                        "y": 114.5
-                    },
-                    "uuid": "3fc21a37-1a3b-4d8c-99d0-88da2ec44469"
-                }
-            ],
-            "severity": "error",
-            "type": "clearance"
-        },
-        {
-            "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,1950 mm)",
-            "items": [
-                {
-                    "description": "Ilha 1 [NET_L2_L3] de L2 no F.Cu",
-                    "pos": {
-                        "x": 95.7125,
-                        "y": 108.0
-                    },
-                    "uuid": "95ea312d-cee9-4faa-9765-c7e7f375a55b"
-                },
-                {
-                    "description": "Ilha 2 [NET_DEC4] de L3 no F.Cu",
-                    "pos": {
-                        "x": 94.785,
-                        "y": 108.0
-                    },
-                    "uuid": "4884d7ec-0245-47ac-8516-107b4a40d911"
-                }
-            ],
-            "severity": "error",
-            "type": "clearance"
-        },
-        {
-            "description": "Non-Mirrored text on back layer",
-            "items": [
-                {
-                    "description": "Campo de referência do J1",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 80.88
-                    },
-                    "uuid": "504378a5-c444-44ee-abb1-1e88c06f839b"
-                }
-            ],
-            "severity": "warning",
-            "type": "nonmirrored_text_on_back_layer"
-        },
-        {
-            "description": "Non-Mirrored text on back layer",
-            "items": [
-                {
-                    "description": "Valor do campo de J1 (Battery_Negative_Contact)",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 96.12
-                    },
-                    "uuid": "fe82e8c7-2498-444c-a2e2-3045b0de64b0"
-                }
-            ],
-            "severity": "warning",
-            "type": "nonmirrored_text_on_back_layer"
-        },
-        {
-            "description": "Non-Mirrored text on back layer",
-            "items": [
-                {
-                    "description": "Texto do footprint de J1 (J1)",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 82.15
-                    },
-                    "uuid": "3ef92255-94c5-4a67-a3c1-e40444e7222c"
-                }
-            ],
-            "severity": "warning",
-            "type": "nonmirrored_text_on_back_layer"
-        },
-        {
-            "description": "Non-Mirrored text on back layer",
-            "items": [
-                {
-                    "description": "Texto do footprint de J1 (−)",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 88.5
-                    },
-                    "uuid": "a26ff66b-b4ef-430f-8513-0e601bb0aca0"
-                }
-            ],
-            "severity": "warning",
-            "type": "nonmirrored_text_on_back_layer"
-        },
-        {
-            "description": "Non-Mirrored text on back layer",
-            "items": [
-                {
-                    "description": "Texto do footprint de J1 (Battery_Negative_Contact)",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 94.85
-                    },
-                    "uuid": "375311ed-3938-49b4-bc0a-6db3120a9f86"
-                }
-            ],
-            "severity": "warning",
-            "type": "nonmirrored_text_on_back_layer"
         },
         {
             "description": "Silkscreen clearance",
@@ -1242,10 +454,217 @@
                 {
                     "description": "Segmento de BT1 em F.Silkscreen",
                     "pos": {
-                        "x": 87.3,
-                        "y": 94.92
+                        "x": 111.1,
+                        "y": 85.7
                     },
-                    "uuid": "470e6ddf-e98d-474a-8912-93c84a5a73a9"
+                    "uuid": "02b4989e-901d-4c07-897d-63cfd623ae56"
+                },
+                {
+                    "description": "Campo de referência do ANT1",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 107.55
+                    },
+                    "uuid": "599828b8-7e07-4475-a910-582725890fff"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Segmento de BT1 em F.Silkscreen",
+                    "pos": {
+                        "x": 111.1,
+                        "y": 85.7
+                    },
+                    "uuid": "02b4989e-901d-4c07-897d-63cfd623ae56"
+                },
+                {
+                    "description": "Segmento de ANT1 em F.Silkscreen",
+                    "pos": {
+                        "x": 107.09,
+                        "y": 110.56
+                    },
+                    "uuid": "c9fbaa4a-7da1-4f06-aa20-dda8f89b51ca"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Segmento de ANT1 em F.Silkscreen",
+                    "pos": {
+                        "x": 107.09,
+                        "y": 110.56
+                    },
+                    "uuid": "c9fbaa4a-7da1-4f06-aa20-dda8f89b51ca"
+                },
+                {
+                    "description": "Campo de referência do C6",
+                    "pos": {
+                        "x": 107.0,
+                        "y": 111.24
+                    },
+                    "uuid": "f2d8496f-33cc-45ad-95a1-20acdd1566a4"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Segmento de BT1 em F.Silkscreen",
+                    "pos": {
+                        "x": 111.1,
+                        "y": 85.7
+                    },
+                    "uuid": "02b4989e-901d-4c07-897d-63cfd623ae56"
+                },
+                {
+                    "description": "Segmento de ANT1 em F.Silkscreen",
+                    "pos": {
+                        "x": 111.0,
+                        "y": 108.24
+                    },
+                    "uuid": "151ac256-1492-43c5-b280-b0a02c211b64"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Campo de referência do C1",
+                    "pos": {
+                        "x": 95.5,
+                        "y": 111.64
+                    },
+                    "uuid": "699f56ed-3616-4bcc-bb41-ea9178f3b16b"
+                },
+                {
+                    "description": "Segmento de X1 em F.Silkscreen",
+                    "pos": {
+                        "x": 92.39,
+                        "y": 112.21
+                    },
+                    "uuid": "7ad357fa-dc10-4e80-98bf-5526605c2d53"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Campo de referência do C5",
+                    "pos": {
+                        "x": 94.64,
+                        "y": 110.6
+                    },
+                    "uuid": "0511ad71-eccc-4af8-8344-42f98e23454e"
+                },
+                {
+                    "description": "Campo de referência do C1",
+                    "pos": {
+                        "x": 95.5,
+                        "y": 111.64
+                    },
+                    "uuid": "699f56ed-3616-4bcc-bb41-ea9178f3b16b"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Segmento de C10 em F.Silkscreen",
+                    "pos": {
+                        "x": 104.35942,
+                        "y": 113.51
+                    },
+                    "uuid": "1a7c6aa1-758e-4c83-a626-9afc703b62dc"
+                },
+                {
+                    "description": "Campo de referência do C7",
+                    "pos": {
+                        "x": 104.0,
+                        "y": 113.24
+                    },
+                    "uuid": "ffef04fe-776e-460e-a6e6-f5877a7f6931"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Segmento de X1 em F.Silkscreen",
+                    "pos": {
+                        "x": 92.39,
+                        "y": 112.21
+                    },
+                    "uuid": "7ad357fa-dc10-4e80-98bf-5526605c2d53"
+                },
+                {
+                    "description": "Campo de referência do C4",
+                    "pos": {
+                        "x": 93.2,
+                        "y": 111.74
+                    },
+                    "uuid": "fee78678-84ee-40ea-9714-e020149dcc73"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Segmento de X1 em F.Silkscreen",
+                    "pos": {
+                        "x": 92.39,
+                        "y": 109.79
+                    },
+                    "uuid": "271e68df-afbc-4175-a804-15518bba9509"
+                },
+                {
+                    "description": "Campo de referência do C4",
+                    "pos": {
+                        "x": 93.2,
+                        "y": 111.74
+                    },
+                    "uuid": "fee78678-84ee-40ea-9714-e020149dcc73"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Campo de referência do BT1",
+                    "pos": {
+                        "x": 87.3,
+                        "y": 100.0
+                    },
+                    "uuid": "177ae816-1755-4de0-9642-7183995a6aa9"
                 },
                 {
                     "description": "Círculo de TP3 em F.Silkscreen",
@@ -1253,7 +672,53 @@
                         "x": 88.0,
                         "y": 100.0
                     },
-                    "uuid": "98936e7f-2265-4a6d-9f73-c40337f32322"
+                    "uuid": "5736f8ab-8ad3-4d6f-b281-fa0b48005405"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Campo de referência do BT1",
+                    "pos": {
+                        "x": 87.3,
+                        "y": 100.0
+                    },
+                    "uuid": "177ae816-1755-4de0-9642-7183995a6aa9"
+                },
+                {
+                    "description": "Campo de referência do TP3",
+                    "pos": {
+                        "x": 88.0,
+                        "y": 98.552
+                    },
+                    "uuid": "68a6680d-df8b-42e5-b5ae-ae63419f10e5"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Campo de referência do TP3",
+                    "pos": {
+                        "x": 88.0,
+                        "y": 98.552
+                    },
+                    "uuid": "68a6680d-df8b-42e5-b5ae-ae63419f10e5"
+                },
+                {
+                    "description": "Segmento de BT1 em F.Silkscreen",
+                    "pos": {
+                        "x": 88.9,
+                        "y": 85.7
+                    },
+                    "uuid": "b11c1475-86c4-4706-ac56-c9148842111e"
                 }
             ],
             "severity": "warning",
@@ -1268,15 +733,38 @@
                         "x": 88.0,
                         "y": 102.552
                     },
-                    "uuid": "383f3db4-8829-47ab-a25f-a33c830c5f27"
+                    "uuid": "3af0f841-0b85-4826-b6ff-815cb06af835"
                 },
                 {
                     "description": "Segmento de BT1 em F.Silkscreen",
                     "pos": {
-                        "x": 87.3,
-                        "y": 94.92
+                        "x": 88.9,
+                        "y": 85.7
                     },
-                    "uuid": "470e6ddf-e98d-474a-8912-93c84a5a73a9"
+                    "uuid": "b11c1475-86c4-4706-ac56-c9148842111e"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Campo de referência do C9",
+                    "pos": {
+                        "x": 89.5,
+                        "y": 106.77
+                    },
+                    "uuid": "a5515797-8a9f-4d63-b1d0-39e68e144c46"
+                },
+                {
+                    "description": "Segmento de BT1 em F.Silkscreen",
+                    "pos": {
+                        "x": 88.9,
+                        "y": 85.7
+                    },
+                    "uuid": "b11c1475-86c4-4706-ac56-c9148842111e"
                 }
             ],
             "severity": "warning",
@@ -1288,18 +776,18 @@
                 {
                     "description": "Segmento de BT1 em F.Silkscreen",
                     "pos": {
-                        "x": 87.3,
-                        "y": 94.92
+                        "x": 88.9,
+                        "y": 85.7
                     },
-                    "uuid": "470e6ddf-e98d-474a-8912-93c84a5a73a9"
+                    "uuid": "b11c1475-86c4-4706-ac56-c9148842111e"
                 },
                 {
-                    "description": "Círculo de TP4 em F.Silkscreen",
+                    "description": "Campo de referência do TP1",
                     "pos": {
                         "x": 88.0,
-                        "y": 104.0
+                        "y": 90.552
                     },
-                    "uuid": "feb9605b-36b1-4889-8955-5640adefdd0d"
+                    "uuid": "dbf11b71-1f46-4add-8064-c759ee79c024"
                 }
             ],
             "severity": "warning",
@@ -1308,577 +796,25 @@
         {
             "description": "Silkscreen clearance",
             "items": [
-                {
-                    "description": "Círculo de TP2 em F.Silkscreen",
-                    "pos": {
-                        "x": 88.0,
-                        "y": 96.0
-                    },
-                    "uuid": "2dc71e29-af5f-4916-aaa8-5ff00f000f49"
-                },
-                {
-                    "description": "Segmento de BT1 em F.Silkscreen",
-                    "pos": {
-                        "x": 87.3,
-                        "y": 94.92
-                    },
-                    "uuid": "470e6ddf-e98d-474a-8912-93c84a5a73a9"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Segmento de BT1 em F.Silkscreen",
-                    "pos": {
-                        "x": 87.3,
-                        "y": 94.92
-                    },
-                    "uuid": "470e6ddf-e98d-474a-8912-93c84a5a73a9"
-                },
-                {
-                    "description": "Campo de referência do TP3",
-                    "pos": {
-                        "x": 88.0,
-                        "y": 98.552
-                    },
-                    "uuid": "dd98d931-791e-48a8-b831-ee0e5ad0c63b"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Campo de referência do C8",
-                    "pos": {
-                        "x": 91.5,
-                        "y": 109.34
-                    },
-                    "uuid": "7d3e5f47-0644-47ff-bc1f-da8d953776d9"
-                },
-                {
-                    "description": "Segmento de X1 em F.Silkscreen",
-                    "pos": {
-                        "x": 92.09,
-                        "y": 109.79
-                    },
-                    "uuid": "bb8fa9b3-a5be-4f60-bd71-32d1d1573da7"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Campo de referência do C4",
-                    "pos": {
-                        "x": 91.5,
-                        "y": 111.64
-                    },
-                    "uuid": "3bf090b0-dd2b-40b5-a477-a8e0ea93dd4c"
-                },
-                {
-                    "description": "Segmento de X1 em F.Silkscreen",
-                    "pos": {
-                        "x": 92.09,
-                        "y": 109.79
-                    },
-                    "uuid": "bb8fa9b3-a5be-4f60-bd71-32d1d1573da7"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Segmento de X1 em F.Silkscreen",
-                    "pos": {
-                        "x": 92.09,
-                        "y": 112.21
-                    },
-                    "uuid": "34ee4096-8a70-4ffa-9780-9f980b893e18"
-                },
-                {
-                    "description": "Campo de referência do C4",
-                    "pos": {
-                        "x": 91.5,
-                        "y": 111.64
-                    },
-                    "uuid": "3bf090b0-dd2b-40b5-a477-a8e0ea93dd4c"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Segmento de BT1 em F.Silkscreen",
-                    "pos": {
-                        "x": 112.7,
-                        "y": 94.92
-                    },
-                    "uuid": "c2563664-4e5a-4231-9481-1fe7c79c2e7c"
-                },
                 {
                     "description": "Campo de referência do TP2",
                     "pos": {
                         "x": 88.0,
                         "y": 94.552
                     },
-                    "uuid": "f25211f1-2a4c-4a0b-968a-12ff71ae5f61"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Campo de referência do C6",
-                    "pos": {
-                        "x": 102.5,
-                        "y": 113.34
-                    },
-                    "uuid": "18b1c980-fe74-4ee4-90a4-367337d822b0"
+                    "uuid": "500f41f9-10bb-4150-8e75-aa6357841727"
                 },
-                {
-                    "description": "Campo de referência do C10",
-                    "pos": {
-                        "x": 104.5,
-                        "y": 113.07
-                    },
-                    "uuid": "3f20aef4-02e0-4f2c-8000-70e9c77be88c"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Campo de referência do C6",
-                    "pos": {
-                        "x": 102.5,
-                        "y": 113.34
-                    },
-                    "uuid": "18b1c980-fe74-4ee4-90a4-367337d822b0"
-                },
-                {
-                    "description": "Segmento de U1 em F.Silkscreen",
-                    "pos": {
-                        "x": 102.61,
-                        "y": 113.41
-                    },
-                    "uuid": "cf7c112f-ed2b-47c4-b9be-fb93a9807f05"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Segmento de L2 em F.Silkscreen",
-                    "pos": {
-                        "x": 96.337221,
-                        "y": 108.51
-                    },
-                    "uuid": "086b921e-6868-4910-9480-096b18350702"
-                },
-                {
-                    "description": "Campo de referência do C2",
-                    "pos": {
-                        "x": 95.5,
-                        "y": 108.04
-                    },
-                    "uuid": "25db0575-a09b-4ff2-a862-8b0225c19a4b"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Campo de referência do C7",
-                    "pos": {
-                        "x": 98.5,
-                        "y": 113.34
-                    },
-                    "uuid": "146c0032-11bc-4f82-8c38-9fc24667dcc4"
-                },
-                {
-                    "description": "Segmento de U1 em F.Silkscreen",
-                    "pos": {
-                        "x": 97.865,
-                        "y": 113.41
-                    },
-                    "uuid": "ff191bda-3471-4690-b9c1-ee270031eec3"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Campo de referência do BT1",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 110.16
-                    },
-                    "uuid": "05f50806-84dd-4b0f-99fa-6af60a090ef9"
-                },
-                {
-                    "description": "Texto do footprint de BT1 (BT1)",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 109.525
-                    },
-                    "uuid": "9eeb33da-8587-4d7d-bea6-842913b93a1d"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Segmento de U1 em F.Silkscreen",
-                    "pos": {
-                        "x": 102.61,
-                        "y": 112.935
-                    },
-                    "uuid": "007c3db6-cd90-44c8-b85b-3dfa93561c30"
-                },
-                {
-                    "description": "Campo de referência do C6",
-                    "pos": {
-                        "x": 102.5,
-                        "y": 113.34
-                    },
-                    "uuid": "18b1c980-fe74-4ee4-90a4-367337d822b0"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Texto do footprint de BT1 (+)",
-                    "pos": {
-                        "x": 92.38,
-                        "y": 100.0
-                    },
-                    "uuid": "bf5a2ad2-c973-4935-8e2b-5e2dce3a5391"
-                },
-                {
-                    "description": "Ilha 1 [VDD_BAT] de BT1 no F.Cu",
-                    "pos": {
-                        "x": 89.84,
-                        "y": 100.0
-                    },
-                    "uuid": "8029f929-0465-46d5-820d-9ee687bc0e4b"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
                 {
                     "description": "Segmento de BT1 em F.Silkscreen",
                     "pos": {
-                        "x": 87.3,
-                        "y": 94.92
+                        "x": 88.9,
+                        "y": 85.7
                     },
-                    "uuid": "470e6ddf-e98d-474a-8912-93c84a5a73a9"
-                },
-                {
-                    "description": "Ilha 1 [VDD_BAT] de BT1 no F.Cu",
-                    "pos": {
-                        "x": 89.84,
-                        "y": 100.0
-                    },
-                    "uuid": "8029f929-0465-46d5-820d-9ee687bc0e4b"
+                    "uuid": "b11c1475-86c4-4706-ac56-c9148842111e"
                 }
             ],
             "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Círculo de TP3 em F.Silkscreen",
-                    "pos": {
-                        "x": 88.0,
-                        "y": 100.0
-                    },
-                    "uuid": "98936e7f-2265-4a6d-9f73-c40337f32322"
-                },
-                {
-                    "description": "Ilha 1 [VDD_BAT] de BT1 no F.Cu",
-                    "pos": {
-                        "x": 89.84,
-                        "y": 100.0
-                    },
-                    "uuid": "8029f929-0465-46d5-820d-9ee687bc0e4b"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Campo de referência do TP3",
-                    "pos": {
-                        "x": 88.0,
-                        "y": 98.552
-                    },
-                    "uuid": "dd98d931-791e-48a8-b831-ee0e5ad0c63b"
-                },
-                {
-                    "description": "Ilha 1 [VDD_BAT] de BT1 no F.Cu",
-                    "pos": {
-                        "x": 89.84,
-                        "y": 100.0
-                    },
-                    "uuid": "8029f929-0465-46d5-820d-9ee687bc0e4b"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Campo de referência do TP4",
-                    "pos": {
-                        "x": 88.0,
-                        "y": 102.552
-                    },
-                    "uuid": "383f3db4-8829-47ab-a25f-a33c830c5f27"
-                },
-                {
-                    "description": "Ilha 1 [VDD_BAT] de BT1 no F.Cu",
-                    "pos": {
-                        "x": 89.84,
-                        "y": 100.0
-                    },
-                    "uuid": "8029f929-0465-46d5-820d-9ee687bc0e4b"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Campo de referência do X1",
-                    "pos": {
-                        "x": 93.5,
-                        "y": 109.0
-                    },
-                    "uuid": "4c582154-9456-446c-be76-a3316a80cbec"
-                },
-                {
-                    "description": "Ilha 2 [GND] de C9 no F.Cu",
-                    "pos": {
-                        "x": 92.275,
-                        "y": 108.2
-                    },
-                    "uuid": "84a1317e-546e-41d9-8dee-47310c3c8772"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Segmento de X1 em F.Silkscreen",
-                    "pos": {
-                        "x": 92.09,
-                        "y": 109.79
-                    },
-                    "uuid": "bb8fa9b3-a5be-4f60-bd71-32d1d1573da7"
-                },
-                {
-                    "description": "Ilha 2 [GND] de C8 no F.Cu",
-                    "pos": {
-                        "x": 91.98,
-                        "y": 110.5
-                    },
-                    "uuid": "509794b7-9a2d-4c55-ba9b-436a374c9777"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Campo de referência do C4",
-                    "pos": {
-                        "x": 91.5,
-                        "y": 111.64
-                    },
-                    "uuid": "3bf090b0-dd2b-40b5-a477-a8e0ea93dd4c"
-                },
-                {
-                    "description": "Ilha 1 [NET_XC1] de X1 no F.Cu",
-                    "pos": {
-                        "x": 92.8,
-                        "y": 111.55
-                    },
-                    "uuid": "ca445e13-d806-476c-96f0-4fc5fca61b43"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Campo de referência do C6",
-                    "pos": {
-                        "x": 102.5,
-                        "y": 113.34
-                    },
-                    "uuid": "18b1c980-fe74-4ee4-90a4-367337d822b0"
-                },
-                {
-                    "description": "Ilha 16 [NET_RESET] de U1 no F.Cu",
-                    "pos": {
-                        "x": 101.75,
-                        "y": 113.25
-                    },
-                    "uuid": "804bc5ec-fc07-4b8c-819b-76a061732824"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Campo de referência do BT1",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 110.16
-                    },
-                    "uuid": "05f50806-84dd-4b0f-99fa-6af60a090ef9"
-                },
-                {
-                    "description": "Ilha 33 [GND] de U1 no F.Cu",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 110.8
-                    },
-                    "uuid": "86fc0023-a719-45b8-85cc-ae245450ab66"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Campo de referência do C5",
-                    "pos": {
-                        "x": 100.5,
-                        "y": 113.34
-                    },
-                    "uuid": "3ce23c81-f696-4eb5-806c-e80aca3298bc"
-                },
-                {
-                    "description": "Ilha 14 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 100.75,
-                        "y": 113.25
-                    },
-                    "uuid": "09ef5853-2c61-4ef5-8373-6365e5056240"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Campo de referência do C5",
-                    "pos": {
-                        "x": 100.5,
-                        "y": 113.34
-                    },
-                    "uuid": "3ce23c81-f696-4eb5-806c-e80aca3298bc"
-                },
-                {
-                    "description": "Ilha 15 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 101.25,
-                        "y": 113.25
-                    },
-                    "uuid": "5070f7fd-1609-4367-b184-85cde0474072"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Campo de referência do C5",
-                    "pos": {
-                        "x": 100.5,
-                        "y": 113.34
-                    },
-                    "uuid": "3ce23c81-f696-4eb5-806c-e80aca3298bc"
-                },
-                {
-                    "description": "Ilha 12 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 99.75,
-                        "y": 113.25
-                    },
-                    "uuid": "5372fe06-8407-46d1-a42e-3d59ca7fc256"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
+            "type": "silk_overlap"
         },
         {
             "description": "Silkscreen clipped by solder mask",
@@ -1886,110 +822,18 @@
                 {
                     "description": "Campo de referência do C7",
                     "pos": {
-                        "x": 98.5,
-                        "y": 113.34
+                        "x": 104.0,
+                        "y": 113.24
                     },
-                    "uuid": "146c0032-11bc-4f82-8c38-9fc24667dcc4"
+                    "uuid": "ffef04fe-776e-460e-a6e6-f5877a7f6931"
                 },
                 {
-                    "description": "Ilha 10 [<no net>] de U1 no F.Cu",
+                    "description": "Ilha 1 [NET_DEC4] de C10 no F.Cu",
                     "pos": {
-                        "x": 98.75,
-                        "y": 113.25
+                        "x": 103.725,
+                        "y": 113.0
                     },
-                    "uuid": "2e47ccd0-bb28-4bc3-a19c-728b6d6ca42b"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Campo de referência do C7",
-                    "pos": {
-                        "x": 98.5,
-                        "y": 113.34
-                    },
-                    "uuid": "146c0032-11bc-4f82-8c38-9fc24667dcc4"
-                },
-                {
-                    "description": "Ilha 11 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 99.25,
-                        "y": 113.25
-                    },
-                    "uuid": "07e37526-0d15-4ef3-8152-5f263b4ce9e6"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Campo de referência do C5",
-                    "pos": {
-                        "x": 100.5,
-                        "y": 113.34
-                    },
-                    "uuid": "3ce23c81-f696-4eb5-806c-e80aca3298bc"
-                },
-                {
-                    "description": "Ilha 13 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 100.25,
-                        "y": 113.25
-                    },
-                    "uuid": "a9f31953-b2f6-4d96-8997-ec87e6e9f791"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Campo de referência do C2",
-                    "pos": {
-                        "x": 95.5,
-                        "y": 108.04
-                    },
-                    "uuid": "25db0575-a09b-4ff2-a862-8b0225c19a4b"
-                },
-                {
-                    "description": "Ilha 1 [NET_L2_L3] de L2 no F.Cu",
-                    "pos": {
-                        "x": 95.7125,
-                        "y": 108.0
-                    },
-                    "uuid": "95ea312d-cee9-4faa-9765-c7e7f375a55b"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Campo de referência do C2",
-                    "pos": {
-                        "x": 95.5,
-                        "y": 108.04
-                    },
-                    "uuid": "25db0575-a09b-4ff2-a862-8b0225c19a4b"
-                },
-                {
-                    "description": "Ilha 2 [NET_DEC4] de L3 no F.Cu",
-                    "pos": {
-                        "x": 94.785,
-                        "y": 108.0
-                    },
-                    "uuid": "4884d7ec-0245-47ac-8516-107b4a40d911"
+                    "uuid": "591fb930-e153-4df6-8220-e646019bc439"
                 }
             ],
             "severity": "warning",
@@ -2004,15 +848,38 @@
                         "x": 95.5,
                         "y": 111.64
                     },
-                    "uuid": "d5618dd3-a8d7-444f-ad33-9d782e871e05"
+                    "uuid": "699f56ed-3616-4bcc-bb41-ea9178f3b16b"
                 },
                 {
                     "description": "Ilha 2 [NET_XC2] de X1 no F.Cu",
                     "pos": {
-                        "x": 94.2,
+                        "x": 94.5,
                         "y": 111.55
                     },
-                    "uuid": "306c5ffd-c9e0-4254-88c0-2722b373bd45"
+                    "uuid": "93854140-3d01-4d1a-be78-81f8026f5a70"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Campo de referência do C1",
+                    "pos": {
+                        "x": 95.5,
+                        "y": 111.64
+                    },
+                    "uuid": "699f56ed-3616-4bcc-bb41-ea9178f3b16b"
+                },
+                {
+                    "description": "Ilha 1 [NET_DEC1] de C5 no F.Cu",
+                    "pos": {
+                        "x": 95.8,
+                        "y": 111.08
+                    },
+                    "uuid": "8418d1c6-9271-444a-84b2-556a050b6265"
                 }
             ],
             "severity": "warning",
@@ -2024,18 +891,18 @@
                 {
                     "description": "Campo de referência do C7",
                     "pos": {
-                        "x": 98.5,
-                        "y": 113.34
+                        "x": 104.0,
+                        "y": 113.24
                     },
-                    "uuid": "146c0032-11bc-4f82-8c38-9fc24667dcc4"
+                    "uuid": "ffef04fe-776e-460e-a6e6-f5877a7f6931"
                 },
                 {
-                    "description": "Ilha 9 [VDD_BAT] de U1 no F.Cu",
+                    "description": "Ilha 2 [GND] de C10 no F.Cu",
                     "pos": {
-                        "x": 98.25,
-                        "y": 113.25
+                        "x": 105.275,
+                        "y": 113.0
                     },
-                    "uuid": "f43bd18e-62c7-4468-8783-a7eaa10c953b"
+                    "uuid": "1e7bdfbd-3b8a-4ff4-8d23-7447d662578a"
                 }
             ],
             "severity": "warning",
@@ -2045,20 +912,20 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Texto do footprint de BT1 (BT1)",
+                    "description": "Campo de referência do C10",
                     "pos": {
-                        "x": 100.0,
-                        "y": 109.525
+                        "x": 104.5,
+                        "y": 111.57
                     },
-                    "uuid": "9eeb33da-8587-4d7d-bea6-842913b93a1d"
+                    "uuid": "546e3350-51b0-4da4-a2a3-ef9440301415"
                 },
                 {
-                    "description": "Ilha 33 [GND] de U1 no F.Cu",
+                    "description": "Ilha 1 [NET_ANT] de L1 no F.Cu",
                     "pos": {
-                        "x": 100.0,
-                        "y": 110.8
+                        "x": 105.515,
+                        "y": 111.0
                     },
-                    "uuid": "86fc0023-a719-45b8-85cc-ae245450ab66"
+                    "uuid": "917f8ed5-14eb-42ef-b1b2-bfe32e99a3b9"
                 }
             ],
             "severity": "warning",
@@ -2068,20 +935,20 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Segmento de U1 em F.Silkscreen",
+                    "description": "Campo de referência do C2",
                     "pos": {
-                        "x": 97.39,
-                        "y": 108.19
+                        "x": 95.5,
+                        "y": 108.04
                     },
-                    "uuid": "f2d86a21-10e3-4a5b-8ce1-105348d341a6"
+                    "uuid": "fc0333b3-b275-4da5-98c8-24fa22194480"
                 },
                 {
                     "description": "Ilha 2 [NET_DCC] de L2 no F.Cu",
                     "pos": {
-                        "x": 97.2875,
+                        "x": 95.3875,
                         "y": 108.0
                     },
-                    "uuid": "cb45f4ab-ea7a-407c-8fe5-aca7fee16826"
+                    "uuid": "2a08e703-0d54-40e9-82e7-143cd6b6a95a"
                 }
             ],
             "severity": "warning",
@@ -2091,66 +958,112 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Segmento de U1 em F.Silkscreen",
+                    "description": "Campo de referência do C4",
                     "pos": {
-                        "x": 97.39,
-                        "y": 108.665
+                        "x": 93.2,
+                        "y": 111.74
                     },
-                    "uuid": "12f86420-002b-42e5-94e2-947b1a27b1cd"
+                    "uuid": "fee78678-84ee-40ea-9714-e020149dcc73"
                 },
                 {
-                    "description": "Ilha 2 [NET_DCC] de L2 no F.Cu",
+                    "description": "Ilha 1 [NET_XC1] de X1 no F.Cu",
                     "pos": {
-                        "x": 97.2875,
-                        "y": 108.0
+                        "x": 93.1,
+                        "y": 111.55
                     },
-                    "uuid": "cb45f4ab-ea7a-407c-8fe5-aca7fee16826"
+                    "uuid": "7655af75-261d-4ded-b0f5-f6edc0ba07fa"
                 }
             ],
             "severity": "warning",
             "type": "silk_over_copper"
         },
         {
-            "description": "Silkscreen clearance",
+            "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Círculo de SHLD1 em B.Silkscreen",
+                    "description": "Campo de referência do C4",
                     "pos": {
-                        "x": 100.0,
+                        "x": 93.2,
+                        "y": 111.74
+                    },
+                    "uuid": "fee78678-84ee-40ea-9714-e020149dcc73"
+                },
+                {
+                    "description": "Ilha 2 [NET_XC2] de X1 no F.Cu",
+                    "pos": {
+                        "x": 94.5,
+                        "y": 111.55
+                    },
+                    "uuid": "93854140-3d01-4d1a-be78-81f8026f5a70"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Campo de referência do C5",
+                    "pos": {
+                        "x": 94.64,
+                        "y": 110.6
+                    },
+                    "uuid": "0511ad71-eccc-4af8-8344-42f98e23454e"
+                },
+                {
+                    "description": "Ilha 2 [NET_XC2] de X1 no F.Cu",
+                    "pos": {
+                        "x": 94.5,
+                        "y": 111.55
+                    },
+                    "uuid": "93854140-3d01-4d1a-be78-81f8026f5a70"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Campo de referência do C5",
+                    "pos": {
+                        "x": 94.64,
+                        "y": 110.6
+                    },
+                    "uuid": "0511ad71-eccc-4af8-8344-42f98e23454e"
+                },
+                {
+                    "description": "Ilha 3 [<no net>] de X1 no F.Cu",
+                    "pos": {
+                        "x": 94.5,
+                        "y": 110.45
+                    },
+                    "uuid": "fee049ae-46b5-4d5e-964c-6b44ea8f00d2"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Campo de referência do BT1",
+                    "pos": {
+                        "x": 87.3,
                         "y": 100.0
                     },
-                    "uuid": "06443462-9b3e-4040-9cb0-7baab4307630"
+                    "uuid": "177ae816-1755-4de0-9642-7183995a6aa9"
                 },
                 {
-                    "description": "Retângulo de J1 em B.Silkscreen",
+                    "description": "Ilha 1 [NET_SWDCLK] de TP3 no F.Cu",
                     "pos": {
-                        "x": 96.0,
-                        "y": 84.5
+                        "x": 88.0,
+                        "y": 100.0
                     },
-                    "uuid": "32a2c9ca-2962-4edc-a286-a3434b284df1"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Retângulo de J1 em B.Silkscreen",
-                    "pos": {
-                        "x": 96.0,
-                        "y": 84.5
-                    },
-                    "uuid": "32a2c9ca-2962-4edc-a286-a3434b284df1"
-                },
-                {
-                    "description": "Ilha 1 [GND] de J1 no B.Cu",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 88.5
-                    },
-                    "uuid": "340d4fad-7c4e-4447-b55f-07d52b266302"
+                    "uuid": "8e255864-e836-484a-8730-8d9447e4e7f0"
                 }
             ],
             "severity": "warning",
@@ -2160,20 +1073,89 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Texto do footprint de J1 (−)",
+                    "description": "Segmento de BT1 em F.Silkscreen",
                     "pos": {
-                        "x": 100.0,
-                        "y": 88.5
+                        "x": 111.1,
+                        "y": 85.7
                     },
-                    "uuid": "a26ff66b-b4ef-430f-8513-0e601bb0aca0"
+                    "uuid": "02b4989e-901d-4c07-897d-63cfd623ae56"
                 },
                 {
-                    "description": "Ilha 1 [GND] de J1 no B.Cu",
+                    "description": "Ilha 2 [GND] de ANT1 no F.Cu",
                     "pos": {
-                        "x": 100.0,
-                        "y": 88.5
+                        "x": 110.85,
+                        "y": 109.4
                     },
-                    "uuid": "340d4fad-7c4e-4447-b55f-07d52b266302"
+                    "uuid": "b9358443-b4d5-4b62-ab1b-8f342efc8da0"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Campo de referência do C6",
+                    "pos": {
+                        "x": 107.0,
+                        "y": 111.24
+                    },
+                    "uuid": "f2d8496f-33cc-45ad-95a1-20acdd1566a4"
+                },
+                {
+                    "description": "Ilha 2 [NET_RF] de L1 no F.Cu",
+                    "pos": {
+                        "x": 106.485,
+                        "y": 111.0
+                    },
+                    "uuid": "96b691fd-2e6f-409b-9198-d278f5d05672"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Campo de referência do X1",
+                    "pos": {
+                        "x": 93.8,
+                        "y": 109.0
+                    },
+                    "uuid": "9797a07a-87af-4b20-be8a-956f1f73b6a1"
+                },
+                {
+                    "description": "Ilha 1 [NET_L2_L3] de L2 no F.Cu",
+                    "pos": {
+                        "x": 93.8125,
+                        "y": 108.0
+                    },
+                    "uuid": "3b9eea06-e9d5-44b0-80f7-cf2f5f419497"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Segmento de BT1 em F.Silkscreen",
+                    "pos": {
+                        "x": 88.9,
+                        "y": 85.7
+                    },
+                    "uuid": "b11c1475-86c4-4706-ac56-c9148842111e"
+                },
+                {
+                    "description": "Ilha 1 [VDD_BAT] de C9 no F.Cu",
+                    "pos": {
+                        "x": 88.725,
+                        "y": 108.2
+                    },
+                    "uuid": "d59d7395-796c-4656-80dd-5832177baf07"
                 }
             ],
             "severity": "warning",
@@ -2188,7 +1170,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "28936b77-26a6-4848-833c-534576130dec"
+                    "uuid": "7fa68501-80ec-4826-9522-b0736792a488"
                 },
                 {
                     "description": "Ilha 1 [GND] de SHLD1 no B.Cu",
@@ -2196,30 +1178,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "5f2b4871-63e5-490e-aaa3-12c3d37254af"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Círculo de SHLD1 em B.Silkscreen",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "06443462-9b3e-4040-9cb0-7baab4307630"
-                },
-                {
-                    "description": "Ilha 1 [GND] de J1 no B.Cu",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 88.5
-                    },
-                    "uuid": "340d4fad-7c4e-4447-b55f-07d52b266302"
+                    "uuid": "3979a77a-d7e0-478c-8cb5-09cbc4256b9b"
                 }
             ],
             "severity": "warning",
@@ -2234,15 +1193,15 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "57a7f751-c527-4f7e-87c9-4ba6e0a24d3f"
+                    "uuid": "eecbb724-30d3-4a88-9a83-cfbef8154d3c"
                 },
                 {
-                    "description": "Segmento de ANT1 em F.Silkscreen",
+                    "description": "Segmento de BT1 em F.Silkscreen",
                     "pos": {
-                        "x": 108.69,
-                        "y": 112.16
+                        "x": 88.9,
+                        "y": 85.7
                     },
-                    "uuid": "86bb7237-62db-4659-b8bc-7a92ec46d7ed"
+                    "uuid": "b11c1475-86c4-4706-ac56-c9148842111e"
                 }
             ],
             "severity": "warning",
@@ -2257,15 +1216,15 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "57a7f751-c527-4f7e-87c9-4ba6e0a24d3f"
+                    "uuid": "eecbb724-30d3-4a88-9a83-cfbef8154d3c"
                 },
                 {
-                    "description": "Segmento de ANT1 em F.Silkscreen",
+                    "description": "Segmento de BT1 em F.Silkscreen",
                     "pos": {
-                        "x": 112.6,
-                        "y": 109.84
+                        "x": 111.1,
+                        "y": 85.7
                     },
-                    "uuid": "070ea3b8-787a-47d9-851e-f0e5b2b01878"
+                    "uuid": "02b4989e-901d-4c07-897d-63cfd623ae56"
                 }
             ],
             "severity": "warning",
@@ -2280,7 +1239,53 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "57a7f751-c527-4f7e-87c9-4ba6e0a24d3f"
+                    "uuid": "eecbb724-30d3-4a88-9a83-cfbef8154d3c"
+                },
+                {
+                    "description": "Texto do footprint de BT1 (-)",
+                    "pos": {
+                        "x": 94.2,
+                        "y": 85.345
+                    },
+                    "uuid": "01d1e880-b6e9-4ab4-afbf-aa684dc67a6f"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Círculo no Edge.Cuts",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "eecbb724-30d3-4a88-9a83-cfbef8154d3c"
+                },
+                {
+                    "description": "Texto do footprint de BT1 (+)",
+                    "pos": {
+                        "x": 94.2,
+                        "y": 114.655
+                    },
+                    "uuid": "2e4afc84-4d21-4f5f-a297-765d51f59772"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Círculo no Edge.Cuts",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "eecbb724-30d3-4a88-9a83-cfbef8154d3c"
                 },
                 {
                     "description": "Campo de referência do TP1",
@@ -2288,64 +1293,11 @@
                         "x": 88.0,
                         "y": 90.552
                     },
-                    "uuid": "a4e217d2-f043-40fc-b71d-7a133fee6448"
+                    "uuid": "dbf11b71-1f46-4add-8064-c759ee79c024"
                 }
             ],
             "severity": "warning",
             "type": "silk_edge_clearance"
-        },
-        {
-            "description": "Silkscreen clipped by board edge",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "57a7f751-c527-4f7e-87c9-4ba6e0a24d3f"
-                },
-                {
-                    "description": "Retângulo de J1 em B.Silkscreen",
-                    "pos": {
-                        "x": 96.0,
-                        "y": 84.5
-                    },
-                    "uuid": "32a2c9ca-2962-4edc-a286-a3434b284df1"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_edge_clearance"
-        },
-        {
-            "description": "Track has unconnected end",
-            "items": [
-                {
-                    "description": "Trilha [GND] no F.Cu, comprimento 0,8000 mm",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "dbd7a08e-8076-41ea-8f26-0c8538257550"
-                }
-            ],
-            "severity": "warning",
-            "type": "track_dangling"
-        },
-        {
-            "description": "Track has unconnected end",
-            "items": [
-                {
-                    "description": "Trilha [GND] no F.Cu, comprimento 0,8000 mm",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 88.5
-                    },
-                    "uuid": "dbfc16ef-505b-4b0a-9c4c-d6699aea5a7b"
-                }
-            ],
-            "severity": "warning",
-            "type": "track_dangling"
         }
     ]
 }

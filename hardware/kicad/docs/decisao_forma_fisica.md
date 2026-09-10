@@ -44,7 +44,7 @@ pontas em overhang (fora do arco do disco):
 - **Preço:** paridade — US$ 3,61 vs US$ 3,59.
 - **Alimentação:** VDD 1,7–3,6 V → CR2032 ok.
 - **Antena integrada** + certificações FCC/CE/TELEC.
-- **Indutores do DC/DC integrados ao módulo** (página oficial Fanstel) —
+- **Indutores do DC/DC integrados ao módulo** ([página oficial Fanstel BM832A](https://www.fanstel.com/bm832a-bluetooth-5-module)) —
   **fecha o item aberto #2** do projeto.
 - **ANATEL:** segue como item aberto (mesmo status do E73 — módulo BLE
   certificado, homologação a confirmar).
@@ -76,5 +76,5 @@ resolvida.
 - takachi-enclosure.com — busca de cápsulas IP67
 - JLCPCB — regras de fabricação (furo PTH bissecado + pad ≥ 0,5 mm)
 - PCBWay — regras de fabricação (idem)
-- Fanstel — página oficial BM832A (dimensões, preço, indutores DC/DC
+- Fanstel — [página oficial BM832A](https://www.fanstel.com/bm832a-bluetooth-5-module) (dimensões, preço, indutores DC/DC
   integrados, certificações)

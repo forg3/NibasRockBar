@@ -16,4 +16,4 @@ C9,4.7uF X5R +-10%,0603,VDD para GND (proximo do IC),Desacoplo bulk VDD,CORRIGID
 C10,1.0uF X7R +-10%,0603,DEC4 (pino 30) para GND,Estabilizacao saida DC/DC,Valor OK no doc original
 TAG1,NTAG213 Inlay adesivo ~25mm,Adesivo,--,Tag NFC passiva,Usar inlay pronto, nao die nu; manter longe da bateria/blindado
 TP1-TP4,Test pads 1.0mm,SMD,VDD/SWDIO(18)/SWDCLK(17)/GND,Pontos de gravacao SWD,CORRIGIDO: doc original citava pinos 24/25 (invertidos e errados)
-BT1,Suporte CR2032,Keystone 1059,--,Retentor bateria,Adicionar folha de ferrite entre bateria e TAG1
+BT1,Suporte CR2032,Keystone 1060 (SMT; 1059 é THM),--,Retentor bateria,Adicionar folha de ferrite entre bateria e TAG1

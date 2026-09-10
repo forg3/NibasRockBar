@@ -2,7 +2,7 @@ Designator,Value,Footprint,Description,Manufacturer_PN,Notes
 U1,BLE Module (nRF52810/832-based),Module footprint per vendor datasheet,"Modulo BLE certificado ANATEL - substitui SoC+antena discretos",A definir (Fanstel/Raytac/u-blox - verificar homologacao ANATEL vigente),Elimina ajuste de RF e simplifica homologacao
 TAG1,NTAG213 Inlay,Adesivo ~25mm diametro,"Inlay NFC pronto (chip+antena) - NAO usar die nu",NXP NTAG213 inlay,Posicionar na borda do disco, longe da bateria
 SHLD1,Ferrite Shielding Sheet,Disco ~20-22mm,"Folha de ferrite entre bateria e bobina NFC",Ex: TDK IFP series ou equivalente,Item novo - nao existia no doc original
-BT1,Coin Cell Holder CR2032,SMT,Suporte metalico polo positivo,Keystone Electronics 1059,Mantido do doc original
+BT1,Coin Cell Holder CR2032,SMT,Suporte metalico polo positivo,Keystone Electronics 1060 (SMT; 1059 é THM),Mantido do doc original - PN corrigido p/ footprint SMT
 C1,10uF,0603,Desacoplo principal VDD,Murata/Yageo X5R 6.3V,Mantido
 C2,100nF,0402,Filtro alta frequencia VDD,X7R 16V,Mantido
 TP1,Test Pad VDD,1.0mm pad ENIG,Ponto de gravacao SWD,--,Mantido
