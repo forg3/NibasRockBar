@@ -47,7 +47,13 @@ pontas em overhang (fora do arco do disco):
 - **Indutores do DC/DC integrados ao módulo** ([página oficial Fanstel BM832A](https://www.fanstel.com/bm832a-bluetooth-5-module)) —
   **fecha o item aberto #2** do projeto.
 - **ANATEL:** segue como item aberto (mesmo status do E73 — módulo BLE
-  certificado, homologação a confirmar).
+  certificado, homologação a confirmar). Precisão de escopo: SOMENTE os
+  radiadores intencionais precisam de homologação (módulos BM832A e ESP32,
+  que emitem em 2,4 GHz); PCB, suporte de bateria, tag NFC passiva, ferrite
+  e cápsula plástica NÃO certificam individualmente. Se os módulos já forem
+  homologados pelo fabricante, o produto final usa processo simplificado
+  aproveitando os laudos do módulo (confirmação com OCD permanece
+  recomendada).
 
 ### 4. Alternativa registrada (não escolhida)
 

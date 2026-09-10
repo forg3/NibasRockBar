@@ -19,19 +19,28 @@
 #include <WiFi.h>
 #include <PubSubClient.h> // compilacao validada com PubSubClient 2.8 (nao trocar sem testar)
 #include <ArduinoJson.h>  // compilacao validada com ArduinoJson 7.4.3; StaticJsonDocument e API v6 com deprecation na v7 (manter ate migracao dedicada para JsonDocument)
+#include <Preferences.h>  // provisioning WiFi/MQTT via NVS (namespace "nibas")
 #include <map>
 
-// ---------- CONFIG (placeholders - preencher por device antes do deploy) ----------
+// ---------- CONFIG (placeholders - fallback quando o NVS esta vazio) ----------
+// Provisionamento por gateway via monitor serial (115200, com newline):
+//   config ssid=<WIFI> pass=<SENHA> broker=<IP_OU_HOST> gw=<gateway_teto_XX>
+// Exemplo:
+//   config ssid=PUB_WIFI pass=troque_aqui broker=192.168.0.10 gw=gateway_teto_02
+// Regras: salva no NVS (namespace "nibas", chaves ssid/pass/broker/gateway_id);
+// vale por device e sobrevive a reflash (so apaga com erase flash). Sem espacos
+// nos valores (parse simples por espaco). A senha NUNCA e ecoada de volta.
+// Apos salvar, reinicie o ESP32 para reconectar com os novos valores.
 // TODO: provisioning via Preferences/NVS - gravar os valores por device na flash
 // (NVS do ESP32) no primeiro boot e ler aqui; nao commitar credenciais reais.
-const char* WIFI_SSID      = "PUB_WIFI";
-const char* WIFI_PASSWORD  = "SENHA_AQUI";
-const char* MQTT_BROKER    = "192.168.0.10";     // IP do servidor local (Mosquitto)
+char WIFI_SSID[33]     = "PUB_WIFI";       // NVS "nibas"/ssid (max 32 chars)
+char WIFI_PASSWORD[64] = "SENHA_AQUI";     // NVS "nibas"/pass (max 63 chars)
+char MQTT_BROKER[64]   = "192.168.0.10";   // NVS "nibas"/broker - IP do servidor local (Mosquitto)
 const int   MQTT_PORT      = 1883;
 // TODO: preencher por device antes do deploy; vazio = sem auth (comportamento atual).
 const char* MQTT_USER      = "";
 const char* MQTT_PASSWORD  = "";
-const char* GATEWAY_ID     = "gateway_teto_02";  // TROCAR por gateway - identifica a zona
+char GATEWAY_ID[32]    = "gateway_teto_02";  // NVS "nibas"/gateway_id - TROCAR por gateway, identifica a zona
 const char* MFG_COMPANY_ID_HEX = "FFFF";         // referencial: deve bater com MANUFACTURER_ID em firmware/main.c
 
 // Filtro do manufacturer data - deve bater com MANUFACTURER_ID (0xFFFF) em firmware/main.c
@@ -161,9 +170,85 @@ void publishTelemetry(const std::string& mac, float rssi_filt, int rssi_raw,
     mqttClient.publish(topic, (const uint8_t*)buffer, (unsigned int)n);
 }
 
+// ---------- Provisioning via NVS (namespace "nibas") ----------
+// Le os valores salvos; campo ausente ou vazio = mantem o placeholder do CONFIG.
+void loadProvisioning() {
+    Preferences prefs;
+    if (!prefs.begin("nibas", true)) {
+        Serial.println("NVS: sem namespace nibas - usando placeholders do CONFIG");
+        return;
+    }
+    String v;
+    v = prefs.getString("ssid", "");
+    if (v.length() > 0) v.toCharArray(WIFI_SSID, sizeof(WIFI_SSID));
+    v = prefs.getString("pass", "");
+    if (v.length() > 0) v.toCharArray(WIFI_PASSWORD, sizeof(WIFI_PASSWORD));
+    v = prefs.getString("broker", "");
+    if (v.length() > 0) v.toCharArray(MQTT_BROKER, sizeof(MQTT_BROKER));
+    v = prefs.getString("gateway_id", "");
+    if (v.length() > 0) v.toCharArray(GATEWAY_ID, sizeof(GATEWAY_ID));
+    prefs.end();
+}
+
+// Extrai "chave=<valor>" da linha (valor vai ate o proximo espaco ou fim).
+String cfgArg(const String& line, const char* key) {
+    int i = line.indexOf(key);
+    if (i < 0) return String();
+    i += strlen(key);
+    int j = line.indexOf(' ', i);
+    if (j < 0) return line.substring(i);
+    return line.substring(i, j);
+}
+
+// Comando serial: config ssid=<..> pass=<..> broker=<..> gw=<..>
+// Salva no NVS e aplica nos buffers ativos (reinicie para reconectar).
+void handleSerialConfig() {
+    if (!Serial.available()) return;
+    String line = Serial.readStringUntil('\n');
+    line.trim();
+    if (!line.startsWith("config ")) return;
+    String ssid   = cfgArg(line, "ssid=");
+    String pass   = cfgArg(line, "pass=");
+    String broker = cfgArg(line, "broker=");
+    String gw     = cfgArg(line, "gw=");
+    if (ssid.isEmpty() && pass.isEmpty() && broker.isEmpty() && gw.isEmpty()) {
+        Serial.println("Uso: config ssid=<WIFI> pass=<SENHA> broker=<IP> gw=<gateway_teto_XX>");
+        return;
+    }
+    Preferences prefs;
+    if (!prefs.begin("nibas", false)) {
+        Serial.println("NVS: falha ao abrir namespace nibas");
+        return;
+    }
+    if (ssid.length() > 0) {
+        prefs.putString("ssid", ssid);
+        ssid.toCharArray(WIFI_SSID, sizeof(WIFI_SSID));
+    }
+    if (pass.length() > 0) {
+        prefs.putString("pass", pass);
+        pass.toCharArray(WIFI_PASSWORD, sizeof(WIFI_PASSWORD));
+    }
+    if (broker.length() > 0) {
+        prefs.putString("broker", broker);
+        broker.toCharArray(MQTT_BROKER, sizeof(MQTT_BROKER));
+    }
+    if (gw.length() > 0) {
+        prefs.putString("gateway_id", gw);
+        gw.toCharArray(GATEWAY_ID, sizeof(GATEWAY_ID));
+    }
+    prefs.end();
+    // Confirmacao sem ecoar a senha.
+    Serial.println("NVS: configuracao salva. Reinicie para reconectar.");
+    Serial.print("ssid: "); Serial.println(WIFI_SSID);
+    Serial.println("pass: *****");
+    Serial.print("broker: "); Serial.println(MQTT_BROKER);
+    Serial.print("gw: "); Serial.println(GATEWAY_ID);
+}
+
 // ---------- Setup / Loop ----------
 void setup() {
     Serial.begin(115200);
+    loadProvisioning(); // NVS "nibas" (read-only); vazio = placeholders do CONFIG
     // Aviso de credencial placeholder — nao trava o boot, so alerta via Serial.
     if (strcmp(WIFI_PASSWORD, "SENHA_AQUI") == 0) {
         Serial.println("ATENÇÃO: credenciais placeholder — configure antes do deploy");
@@ -183,6 +268,7 @@ void setup() {
 }
 
 void loop() {
+    handleSerialConfig(); // provisioning via monitor serial (nao-bloqueante)
     if (WiFi.status() != WL_CONNECTED) connectWiFi();
     if (!mqttClient.connected()) connectMQTT();
     mqttClient.loop();

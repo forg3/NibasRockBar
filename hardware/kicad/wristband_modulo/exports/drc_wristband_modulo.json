@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-09-10T15:09:49",
+    "date": "2026-09-10T16:09:51",
     "ignored_checks": [
         {
             "description": "Footprint has no courtyard defined",
@@ -36,35 +36,12 @@
             "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
             "items": [
                 {
-                    "description": "Ilha 8 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 98.41,
-                        "y": 96.8
-                    },
-                    "uuid": "0ba52280-476c-4bc1-88a5-e0085724a40b"
-                },
-                {
-                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
-            "items": [
-                {
-                    "description": "Ilha 9 [<no net>] de U1 no F.Cu",
+                    "description": "Ilha 5 [<no net>] de U1 no F.Cu",
                     "pos": {
                         "x": 99.31,
-                        "y": 96.25
+                        "y": 98.45
                     },
-                    "uuid": "e6e0f568-d293-4dc3-9bea-3d4bdcce3276"
+                    "uuid": "d1de0ecf-1513-4209-be54-77531d54b904"
                 },
                 {
                     "description": "Ilha 2 [GND] de BT1 no F.Cu",
@@ -72,76 +49,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
-            "items": [
-                {
-                    "description": "Ilha 10 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 98.41,
-                        "y": 95.7
-                    },
-                    "uuid": "51c9ea86-7025-4ed8-abb6-10f6347e89d7"
-                },
-                {
-                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
-            "items": [
-                {
-                    "description": "Ilha 11 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 99.31,
-                        "y": 95.15
-                    },
-                    "uuid": "2c4d0b59-bd7a-4984-8795-551af7ac1dc3"
-                },
-                {
-                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
-            "items": [
-                {
-                    "description": "Ilha 12 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 98.41,
-                        "y": 94.6
-                    },
-                    "uuid": "29c9d48b-99dd-4ff7-9e9f-b74574c28ee4"
-                },
-                {
-                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
                 }
             ],
             "severity": "error",
@@ -156,7 +64,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
                 },
                 {
                     "description": "Ilha 2 [<no net>] de U1 no F.Cu",
@@ -164,7 +72,7 @@
                         "x": 98.41,
                         "y": 100.1
                     },
-                    "uuid": "856d2c41-1297-44c3-be48-2493a93953a4"
+                    "uuid": "39f801c6-70d8-470f-a97e-1c37415ac284"
                 }
             ],
             "severity": "error",
@@ -179,99 +87,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
-                },
-                {
-                    "description": "Ilha 3 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 99.31,
-                        "y": 99.55
-                    },
-                    "uuid": "0d59a6b9-2893-4ba8-a312-c697b61191c3"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
-            "items": [
-                {
-                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
-                },
-                {
-                    "description": "Ilha 5 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 99.31,
-                        "y": 98.45
-                    },
-                    "uuid": "d47e4adc-d1a6-4abb-9c57-5954a3270c78"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
-            "items": [
-                {
-                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
-                },
-                {
-                    "description": "Ilha 7 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 99.31,
-                        "y": 97.35
-                    },
-                    "uuid": "9289124d-09b1-4c76-9dd2-cfdf28546f32"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
-            "items": [
-                {
-                    "description": "Ilha 3 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 99.31,
-                        "y": 99.55
-                    },
-                    "uuid": "0d59a6b9-2893-4ba8-a312-c697b61191c3"
-                },
-                {
-                    "description": "Ilha 1 [GND] de SHLD1 no todas as camadas com cobre",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "2a1e0d14-0db5-4a2d-98e2-eac4710660c8"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
-            "items": [
-                {
-                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
                 },
                 {
                     "description": "Ilha 4 [<no net>] de U1 no F.Cu",
@@ -279,7 +95,168 @@
                         "x": 98.41,
                         "y": 99.0
                     },
-                    "uuid": "e0572ad8-7bc7-43f3-bd7c-db47e0e0ca40"
+                    "uuid": "5888c7ac-a492-4efe-bb40-7ca8c1765b7c"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "items": [
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
+                },
+                {
+                    "description": "Ilha 7 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 99.31,
+                        "y": 97.35
+                    },
+                    "uuid": "b900db6c-5d5c-4b43-9e58-c561d1847a89"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "items": [
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
+                },
+                {
+                    "description": "Ilha 8 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 98.41,
+                        "y": 96.8
+                    },
+                    "uuid": "28ee7105-8a31-42af-8cd1-d907fa09083b"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "items": [
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
+                },
+                {
+                    "description": "Ilha 9 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 99.31,
+                        "y": 96.25
+                    },
+                    "uuid": "ebc5a818-dfc4-49bd-b917-76033c816b67"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "items": [
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
+                },
+                {
+                    "description": "Ilha 11 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 99.31,
+                        "y": 95.15
+                    },
+                    "uuid": "95717702-3e1e-42dd-92e7-92d63d9fc52b"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "items": [
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
+                },
+                {
+                    "description": "Ilha 10 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 98.41,
+                        "y": 95.7
+                    },
+                    "uuid": "677de6cf-5fde-4678-9b00-1a473869ad15"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "items": [
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
+                },
+                {
+                    "description": "Ilha 12 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 98.41,
+                        "y": 94.6
+                    },
+                    "uuid": "46760cde-a19e-4b69-9617-d03d5776fce1"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "items": [
+                {
+                    "description": "Ilha 1 [GND] de SHLD1 no todas as camadas com cobre",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "14dd5eb3-da7e-4788-bb8f-649deebec8c7"
+                },
+                {
+                    "description": "Ilha 3 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 99.31,
+                        "y": 99.55
+                    },
+                    "uuid": "a771b4d7-7bad-4075-afbf-7d3ce075017f"
                 }
             ],
             "severity": "error",
@@ -294,7 +271,7 @@
                         "x": 98.41,
                         "y": 97.9
                     },
-                    "uuid": "2904bbf4-6890-4cc1-80de-c44f1fe25913"
+                    "uuid": "d6a5edef-d450-404e-8b26-fff66a98baee"
                 },
                 {
                     "description": "Ilha 2 [GND] de BT1 no F.Cu",
@@ -302,7 +279,30 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "items": [
+                {
+                    "description": "Ilha 3 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 99.31,
+                        "y": 99.55
+                    },
+                    "uuid": "a771b4d7-7bad-4075-afbf-7d3ce075017f"
+                },
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
                 }
             ],
             "severity": "error",
@@ -317,7 +317,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "23b201b9-0644-46b0-a517-22c382c2c8f9"
+                    "uuid": "bdc6d6b2-9c87-4fc3-bff6-3a72aa927e3c"
                 },
                 {
                     "description": "Ilha 1 [VDD_BAT] de BT1 no F.Cu",
@@ -325,7 +325,7 @@
                         "x": 100.0,
                         "y": 114.655
                     },
-                    "uuid": "2e0e3597-f33a-4bd9-92d8-8ce12ec3cb0d"
+                    "uuid": "3231a811-5398-46ed-a39f-496fc2888e5f"
                 }
             ],
             "severity": "error",
@@ -340,7 +340,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "23b201b9-0644-46b0-a517-22c382c2c8f9"
+                    "uuid": "bdc6d6b2-9c87-4fc3-bff6-3a72aa927e3c"
                 },
                 {
                     "description": "Ilha 3 [GND] de BT1 no F.Cu",
@@ -348,7 +348,7 @@
                         "x": 100.0,
                         "y": 85.345
                     },
-                    "uuid": "e27b9b1e-b1dd-49d8-8ca1-360c6f85ff06"
+                    "uuid": "c5782c5f-0eb3-4672-96f0-bb7d5ff63baa"
                 }
             ],
             "severity": "error",
@@ -363,7 +363,7 @@
                         "x": 100.0,
                         "y": 106.2
                     },
-                    "uuid": "7dcbf2ee-b675-43a7-ac0a-4badc4128a29"
+                    "uuid": "740c37f4-7a22-41d7-ae1f-4f130172fc67"
                 },
                 {
                     "description": "Footprint BT1",
@@ -371,7 +371,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "d8f01b86-496a-45e3-ac65-0a682c6fe6a9"
+                    "uuid": "d5b1a4dd-65f3-44af-981e-66553eff10cf"
                 }
             ],
             "severity": "error",
@@ -386,7 +386,7 @@
                         "x": 98.41,
                         "y": 100.1
                     },
-                    "uuid": "856d2c41-1297-44c3-be48-2493a93953a4"
+                    "uuid": "39f801c6-70d8-470f-a97e-1c37415ac284"
                 },
                 {
                     "description": "Ilha 2 [GND] de BT1 no F.Cu",
@@ -394,7 +394,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
                 }
             ],
             "severity": "error",
@@ -409,7 +409,7 @@
                         "x": 99.31,
                         "y": 99.55
                     },
-                    "uuid": "0d59a6b9-2893-4ba8-a312-c697b61191c3"
+                    "uuid": "a771b4d7-7bad-4075-afbf-7d3ce075017f"
                 },
                 {
                     "description": "Ilha 2 [GND] de BT1 no F.Cu",
@@ -417,7 +417,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
                 }
             ],
             "severity": "error",
@@ -432,7 +432,7 @@
                         "x": 99.31,
                         "y": 99.55
                     },
-                    "uuid": "0d59a6b9-2893-4ba8-a312-c697b61191c3"
+                    "uuid": "a771b4d7-7bad-4075-afbf-7d3ce075017f"
                 },
                 {
                     "description": "Ilha 1 [GND] de SHLD1 no todas as camadas com cobre",
@@ -440,7 +440,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "2a1e0d14-0db5-4a2d-98e2-eac4710660c8"
+                    "uuid": "14dd5eb3-da7e-4788-bb8f-649deebec8c7"
                 }
             ],
             "severity": "error",
@@ -455,7 +455,7 @@
                         "x": 98.41,
                         "y": 99.0
                     },
-                    "uuid": "e0572ad8-7bc7-43f3-bd7c-db47e0e0ca40"
+                    "uuid": "5888c7ac-a492-4efe-bb40-7ca8c1765b7c"
                 },
                 {
                     "description": "Ilha 2 [GND] de BT1 no F.Cu",
@@ -463,7 +463,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
                 }
             ],
             "severity": "error",
@@ -478,7 +478,7 @@
                         "x": 99.31,
                         "y": 98.45
                     },
-                    "uuid": "d47e4adc-d1a6-4abb-9c57-5954a3270c78"
+                    "uuid": "d1de0ecf-1513-4209-be54-77531d54b904"
                 },
                 {
                     "description": "Ilha 2 [GND] de BT1 no F.Cu",
@@ -486,7 +486,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
                 }
             ],
             "severity": "error",
@@ -501,7 +501,7 @@
                         "x": 98.41,
                         "y": 97.9
                     },
-                    "uuid": "2904bbf4-6890-4cc1-80de-c44f1fe25913"
+                    "uuid": "d6a5edef-d450-404e-8b26-fff66a98baee"
                 },
                 {
                     "description": "Ilha 2 [GND] de BT1 no F.Cu",
@@ -509,7 +509,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
                 }
             ],
             "severity": "error",
@@ -524,7 +524,7 @@
                         "x": 99.31,
                         "y": 97.35
                     },
-                    "uuid": "9289124d-09b1-4c76-9dd2-cfdf28546f32"
+                    "uuid": "b900db6c-5d5c-4b43-9e58-c561d1847a89"
                 },
                 {
                     "description": "Ilha 2 [GND] de BT1 no F.Cu",
@@ -532,7 +532,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
                 }
             ],
             "severity": "error",
@@ -547,7 +547,7 @@
                         "x": 98.41,
                         "y": 96.8
                     },
-                    "uuid": "0ba52280-476c-4bc1-88a5-e0085724a40b"
+                    "uuid": "28ee7105-8a31-42af-8cd1-d907fa09083b"
                 },
                 {
                     "description": "Ilha 2 [GND] de BT1 no F.Cu",
@@ -555,7 +555,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
                 }
             ],
             "severity": "error",
@@ -570,7 +570,7 @@
                         "x": 99.31,
                         "y": 96.25
                     },
-                    "uuid": "e6e0f568-d293-4dc3-9bea-3d4bdcce3276"
+                    "uuid": "ebc5a818-dfc4-49bd-b917-76033c816b67"
                 },
                 {
                     "description": "Ilha 2 [GND] de BT1 no F.Cu",
@@ -578,7 +578,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
                 }
             ],
             "severity": "error",
@@ -593,7 +593,7 @@
                         "x": 98.41,
                         "y": 95.7
                     },
-                    "uuid": "51c9ea86-7025-4ed8-abb6-10f6347e89d7"
+                    "uuid": "677de6cf-5fde-4678-9b00-1a473869ad15"
                 },
                 {
                     "description": "Ilha 2 [GND] de BT1 no F.Cu",
@@ -601,7 +601,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
                 }
             ],
             "severity": "error",
@@ -616,7 +616,7 @@
                         "x": 99.31,
                         "y": 95.15
                     },
-                    "uuid": "2c4d0b59-bd7a-4984-8795-551af7ac1dc3"
+                    "uuid": "95717702-3e1e-42dd-92e7-92d63d9fc52b"
                 },
                 {
                     "description": "Ilha 2 [GND] de BT1 no F.Cu",
@@ -624,7 +624,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
                 }
             ],
             "severity": "error",
@@ -639,7 +639,7 @@
                         "x": 98.41,
                         "y": 94.6
                     },
-                    "uuid": "29c9d48b-99dd-4ff7-9e9f-b74574c28ee4"
+                    "uuid": "46760cde-a19e-4b69-9617-d03d5776fce1"
                 },
                 {
                     "description": "Ilha 2 [GND] de BT1 no F.Cu",
@@ -647,7 +647,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
                 }
             ],
             "severity": "error",
@@ -662,7 +662,7 @@
                         "x": 96.26,
                         "y": 97.9
                     },
-                    "uuid": "0a606420-bd5f-46e7-ae0e-933d4f8d5c5c"
+                    "uuid": "af4f4fd6-0cc9-4141-bf7f-bc091f4ad7f1"
                 },
                 {
                     "description": "Ilha 2 [GND] de BT1 no F.Cu",
@@ -670,7 +670,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                    "uuid": "51b6b2c1-08ec-43f1-a88a-2c5d6d11a002"
                 }
             ],
             "severity": "error",

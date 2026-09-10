@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import heapq
+import itertools
 import sys
 import re
 import math
@@ -980,12 +981,346 @@ def route_pending_second_pass(board, placed, grid, routed_tracks,
 
 
 # ---------------------------------------------------------------------------
+# TERCEIRA PASSADA (manual, determinística): Dijkstra em treliça 0,25 mm
+# ---------------------------------------------------------------------------
+# DESVIO DOCUMENTADO da estratégia "L de 2 segmentos": L puro (HV e VH) em
+# F.Cu falha em 9/9 pares (verificado por _seg_clear_of_other_nets — os pads
+# da coluna leste do U1 têm gap de 0,25 mm entre si e qualquer saída
+# horizontal/vertical cruza pads vizinhos ou trilhas VDD_BAT), e L em B.Cu
+# falha em 8/9. Em vez disso: Dijkstra determinístico (heap + contador de
+# desempate, vizinhança em ordem fixa, sets ordenados) sobre treliça de
+# 0,25 mm ancorada no centro, com checagem geométrica EXATA por segmento
+# (trilhas da mesma camada, vias through, retângulo exato dos pads,
+# keepout da antena, borda r≤15,2). Pontos de cobre da própria net
+# (terminais de trilhas + vias existentes) entram como nós neutros — o
+# caminho pode partir de um stub parcial da 2ª passada. Largura 0,2 mm;
+# via custo 8 (desestimula, permite o desvio por B.Cu via→trecho→via).
+# Só desenha após validar vias novas (hole-to-hole ≥0,55 entre si e contra
+# _ALL_VIAS); sem caminho válido -> par continua pendente (não inventa cobre).
+_MAN_STEP_MM = 0.25
+_MAN_W_MM = 0.2
+_MAN_CLR_MM = 0.2
+_MAN_R_EDGE_MM = 15.2
+_MAN_VIA_COST = 8.0
+
+# Ordem da tarefa (9 pares pendentes, sequência do enunciado). Nota empírica:
+# com XC1 primeiro fecham XC1+DEC1 (a rota longa do XC1 ~28 mm sela o
+# corredor oeste que o XC2 precisaria); com locais primeiro (DEC1, XC2, XC1)
+# fecham 3 sinais mas a rota do XC2 esteriliza os stitches GND do oeste
+# (C1.2/C2.2) e gerava clearance via×via — ver correções _man_via_ok (0,8).
+# Mantida a ordem do enunciado: o saldo DRC/unconnected decide a MELHOR.
+_MAN_PAIRS = [
+    ("NET_XC1", "C1", "1", "U1", "23"),
+    ("NET_XC2", "U1", "24", "X1", "2"),
+    ("NET_DCC", "L2", "2", "U1", "31"),
+    ("NET_DEC4", "L3", "2", "U1", "30"),
+    ("NET_DEC1", "C5", "1", "U1", "1"),
+    ("NET_DEC3", "C6", "1", "U1", "22"),
+    ("NET_SWDCLK", "TP3", "1", "U1", "17"),
+    ("NET_SWDIO", "TP2", "1", "U1", "18"),
+    ("NET_RESET", "R1", "1", "U1", "16"),
+]
+
+
+def _man_seg_rect(x1, y1, x2, y2, cx, cy, w, h, ang) -> float:
+    """Distância EXATA (mm) segmento↔retângulo (quadro local + 4 arestas)."""
+    c, s = math.cos(ang), math.sin(ang)
+    la = ((x1 - cx) * c + (y1 - cy) * s, -(x1 - cx) * s + (y1 - cy) * c)
+    lb = ((x2 - cx) * c + (y2 - cy) * s, -(x2 - cx) * s + (y2 - cy) * c)
+    hw, hh = w / 2.0, h / 2.0
+    if abs(la[0]) <= hw and abs(la[1]) <= hh:
+        return 0.0
+    if abs(lb[0]) <= hw and abs(lb[1]) <= hh:
+        return 0.0
+    if abs((la[0] + lb[0]) / 2) <= hw and abs((la[1] + lb[1]) / 2) <= hh:
+        for ex1, ey1, ex2, ey2 in ((-hw, -hh, hw, -hh), (hw, -hh, hw, hh),
+                                   (hw, hh, -hw, hh), (-hw, hh, -hw, -hh)):
+            if _segs_intersect(la[0], la[1], lb[0], lb[1], ex1, ey1, ex2, ey2):
+                return 0.0
+    best = float("inf")
+    for ex1, ey1, ex2, ey2 in ((-hw, -hh, hw, -hh), (hw, -hh, hw, hh),
+                               (hw, hh, -hw, hh), (-hw, hh, -hw, -hh)):
+        best = min(best, _dist_seg_seg(la[0], la[1], lb[0], lb[1],
+                                       ex1, ey1, ex2, ey2))
+    return best
+
+
+def _man_caches(placed):
+    """Pads por camada: {0: [...], 1: [...]} de (cx,cy,w,h,ang,net)."""
+    padr = {0: [], 1: []}
+    for _ref, fp in placed.items():
+        for pad in fp.Pads():
+            cx, cy, w, h, ang = _pad_rect(fp, pad)
+            ln = _PAD_LAYER_NODE.get(pad.GetLayer(), 0)
+            padr[ln].append((cx, cy, w, h, ang, pad.GetNetname()))
+    return padr
+
+
+def _man_edge_ok(padr, trk, vias, x1, y1, x2, y2, net, layer,
+                 half=_MAN_W_MM / 2.0) -> bool:
+    """Segmento de trilha 0,2 respeita clearance 0,2 (mesma camada p/ trilhas
+    e pads; vias through sempre; keepout p/ não-RF)."""
+    if in_keepout((x1, y1), net) or in_keepout((x2, y2), net):
+        return False
+    for tx1, ty1, tx2, ty2, _l, tnet, tw in trk[layer]:
+        if tnet == net:
+            continue
+        if _dist_seg_seg(x1, y1, x2, y2, tx1, ty1, tx2, ty2) < half + _MAN_CLR_MM + tw / 2.0:
+            return False
+    for vx, vy, vnet in vias:
+        if vnet == net:
+            continue
+        if _dist_point_seg(vx, vy, x1, y1, x2, y2) < half + _MAN_CLR_MM + 0.3:
+            return False
+    for cx, cy, w, h, ang, pnet in padr[layer]:
+        if pnet == net:
+            continue
+        if _man_seg_rect(x1, y1, x2, y2, cx, cy, w, h, ang) < half + _MAN_CLR_MM:
+            return False
+    return True
+
+
+def _man_via_ok(padr, trk, vias, vx, vy, net) -> bool:
+    """Via through Ø0,6/furo Ø0,3 respeita clearance + hole-to-hole 0,55."""
+    if in_keepout((vx, vy), net):
+        return False
+    for tx1, ty1, tx2, ty2, _l, tnet, tw in trk[0] + trk[1]:
+        if tnet == net:
+            continue
+        if _dist_point_seg(vx, vy, tx1, ty1, tx2, ty2) < 0.3 + _MAN_CLR_MM + tw / 2.0:
+            return False
+    for ex, ey, evnet in vias:
+        need = 0.55 if evnet == net else 0.8
+        if math.hypot(vx - ex, vy - ey) <= need + 1e-9:
+            return False
+    for cx, cy, w, h, ang, pnet in padr[0] + padr[1]:
+        if pnet == net:
+            continue
+        if _dist_point_rect(vx, vy, cx, cy, w, h, ang) < 0.3 + _MAN_CLR_MM:
+            return False
+    return True
+
+
+def _man_neutral(net, routed_tracks, vias) -> list:
+    """Âncoras de cobre da própria net: [(x, y, camada)] (via -> 2 camadas)."""
+    out, seen = [], set()
+    for x1, y1, x2, y2, layer, tnet, _tw in routed_tracks:
+        if tnet != net:
+            continue
+        out.extend([(x1, y1, layer), (x2, y2, layer)])
+    for vx, vy, vnet in vias:
+        if vnet != net:
+            continue
+        out.extend([(vx, vy, 0), (vx, vy, 1)])
+    res = []
+    for x, y, layer in out:
+        k = (round(x, 4), round(y, 4), layer)
+        if k not in seen:
+            seen.add(k)
+            res.append((x, y, layer))
+    return res
+
+
+def _man_find(placed, padr, trk, vias, net, A, B, margin=3.0):
+    """Dijkstra semeado lado-A -> lado-B. Retorna [(x,y,camada)] ou None."""
+    st = _MAN_STEP_MM
+    neut = _man_neutral(net, trk[0] + trk[1], vias)
+    x0, y0 = min(A[0], B[0]) - margin, min(A[1], B[1]) - margin
+    x1, y1 = max(A[0], B[0]) + margin, max(A[1], B[1]) + margin
+    pts = []
+    i0, i1 = math.ceil((x0 - CENTER_X) / st), math.floor((x1 - CENTER_X) / st)
+    j0, j1 = math.ceil((y0 - CENTER_Y) / st), math.floor((y1 - CENTER_Y) / st)
+    for i in range(i0, i1 + 1):
+        for j in range(j0, j1 + 1):
+            x = round(CENTER_X + i * st, 6)
+            y = round(CENTER_Y + j * st, 6)
+            if math.hypot(x - CENTER_X, y - CENTER_Y) <= _MAN_R_EDGE_MM:
+                pts.append((x, y))
+    pset = set(pts)
+    eok = lambda ax, ay, bx, by, layer: _man_edge_ok(
+        padr, trk, vias, ax, ay, bx, by, net, layer)
+    a_seed = [p for p in pts
+              if (p[0] - A[0]) ** 2 + (p[1] - A[1]) ** 2 <= 1.0
+              and eok(A[0], A[1], p[0], p[1], 0)]
+    b_seed = {p for p in pts
+              if (p[0] - B[0]) ** 2 + (p[1] - B[1]) ** 2 <= 1.0
+              and eok(p[0], p[1], B[0], B[1], 0)}
+    if not a_seed or not b_seed:
+        return None
+    xnodes = set()
+    for nx, ny, nl in neut:
+        if not (x0 <= nx <= x1 and y0 <= ny <= y1):
+            continue
+        if math.hypot(nx - CENTER_X, ny - CENTER_Y) > _MAN_R_EDGE_MM:
+            continue
+        xnodes.add((round(nx, 6), round(ny, 6), nl))
+    ecache, vokcache = {}, {}
+
+    def eok_c(x, y, qx, qy, layer):
+        key = (x, y, qx, qy, layer)
+        v = ecache.get(key)
+        if v is None:
+            v = eok(x, y, qx, qy, layer)
+            ecache[key] = v
+        return v
+
+    def vok_c(x, y):
+        v = vokcache.get((x, y))
+        if v is None:
+            v = _man_via_ok(padr, trk, vias, x, y, net)
+            vokcache[(x, y)] = v
+        return v
+
+    def neighbors(x, y, layer):
+        out = []
+        for dx, dy in ((st, 0), (-st, 0), (0, st), (0, -st)):
+            qx, qy = round(x + dx, 6), round(y + dy, 6)
+            if (qx, qy) in pset:
+                out.append((qx, qy, layer))
+        for qx, qy, ql in sorted(xnodes):
+            if ql != layer or (qx, qy) == (x, y):
+                continue
+            if (qx - x) ** 2 + (qy - y) ** 2 <= 0.45 ** 2 + 1e-9:
+                out.append((qx, qy, ql))
+        if (x, y, layer) in xnodes:
+            for px, py in pts:
+                if (px - x) ** 2 + (py - y) ** 2 <= 0.45 ** 2 + 1e-9:
+                    if (px, py) != (x, y):
+                        out.append((px, py, layer))
+        return out
+
+    ctr = itertools.count()
+    dist, prev, heap = {}, {}, []
+    for p in a_seed:
+        heapq.heappush(heap, ((p[0] - A[0]) ** 2 + (p[1] - A[1]) ** 2,
+                              next(ctr), (p[0], p[1], 0)))
+    for qx, qy, ql in sorted(xnodes):
+        if ql == 0 and (qx - A[0]) ** 2 + (qy - A[1]) ** 2 <= 1.0 + 1e-9:
+            if eok_c(A[0], A[1], qx, qy, 0):
+                heapq.heappush(heap, (0.0, next(ctr), (qx, qy, ql)))
+    goal = None
+    while heap:
+        c, _, (x, y, layer) = heapq.heappop(heap)
+        if (x, y, layer) in dist:
+            continue
+        dist[(x, y, layer)] = c
+        if (x, y) in b_seed and layer == 0:
+            goal = (x, y, layer)
+            break
+        if ((x, y, layer) in xnodes
+                and (x - B[0]) ** 2 + (y - B[1]) ** 2 <= 1.0 + 1e-9
+                and layer == 0 and eok_c(x, y, B[0], B[1], 0)):
+            prev[(B[0], B[1], 0)] = (x, y, layer)
+            goal = (B[0], B[1], 0)
+            break
+        for qx, qy, ql in neighbors(x, y, layer):
+            if (qx, qy, ql) in dist or not eok_c(x, y, qx, qy, ql):
+                continue
+            prev[(qx, qy, ql)] = (x, y, layer)
+            heapq.heappush(heap, (c + (1.0 if ql == 0 else 1.2),
+                                  next(ctr), (qx, qy, ql)))
+        nl = 1 - layer
+        if (x, y, nl) not in dist and vok_c(x, y):
+            prev[(x, y, nl)] = (x, y, layer)
+            heapq.heappush(heap, (c + _MAN_VIA_COST, next(ctr), (x, y, nl)))
+    if goal is None:
+        return None
+    path = [goal]
+    while path[-1] in prev:
+        path.append(prev[path[-1]])
+    path.reverse()
+    seq = [(A[0], A[1], 0)] + [(p[0], p[1], p[2]) for p in path]
+    if goal != (B[0], B[1], 0):
+        seq.append((B[0], B[1], 0))
+    return seq
+
+
+def _man_runs(seq) -> list:
+    """Seq de pontos -> runs retas [[(x,y,camada), ...]] (funde colineares)."""
+    runs = [[seq[0]]]
+    for p in seq[1:]:
+        last = runs[-1][-1]
+        if p[2] != last[2]:
+            runs[-1].append(p)
+            runs.append([p])
+        elif len(runs[-1]) >= 2:
+            a0, a1 = runs[-1][-2], last
+            d1 = (a1[0] - a0[0], a1[1] - a0[1])
+            d2 = (p[0] - a1[0], p[1] - a1[1])
+            if (abs(d1[0] * d2[1] - d1[1] * d2[0]) < 1e-9
+                    and (d1[0] * d2[0] + d1[1] * d2[1]) > 0):
+                runs[-1].append(p)
+            else:
+                runs.append([a1, p])
+        else:
+            runs[-1].append(p)
+    return [r for r in runs if len(r) >= 2]
+
+
+def _man_commit(board, padr, trk, vias, net, seq, routed_tracks):
+    """Valida (vias novas hole-to-hole) e desenha runs/vias. None se inválido."""
+    new_vias = [(seq[i][0], seq[i][1]) for i in range(len(seq) - 1)
+                if seq[i][2] != seq[i + 1][2]]
+    for i, (vx, vy) in enumerate(new_vias):
+        for ex, ey, evnet in vias:
+            need = 0.55 if evnet == net else 0.8
+            if math.hypot(vx - ex, vy - ey) <= need + 1e-9:
+                return None
+        for wx, wy in new_vias[i + 1:]:
+            if math.hypot(vx - wx, vy - wy) <= 0.55 + 1e-9:
+                return None
+        if not _man_via_ok(padr, trk, vias, vx, vy, net):
+            return None
+    layer_name = {0: "F.Cu", 1: "B.Cu"}
+    for vx, vy in new_vias:
+        bb.add_via(board, net, vx, vy)
+        _ALL_VIAS.append((vx, vy, net))
+        vias.append((vx, vy, net))
+    for r in _man_runs(seq):
+        bb.add_track(board, net, r[0][0], r[0][1], r[-1][0], r[-1][1],
+                     layer=layer_name[r[0][2]], width_mm=_MAN_W_MM)
+        routed_tracks.append((r[0][0], r[0][1], r[-1][0], r[-1][1],
+                              r[0][2], net, _MAN_W_MM))
+    return (len(_man_runs(seq)), len(new_vias))
+
+
+def route_manual(board, placed, routed_tracks) -> tuple:
+    """Terceira passada: pares de _MAN_PAIRS via _man_find (margem 3, depois
+    8); desenha com _man_commit. Retorna (fechados, restantes): fechados =
+    [(net, a, b, n_runs, n_vias)], restantes = [(net, a, b)]."""
+    padr = _man_caches(placed)
+    vias = list(_ALL_VIAS)
+    fechados, restantes = [], []
+    for net, r0, p0, r1, p1 in _MAN_PAIRS:
+        if r0 not in placed or r1 not in placed:
+            restantes.append((net, f"{r0}.{p0}", f"{r1}.{p1}"))
+            continue
+        trk = {0: [t for t in routed_tracks if t[4] == 0],
+               1: [t for t in routed_tracks if t[4] == 1]}
+        A = bb.pad_position_mm(placed[r0], p0)
+        B = bb.pad_position_mm(placed[r1], p1)
+        seq = _man_find(placed, padr, trk, vias, net, A, B)
+        if seq is None:
+            seq = _man_find(placed, padr, trk, vias, net, A, B, margin=8.0)
+        if seq is None:
+            restantes.append((net, f"{r0}.{p0}", f"{r1}.{p1}"))
+            continue
+        res = _man_commit(board, padr, trk, vias, net, seq, routed_tracks)
+        if res is None:
+            restantes.append((net, f"{r0}.{p0}", f"{r1}.{p1}"))
+            continue
+        n_runs, n_vias = res
+        fechados.append((net, f"{r0}.{p0}", f"{r1}.{p1}", n_runs, n_vias))
+    return fechados, restantes
+
+
+# ---------------------------------------------------------------------------
 # Aterramento: malha sob o die pad + vias de costura + zona GND em B.Cu
 # ---------------------------------------------------------------------------
 # Refs com pads GND elegíveis para via de costura (item b). U1 só nos pinos
 # 20/29 (o die pad U1.33 recebe a malha 3x3 do item a). R1 NÃO entra: vai em
 # VDD_BAT/RESET — o filtro por netname já o exclui, mas fica explícito aqui.
-_GND_STITCH_REFS = {"U1", "SHLD1", "BT1", "TP4"} | {f"C{i}" for i in range(1, 11)}
+_GND_STITCH_REFS = {"U1", "SHLD1", "BT1", "TP4", "ANT1"} | {f"C{i}" for i in range(1, 11)}
 _GND_STITCH_U1_PINS = {"20", "29"}
 _GND_CLEAR_MM = 0.3          # (doc) folga mínima via x trilhas/pads de outras nets
 _GND_STITCH_TRACK_MM = 0.3   # largura da trilha GND pad→via de costura
@@ -1111,6 +1446,115 @@ def _seg_clear_of_other_nets(placed, x1, y1, x2, y2, net_name, routed_tracks,
     return True
 
 
+def _seg_clear_layer(placed, x1, y1, x2, y2, net_name, routed_tracks,
+                       layer_node, item_half=0.15, clearance=0.2) -> bool:
+    """Variante de _seg_clear_of_other_nets só contra cobre da MESMA camada
+    (trilhas layer_node + vias through + pads layer_node). A versão cega à
+    camada rejeitava spur GND em F.Cu por causa de trilha B.Cu sob ele —
+    sem violação real de DRC (camadas distintas)."""
+    for tx1, ty1, tx2, ty2, tlayer, tnet, tw in routed_tracks:
+        if tnet == net_name or tlayer != layer_node:
+            continue
+        if _dist_seg_seg(x1, y1, x2, y2, tx1, ty1, tx2, ty2) < item_half + clearance + tw / 2.0:
+            return False
+    for vx, vy, vnet in _ALL_VIAS:
+        if vnet == net_name:
+            continue
+        if _dist_point_seg(vx, vy, x1, y1, x2, y2) < item_half + clearance + 0.3:
+            return False
+    for _ref, fp in placed.items():
+        for pad in fp.Pads():
+            net = pad.GetNetname()
+            if net == net_name:  # pads sem rede (NC) também bloqueiam
+                continue
+            if _PAD_LAYER_NODE.get(pad.GetLayer(), 0) != layer_node:
+                continue
+            cx, cy, w, h, ang = _pad_rect(fp, pad)
+            if _dist_seg_rect(x1, y1, x2, y2, cx, cy, w, h, ang) < item_half + clearance:
+                return False
+    return True
+
+
+def _gnd_pad_connected(placed, fp, pin, routed_tracks) -> bool:
+    """True se o pad GND já toca cobre GND (trilha/via sobreposta).
+
+    Evita pendência falsa: um stitch vizinho cujo spur/via cai sobre o pad
+    (mesma net) já conecta o pad à zona — sem via própria. Toque EXATO:
+    distância segmento↔retângulo do pad ≤ tw/2, ou ponto↔retângulo ≤ 0,3
+    para via (nada de meia-diagonal — superestimava e pulava pads
+    desconectados).
+    """
+    gnd = "GND"
+    pad = fp.FindPadByNumber(str(pin))
+    _px, _py, _w, _h, _ang = _pad_rect(fp, pad)
+    for x1, y1, x2, y2, _layer, tnet, tw in routed_tracks:
+        if tnet != gnd:
+            continue
+        if _man_seg_rect(x1, y1, x2, y2, _px, _py, _w, _h, _ang) <= tw / 2.0 + 1e-9:
+            return True
+    for vx, vy, vnet in _ALL_VIAS:
+        if vnet != gnd:
+            continue
+        if _dist_point_rect(vx, vy, _px, _py, _w, _h, _ang) <= 0.3 + 1e-9:
+            return True
+    return False
+
+
+def _gnd_spur_L(board, placed, routed_tracks, px, py) -> bool:
+    """Spur GND em L (2 segmentos F.Cu 0,3 + via): saída horizontal e depois
+    vertical (e vice-versa). Para pads encaixotados (U1.20/U1.29/C4.2) onde
+    nenhum spur reto tem via+trilha livres. Varredura determinística por
+    comprimento total crescente (passo 0,1, alcance 1,5 mm). True se desenhou.
+    """
+    gnd = "GND"
+    cands = []
+    d = 0.1
+    while d <= 1.51:
+        for s1 in (-1.0, 1.0):
+            cands.append(("FH", round(px + s1 * d, 6)))
+            cands.append(("FV", round(py + s1 * d, 6)))
+        d = round(d + 0.1, 6)
+    # ordena por comprimento mínimo possível (determinístico)
+    cands.sort(key=lambda c: abs(c[1] - (px if c[0] == "FH" else py)))
+    for fam, e in cands:
+        d2 = 0.1
+        while d2 <= 1.51:
+            for s2 in (-1.0, 1.0):
+                if fam == "FH":
+                    xE, vy = e, round(py + s2 * d2, 6)
+                    segs = ((px, py, xE, py), (xE, py, xE, vy))
+                else:
+                    vx, yE = round(px + s2 * d2, 6), e
+                    segs = ((px, py, vx, py), (vx, py, vx, yE))
+                    xE, vy = vx, yE
+                if math.hypot(xE - CENTER_X, vy - CENTER_Y) > 15.0:
+                    d2ok = True
+                else:
+                    d2ok = False
+                    if any(math.hypot(xE - ex, vy - ey) <= 0.55 + 1e-9
+                           for ex, ey, _vn in _ALL_VIAS):
+                        d2ok = True
+                    elif not _clear_of_other_nets(placed, xE, vy, gnd,
+                                                  routed_tracks):
+                        d2ok = True
+                    elif not all(_seg_clear_layer(placed, a, b, c, e_,
+                                                  gnd, routed_tracks, 0,
+                                                  item_half=0.15)
+                                 for a, b, c, e_ in segs):
+                        d2ok = True
+                if not d2ok:
+                    for a, b, c, e_ in segs:
+                        bb.add_track(board, gnd, a, b, c, e_, layer="F.Cu",
+                                     width_mm=_GND_STITCH_TRACK_MM)
+                        routed_tracks.append((a, b, c, e_, 0, gnd,
+                                              _GND_STITCH_TRACK_MM))
+                    bb.add_via(board, gnd, xE, vy)
+                    _ALL_VIAS.append((xE, vy, gnd))
+                    return True
+            d2 = round(d2 + 0.1, 6)
+    return False
+
+
 def add_die_mesh(board, placed) -> int:
     """Malha 3x3 de vias GND sob o die pad U1.33 — DEVE rodar ANTES de
     route_all.
@@ -1209,6 +1653,8 @@ def add_ground(board, placed, routed_tracks, grid) -> tuple:
                 continue  # die pad (33) já tem a malha; demais pinos fora da lista
             if pad.GetLayer() == pcbnew.B_Cu:
                 continue  # já em B.Cu: a zona alcança o pad
+            if _gnd_pad_connected(placed, fp, pin, routed_tracks):
+                continue  # spur/via de stitch vizinho já toca o pad (mesma net)
             px, py = pad_abs_pos(fp, pin)
             base = math.atan2(py - CENTER_Y, px - CENTER_X)
             placed_stitch = False
@@ -1250,6 +1696,40 @@ def add_ground(board, placed, routed_tracks, grid) -> tuple:
                     break
                 if placed_stitch:
                     break
+            if not placed_stitch:
+                # Fallback estendido (3ª passada): 16 direções × offsets
+                # 0,6–1,5 mm, com o spur pad→via testado só contra cobre F.Cu
+                # (_seg_clear_layer — trilhas B.Cu sob o spur não são curto).
+                # Via continua com checagem cheia + hole-to-hole 0,55.
+                for k in range(16):
+                    ang = base + k * math.pi / 8.0
+                    off = 0.6
+                    while off <= 1.51:
+                        vx = px + off * math.cos(ang)
+                        vy = py + off * math.sin(ang)
+                        if math.hypot(vx - CENTER_X, vy - CENTER_Y) <= 15.0:
+                            if not any(math.hypot(vx - ex, vy - ey) <= 0.55 + 1e-9
+                                       for ex, ey, _vn in _ALL_VIAS):
+                                if _clear_of_other_nets(placed, vx, vy, gnd,
+                                                        routed_tracks):
+                                    if _seg_clear_layer(placed, px, py, vx, vy,
+                                                        gnd, routed_tracks, 0,
+                                                        item_half=0.15):
+                                        bb.add_track(board, gnd, px, py, vx, vy,
+                                                     layer="F.Cu", width_mm=_GND_STITCH_TRACK_MM)
+                                        routed_tracks.append((px, py, vx, vy, 0, gnd,
+                                                              _GND_STITCH_TRACK_MM))
+                                        bb.add_via(board, gnd, vx, vy)
+                                        _ALL_VIAS.append((vx, vy, gnd))
+                                        n_vias += 1
+                                        placed_stitch = True
+                                        break
+                        off = round(off + 0.1, 6)
+                    if placed_stitch:
+                        break
+            if not placed_stitch:
+                placed_stitch = _gnd_spur_L(board, placed, routed_tracks,
+                                            px, py)
             if not placed_stitch:
                 pendencias.append((f"{ref}.{pin}",
                                    "nenhuma das 8 direções x 3 offsets livre "
@@ -1405,6 +1885,7 @@ if __name__ == "__main__":
     pend_1a = list(pendencias)
     pendencias, n_2a = route_pending_second_pass(board, placed, grid,
                                                  routed_tracks, pendencias)
+    man_ok, man_rest = route_manual(board, placed, routed_tracks)
     gnd_vias, gnd_pend = add_ground(board, placed, routed_tracks, grid)
     n_vias = sum(1 for t in board.GetTracks() if t.GetClass() == "PCB_VIA")
     print(f"trilhas roteadas: {len(routed_tracks)}")
@@ -1412,6 +1893,8 @@ if __name__ == "__main__":
     print(f"pendências 1ª passada ({len(pend_1a)}): {pend_1a}")
     print(f"2ª passada: {n_2a} pares roteados, "
           f"{len(pendencias)} pendências restantes: {pendencias}")
+    print(f"3ª passada (manual): {len(man_ok)} pares fechados: {man_ok}")
+    print(f"3ª passada restantes ({len(man_rest)}): {man_rest}")
     print(f"vias GND adicionadas: {gnd_vias} (malha die pad: {mesh_vias})")
     print(f"SHLD1: anéis F.Cu removidos: {ring_removed}, segs obstáculo B.Cu: {ring_seg}")
     print(f"pendências de via GND ({len(gnd_pend)}): {gnd_pend}")

@@ -102,8 +102,10 @@ credenciais reais (`DELI_API_KEY`/`DELI_API_SECRET`) para teste de ponta a ponta
 
 ## Pendências
 
-- ANATEL: certificado do módulo não localizado — item aberto (não bloqueia bancada;
-  homologação a confirmar antes de operar com público).
+- ANATEL: item aberto (não bloqueia bancada; confirmar antes de operar com público).
+  Homologação vale só para os radiadores intencionais (BM832A e ESP32, 2,4 GHz) — PCB,
+  bateria, NFC passiva, ferrite e cápsula não certificam; se os módulos já forem
+  homologados, o produto usa processo simplificado com os laudos do módulo (confirmar com OCD).
 - BOM raiz: corrigir Keystone 1059 → 1060.
 - Alimentação do BM832A: indutores do DC/DC integrados ao módulo (fonte: página oficial
   Fanstel) — fecha o item aberto #2.
