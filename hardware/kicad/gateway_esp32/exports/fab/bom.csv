@@ -1,0 +1,5 @@
+"Refs","Value","Footprint","Qty","DNP"
+"J1","USB-C 5V power-only ou terminal 2p","Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical","1",""
+"R1","10k","Resistor_SMD:R_0603_1608Metric","1",""
+"SW1","Botao reset EN (NA)","Button_Switch_THT:SW_PUSH_6mm","1",""
+"U1","ESP32-DevKitC-32E","nibas_gateway:ESP32-DevKitC-32E_Carrier","1",""

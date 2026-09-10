@@ -1,23 +1,31 @@
 #!/usr/bin/env python3
-"""Gerador do board da carrier do gateway ESP32.
+"""Gerador do board da carrier do gateway ESP32 (re-layout p/ DevKitC físico).
 
-Board RETÂNGULAR 60×32 mm centro (100,100) (x∈[70,130], y∈[84,116]),
+Board RETÂNGULAR 62×36 mm centro (100,100) (x∈[69,131], y∈[82,118]),
 2 camadas, 1,6 mm. Roteamento em L (com checagem de colisão, inflate
 0,3 mm) — sem A*. Estrutura copiada de
 wristband_modulo/gen_board_modulo.py (parsers, helpers, board_builder).
 
-U1 = ESP32-DevKitC-32E em soquete PinHeader 2x19 P2.54 (comprimento
-48,26 mm), eixo longo em X: pads x∈[77.14,122.86], J2 (pads ímpares
-1..37) em y=101,27 e J3 (pads pares 2..38) em y=98,73. Mapeamento
-símbolo→footprint: pino "J2-x" -> pad 2x-1; "J3-x" -> pad 2x.
+U1 = footprint custom `nibas_gateway:ESP32-DevKitC-32E_Carrier` (2 soquetes
+fêmea 1x19, pads 1..38 numerados em sequência: J2-x -> pad x, J3-x ->
+pad 19+x), rot 270 em (100,100): fileiras (x=±13,97 locais) viram linhas
+horizontais em y=86,03 (J2, pads 1..19, pino 1 a oeste) e y=113,97 (J3);
+campo de pads 45,72(X)×27,94(Y); +5V (J2-19) na extremidade LESTE.
 
-NOTA keepout da antena: a extremidade da antena PCB do DevKitC fica no
-lado x>124 do board — sem cobre DE ROTA nessa faixa (x∈[124,130], ambas
-as camadas), exceto os pads do próprio U1 (J2-19/J3-19 em x≈122,86, de
-onde as trilhas saem para oeste). Amostras de segmento a ≤1,0 mm de um
-pad do U1 são isentas. A zona GND em B.Cu (spec: retângulo 60×32 inset
-0,5 mm) não é bloqueada por este keepout — a restrição vale para trilhas
-de rota, como no board da pulseira.
+QUIRK do footprint (documentado, lib intacta): silk/courtyard desenhados
+54,4(X)×27,9(Y) / 56,4(X)×29,9(Y) a rot 0, mas o campo de pads é
+27,94(X)×45,72(Y) — courtyard NÃO contém os pads nas extremidades. A rot
+90 (única que cabe o soquete físico de 48 mm no eixo X) o courtyard
+desenhado vira 29,9(X)×56,4(Y) e ultrapassa as bordas Y do board. É só
+desenho (courtyard não é cobre, não entra em gerber, não é erro de DRC);
+o corpo real do módulo (54,4×27,9 em X/Y) cabe com ≥3 mm de margem. O
+assert de courtyard cobre J1/R1/SW1 (≥0,5 mm) + corpo-do-módulo p/ U1.
+
+Keepout da antena: extremidade do módulo no lado dos pads 19/38 (+5V) —
+faixa de 6 mm até a borda (x∈[125,131] se leste), sem cobre DE ROTA nas
+duas camadas (trilhas e vias), exceto pads do próprio U1 (isenção
+1,0 mm). A zona GND em B.Cu (retângulo 62×36 inset 0,5 mm) não é
+bloqueada por este keepout — como no board anterior.
 """
 import math
 import re
@@ -36,6 +44,24 @@ SCH_FILE = HERE / "gateway_esp32.kicad_sch"
 NET_FILE = HERE / "exports" / "gateway_esp32.net"
 OUT_FILE = HERE / "gateway_esp32.kicad_pcb"
 bb.FP_LIB_ROOTS.insert(0, str(CUSTOM_LIBS_DIR))
+
+# U1: footprint custom da carrier (soquetes fêmea 1x19 p/ DevKitC-32E).
+# Carregado via caminho COMPLETO do .kicad_mod (exigência de projeto).
+_U1_MOD_PATH = (CUSTOM_LIBS_DIR / "nibas_gateway.pretty"
+                / "ESP32-DevKitC-32E_Carrier.kicad_mod")
+_U1_FP = "nibas_gateway:ESP32-DevKitC-32E_Carrier"
+if not _U1_MOD_PATH.is_file():
+    raise SystemExit(f"footprint custom U1 ausente: {_U1_MOD_PATH}")
+
+# Mapeamento símbolo->footprint custom: pads numerados 1..38 em sequência
+# (coluna J2 = pads 1..19, coluna J3 = pads 20..38).
+def _sym_to_pad(pin: str) -> str:
+    s = str(pin)
+    m = re.fullmatch(r"J([23])-(\d+)", s)
+    if m:
+        x = int(m.group(2))
+        return str(x) if m.group(1) == "2" else str(19 + x)
+    return s
 
 
 # ---------------------------------------------------------------------------
@@ -90,36 +116,30 @@ def parse_footprints(path) -> dict:
 # Placement (mm ABSOLUTOS no board; centro do retângulo = (100,100))
 # ---------------------------------------------------------------------------
 CENTER_X, CENTER_Y = 100.0, 100.0
-BOARD_W, BOARD_H = 60.0, 32.0
-# x∈[70,130], y∈[84,116]
+BOARD_W, BOARD_H = 62.0, 36.0
+# x∈[69,131], y∈[82,118]
 EDGE_X0, EDGE_X1 = CENTER_X - BOARD_W / 2, CENTER_X + BOARD_W / 2
 EDGE_Y0, EDGE_Y1 = CENTER_Y - BOARD_H / 2, CENTER_Y + BOARD_H / 2
 
-# (x, y, rot_deg, flip) — flip = footprint em B.Cu. Posições ABSOLUTAS da
-# ORIGEM do footprint (PinHeader/SW_PUSH têm origem no pad 1; R_0603 é
-# centrado). U1 rot 90: pads x∈[77.14,122.86], J2 (ímpares) y=101,27,
-# J3 (pares) y=98,73; J2-19/J3-19 no lado leste (antena).
+# U1 rot 270 em (100,100): pads x∈[77.14,122.86], J2 (pads 1..19) em
+# y=86,03 com J2-1 a oeste, J3 (pads 20..38) em y=113,97; +5V (J2-19) a
+# leste. Topologia espelha o board 60×32 anterior (J1 a oeste, keepout a
+# leste): +5V cruza o board pelo strip superior (~53 mm, antes 58,6 mm).
+# J1 no strip superior oeste (corpo fora do módulo em X — sem colisão
+# física); R1/SW1 na banda central oeste (extremidade J2-1/J2-2), sob o
+# módulo (elevado; MONTAR o DevKitC com pinos longos empilháveis, folga
+# ≥6 mm sob o módulo — R1 1 mm e SW1 4,3 mm cabem; SW1 acessível c/
+# módulo removido, reset primário = botão EN do próprio DevKitC).
 PLACEMENT = {
-    # Soquete do DevKitC: PinHeader 2x19 P2.54 (48,26 mm), eixo longo em X,
-    # pads x∈[77.14,122.86], y=100±1.27. Antena na extremidade x>124.
-    "U1": (77.14, 101.27, 90.0, False),
-    # Entrada de alimentação 5V (USB-C power-only ou terminal 2p), rot 0.
-    # y=112: courtyard chegava a y=116.365 — 0,365 mm FORA da borda y=116
-    # (auditoria visual). y=110: courtyard y<=114.365 (1,635 dentro), mas o
-    # +5V não tem L livre (y=110 cruza SW1.1 [108.5,110.5]; o L alternativo
-    # corre na linha y=101.27 dos pads J2). y=111: courtyard y<=115.365
-    # (0,635 >= 0,5 dentro da borda) e o L horizontal y=111 limpa SW1.1
-    # com 0,25 mm.
-    "J1": (75.0, 111.0, 0.0, False),
-    # Pull-up +3V3 -> EN.
-    "R1": (78.855, 108.0, 0.0, False),
-    # Botão EN -> GND (reset), push 6 mm.
-    "SW1": (84.0, 109.5, 0.0, False),
+    "U1": (100.0, 100.0, 270.0, False),
+    "J1": (71.32, 84.5, 0.0, False),
+    "R1": (78.5, 92.0, 270.0, False),
+    "SW1": (76.5, 99.0, 0.0, False),
 }
 
-# Keepout da antena (frame do board): x∈[124,130], y∈[84,116] — sem cobre
-# de rota nas duas camadas, exceto pads do próprio U1 (isenção 1,0 mm).
-KEEPOUT_ANT = (124.0, EDGE_Y0, EDGE_X1, EDGE_Y1)  # x0, y0, x1, y1
+# Keepout da antena: definido em runtime (lado dos pads 19/38): faixa de
+# 6 mm até a borda do board, altura total. Padrão (rot 270 => leste).
+KEEPOUT_ANT = (125.0, EDGE_Y0, EDGE_X1, EDGE_Y1)  # x0, y0, x1, y1
 _KEEPOUT_PAD_EXEMPT_MM = 1.0
 
 
@@ -136,7 +156,7 @@ _ALL_VIAS = []  # [(x, y, net), ...]
 
 
 def pad_abs_pos(fp, pin) -> tuple:
-    return bb.pad_position_mm(fp, str(pin))
+    return bb.pad_position_mm(fp, _sym_to_pad(pin) if fp.GetReference() == "U1" else str(pin))
 
 
 def _pad_rect(fp, pad) -> tuple:
@@ -281,20 +301,24 @@ def _seg_hits_keepout(x1, y1, x2, y2, u1_pads, sample=0.05) -> bool:
 # Roteamento em L (sem A*)
 # ---------------------------------------------------------------------------
 def _resolve_pad(fp, pin):
-    """Pino do símbolo -> PAD do footprint.
+    """Pino do símbolo -> PAD do footprint custom.
 
-    "J2-x" -> pad ímpar 2x-1 (coluna J2); "J3-x" -> pad par 2x (coluna J3).
-    Sufixo "b" (ex.: "1b") -> segundo pad com o mesmo número (footprints
-    com pads espelhados, ex.: SW_PUSH 4 pads). Demais nomes passam direto.
+    U1 (carrier 38 pads): "J2-x" -> pad x; "J3-x" -> pad 19+x.
+    Demais refs: sufixo "b" (ex.: "1b") -> segundo pad com o mesmo número
+    (footprints com pads espelhados, ex.: SW_PUSH 4 pads); demais nomes
+    passam direto.
     """
     s = str(pin)
+    if fp.GetReference() == "U1":
+        s = _sym_to_pad(s)
+        pad = fp.FindPadByNumber(s)
+        if pad is None:
+            raise bb.BoardBuilderError(
+                f"pad {pin!r} (fp {s!r}) não resolvido em U1")
+        return pad
     second = s.endswith("b")
     if second:
         s = s[:-1]
-    m = re.fullmatch(r"J([23])-(\d+)", s)
-    if m:
-        x = int(m.group(2))
-        s = str(2 * x - 1) if m.group(1) == "2" else str(2 * x)
     if not second:
         pad = fp.FindPadByNumber(s)
         if pad is None:
@@ -356,7 +380,9 @@ def route_pair_l(board, placed, net_name, width_mm, routed_tracks,
 
 
 # Pares terminais na ordem pedida. GND fica para a zona (sem trilha de sinal).
-# Nomes de net pós-parse (lstrip "/"): "/EN" -> "EN".
+# Nets da netlist (nomes exatos): "+5V" (J1.1, U1.J2-19), "+3V3" (R1.1,
+# U1.J2-1), "/EN"->"EN" (R1.2, SW1.1, U1.J2-2), "GND" (J1.2, SW1.2,
+# U1.J2-14=p14, U1.J3-1=p20, U1.J3-7=p26).
 _ROUTE_PAIRS = [
     ("+5V", 0.5, [("J1", "1", "U1", "J2-19")]),
     ("+3V3", 0.4, [("U1", "J2-1", "R1", "1")]),
@@ -393,26 +419,98 @@ def route_all(board, placed, nets) -> tuple:
 # Aterramento: vias de costura + zona GND em B.Cu
 # ---------------------------------------------------------------------------
 _GND_STITCH_TRACK_MM = 0.3
-_GND_STITCH_OFFSET_MM = 0.8
 _GND_STITCH_VIA_DIA_MM = 0.8
-# Zona GND: retângulo 60×32 com inset 0,5 mm da borda.
+# Furo-a-furo (borda a borda) mínimo entre a via de stitch e QUALQUER PTH
+# (inclui os próprios pads da net e outras vias de stitch): 0,6 mm cobre o
+# clearance default do KiCad (0,25 mm) com folga de fabricação.
+_GND_STITCH_HOLE_CLEAR_MM = 0.6
+# Offset inicial pad→via: 1,6 mm garante furo-a-furo >= 0,6 mm contra os
+# maiores drills do board (SW1 1,1 mm → r 0,55; via r 0,4: 1,6-0,95=0,65).
+_GND_STITCH_OFFSETS_MM = (1.6, 1.9, 2.2, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0, 8.0)
+# Raio máximo de busca (pad→via) — confina as vias de stitch.
+_GND_STITCH_MAX_R_MM = 14.5
+# Zona GND: retângulo 62×36 com inset 0,5 mm da borda.
 _ZONE_INSET_MM = 0.5
 
 
+def _pad_hole_r_mm(pad) -> float:
+    """Raio de furo do pad (0,0 se SMD)."""
+    d = pad.GetDrillSize()
+    r = min(bb._mm(d.x), bb._mm(d.y)) / 2.0
+    return r if r > 0.0 else 0.0
+
+
+def _all_pth_holes(placed) -> list:
+    """[(x, y, r_furo), ...] de TODOS os pads PTH do board."""
+    out = []
+    for fp in placed.values():
+        for pad in fp.Pads():
+            r = _pad_hole_r_mm(pad)
+            if r <= 0.0:
+                continue
+            pos = pad.GetPosition()
+            out.append((bb._mm(pos.x), bb._mm(pos.y), r))
+    return out
+
+
+def _stitch_via_ok(placed, vx, vy, gnd, routed_tracks, pth_holes,
+                   via_r, copper_clear, hole_clear) -> bool:
+    """Valida posição de via de stitch: caixa da zona, keepout, furo-a-furo
+    contra TODOS os PTHs + vias já colocadas, e clearance de cobre contra
+    pads/trilhas/vias de outras nets."""
+    margin = _ZONE_INSET_MM + via_r + 0.3
+    if not (EDGE_X0 + margin <= vx <= EDGE_X1 - margin and
+            EDGE_Y0 + margin <= vy <= EDGE_Y1 - margin):
+        return False
+    u1_pads = _u1_pad_centers(placed)
+    if in_keepout_rect(vx, vy) and not any(
+            math.hypot(vx - ux, vy - uy) <= _KEEPOUT_PAD_EXEMPT_MM
+            for ux, uy in u1_pads):
+        return False
+    # Furo-a-furo contra todos os PTHs (borda a borda >= hole_clear).
+    for hx, hy, hr in pth_holes:
+        if math.hypot(vx - hx, vy - hy) < hole_clear + via_r + hr:
+            return False
+    # Furo-a-furo contra vias de stitch já colocadas (furo r = via_r).
+    for ox, oy, _onet in _ALL_VIAS:
+        if math.hypot(vx - ox, vy - oy) < hole_clear + 2.0 * via_r:
+            return False
+    # Cobre: via r=via_r + clearance contra pads de outras nets.
+    for _ref, fp in placed.items():
+        for pad in fp.Pads():
+            if pad.GetNetname() == gnd:
+                continue
+            if not pad.IsOnLayer(pcbnew.F_Cu):
+                continue
+            cx, cy, w, h, ang = _pad_rect(fp, pad)
+            if _dist_point_rect(vx, vy, cx, cy, w, h, ang) < via_r + copper_clear:
+                return False
+    # Cobre contra trilhas de outras nets.
+    for x1, y1, x2, y2, _layer, tnet, tw in routed_tracks:
+        if tnet == gnd:
+            continue
+        if _dist_point_seg(vx, vy, x1, y1, x2, y2) < via_r + copper_clear + tw / 2.0:
+            return False
+    # Cobre contra outras vias (raio via_r cada).
+    for ox, oy, _onet in _ALL_VIAS:
+        if math.hypot(vx - ox, vy - oy) < 2.0 * via_r + copper_clear:
+            return False
+    return True
+
+
 def add_ground(board, placed, routed_tracks) -> tuple:
-    """Via de costura (trilha 0,3 pad→via Ø0,8 mm a 0,8 mm, 8 direções) para
-    cada pad GND em F.Cu (J1.2, SW1.2, U1.J2-14/J3-1/J3-7); zona GND
-    retangular 60×32 inset 0,5 mm em B.Cu + fill. Via deve caber inteira
-    dentro da zona (inset 0,5 + raio da via 0,4 + margem 0,3 da borda da
-    zona). Retorna (n_vias_gnd, pendencias)."""
+    """Via de costura GND para cada pad GND em F.Cu (J1.2, SW1.2/2b,
+    U1 p14/p20/p26): trilha 0,3 mm pad→via Ø0,8 mm. Posição da via:
+    offsets crescentes (1,6..8,0 mm) × 8 direções, validados contra TODOS
+    os PTHs (furo-a-furo borda a borda >= 0,6 mm) + clearance de cobre;
+    fallback: busca em grade 0,5 mm até r 14,5 mm do pad. Zona GND
+    retangular 62×36 inset 0,5 mm em B.Cu + fill. Retorna
+    (n_vias_gnd, pendencias)."""
     gnd = "GND"
     n_vias = 0
     pendencias = []
     via_r = _GND_STITCH_VIA_DIA_MM / 2.0
-    margin = _ZONE_INSET_MM + via_r + 0.3
-    vx_min, vx_max = EDGE_X0 + margin, EDGE_X1 - margin
-    vy_min, vy_max = EDGE_Y0 + margin, EDGE_Y1 - margin
-    u1_pads = _u1_pad_centers(placed)
+    pth_holes = _all_pth_holes(placed)
     for ref in sorted(placed):
         fp = placed[ref]
         for pad in fp.Pads():
@@ -421,38 +519,51 @@ def add_ground(board, placed, routed_tracks) -> tuple:
             if pad.GetLayer() == pcbnew.B_Cu:
                 continue  # zona em B.Cu alcança o pad diretamente
             pin = pad.GetNumber()
-            px, py = pad_abs_pos(fp, pin)
+            px, py = bb.pad_position_mm(fp, pin)
             base = math.atan2(py - CENTER_Y, px - CENTER_X)
-            for k in range(8):
-                ang = base + math.pi + k * math.pi / 4.0
-                vx = px + _GND_STITCH_OFFSET_MM * math.cos(ang)
-                vy = py + _GND_STITCH_OFFSET_MM * math.sin(ang)
-                if not (vx_min <= vx <= vx_max and vy_min <= vy <= vy_max):
+            # Candidatos: offsets × 8 direções, depois grade (fallback).
+            cands = [(px + off * math.cos(base + math.pi + k * math.pi / 4.0),
+                      py + off * math.sin(base + math.pi + k * math.pi / 4.0))
+                     for off in _GND_STITCH_OFFSETS_MM for k in range(8)]
+            step = 0.5
+            n_grid = int(_GND_STITCH_MAX_R_MM / step)
+            for i in range(-n_grid, n_grid + 1):
+                for j in range(-n_grid, n_grid + 1):
+                    gx_, gy_ = px + i * step, py + j * step
+                    if math.hypot(gx_ - px, gy_ - py) > _GND_STITCH_MAX_R_MM:
+                        continue
+                    cands.append((gx_, gy_))
+            chosen = None
+            for vx, vy in cands:
+                if math.hypot(vx - px, vy - py) > _GND_STITCH_MAX_R_MM:
                     continue
-                if in_keepout_rect(vx, vy) and not any(
-                        math.hypot(vx - ux, vy - uy) <= _KEEPOUT_PAD_EXEMPT_MM
-                        for ux, uy in u1_pads):
-                    continue
-                if not _clear_of_other_nets(placed, vx, vy, gnd, routed_tracks):
+                if not _stitch_via_ok(placed, vx, vy, gnd, routed_tracks,
+                                      pth_holes, via_r,
+                                      copper_clear=0.2,
+                                      hole_clear=_GND_STITCH_HOLE_CLEAR_MM):
                     continue
                 if not _seg_clear_of_other_nets(placed, px, py, vx, vy, gnd,
                                                 routed_tracks, item_half=0.15):
                     continue
-                bb.add_track(board, gnd, px, py, vx, vy, layer="F.Cu",
-                             width_mm=_GND_STITCH_TRACK_MM)
-                routed_tracks.append((px, py, vx, vy, 0, gnd,
-                                      _GND_STITCH_TRACK_MM))
-                bb.add_via(board, gnd, vx, vy,
-                           diameter_mm=_GND_STITCH_VIA_DIA_MM)
-                _ALL_VIAS.append((vx, vy, gnd))
-                n_vias += 1
+                chosen = (vx, vy)
                 break
-            else:
+            if chosen is None:
                 pendencias.append((f"{ref}.{pin}",
-                                   "nenhuma das 8 direções livre (via+trilha)"))
+                                   "nenhuma posição de via válida "
+                                   "(furo-a-furo/cobre/keepout, r<=14,5)"))
+                continue
+            vx, vy = chosen
+            bb.add_track(board, gnd, px, py, vx, vy, layer="F.Cu",
+                         width_mm=_GND_STITCH_TRACK_MM)
+            routed_tracks.append((px, py, vx, vy, 0, gnd,
+                                  _GND_STITCH_TRACK_MM))
+            bb.add_via(board, gnd, vx, vy,
+                       diameter_mm=_GND_STITCH_VIA_DIA_MM)
+            _ALL_VIAS.append((vx, vy, gnd))
+            n_vias += 1
 
-    # Zona GND retangular 60×32 inset 0,5 mm da borda (x∈[70.5,129.5],
-    # y∈[84.5,115.5]) em B.Cu + fill.
+    # Zona GND retangular 62×36 inset 0,5 mm da borda (x∈[69.5,130.5],
+    # y∈[82.5,117.5]) em B.Cu + fill.
     bb.add_rect_zone(board, gnd,
                      EDGE_X0 + _ZONE_INSET_MM, EDGE_Y0 + _ZONE_INSET_MM,
                      EDGE_X1 - _ZONE_INSET_MM, EDGE_Y1 - _ZONE_INSET_MM,
@@ -467,6 +578,9 @@ def add_ground(board, placed, routed_tracks) -> tuple:
 def build_board():
     """Board retangular + placement + atribuição de nets."""
     fp_map = parse_footprints(SCH_FILE)
+    if fp_map.get("U1") != _U1_FP:
+        raise RuntimeError(
+            f"esquemático aponta U1 para {fp_map.get('U1')!r}, esperado {_U1_FP!r}")
     board = bb.create_board(shape="rect", width_mm=BOARD_W,
                             height_mm=BOARD_H, layers=2, thickness_mm=1.6)
     # create_board gera o retângulo centrado na origem — translada os 4
@@ -484,10 +598,23 @@ def build_board():
         if ref not in fp_map:
             raise RuntimeError(f"ref {ref!r} sem Footprint no esquemático")
         x, y, rot, flip = PLACEMENT[ref]
+        fp_id = fp_map[ref]
         placed[ref] = bb.place_footprint(
-            board, fp_map[ref], x, y,
+            board, fp_id, x, y,
             rot_deg=rot, ref=ref, layer="B.Cu" if flip else "F.Cu"
         )
+
+    # Keepout da antena no lado dos pads 19/38 (extremidade do módulo):
+    # faixa de 6 mm até a borda.
+    global KEEPOUT_ANT
+    try:
+        x19 = bb.pad_position_mm(placed["U1"], "19")[0]
+        if x19 < CENTER_X:
+            KEEPOUT_ANT = (EDGE_X0, EDGE_Y0, EDGE_X0 + 6.0, EDGE_Y1)
+        else:
+            KEEPOUT_ANT = (EDGE_X1 - 6.0, EDGE_Y0, EDGE_X1, EDGE_Y1)
+    except bb.BoardBuilderError:
+        pass
 
     nets = parse_netlist(NET_FILE)
     nets_assigned = 0
@@ -506,13 +633,38 @@ def build_board():
     return board, placed, nets_assigned, nets
 
 
+def _courtyard_bbox(fp) -> tuple:
+    """BBox (x0,x1,y0,y1 mm) do courtyard, ou None se vazio."""
+    for ly in (pcbnew.F_CrtYd, pcbnew.B_CrtYd):
+        cr = fp.GetCourtyard(ly)
+        if not cr.IsEmpty():
+            bbx = cr.BBox()
+            return (bb._mm(bbx.GetLeft()), bb._mm(bbx.GetRight()),
+                    bb._mm(bbx.GetTop()), bb._mm(bbx.GetBottom()))
+    return None
+
+
 if __name__ == "__main__":
     board, placed, nets_assigned, nets = build_board()
     routed_tracks, pendencias = route_all(board, placed, nets)
     gnd_vias, gnd_pend = add_ground(board, placed, routed_tracks)
     n_vias = sum(1 for t in board.GetTracks() if t.GetClass() == "PCB_VIA")
 
-    # --- Asserts de geometria (60x32 + courtyard dentro da borda) ---
+    # --- Diagnóstico de placement (rodada de medição) ---
+    for ref in sorted(placed):
+        fp = placed[ref]
+        print(f"DIAG {ref}: pads=" + ", ".join(
+            f"{p.GetNumber()}@({bb._mm(p.GetPosition().x):.2f},"
+            f"{bb._mm(p.GetPosition().y):.2f})/{p.GetNetname() or '-'}"
+            for p in fp.Pads()))
+        print(f"DIAG {ref}: courtyard={_courtyard_bbox(fp)}")
+    print(f"DIAG keepout_antena: x∈[{KEEPOUT_ANT[0]},{KEEPOUT_ANT[2]}]")
+    print(f"DIAG pads_fora_da_borda: {bb.validate_pads_inside_edges(board)}")
+    print(f"DIAG comprimentos: " + "; ".join(
+        f"{t[5]} {math.hypot(t[2]-t[0],t[3]-t[1]):.2f}mm ({t[0]:.2f},{t[1]:.2f})->({t[2]:.2f},{t[3]:.2f})"
+        for t in routed_tracks))
+
+    # --- Asserts de geometria (62x36 + courtyard dentro da borda) ---
     xs, ys = [], []
     for d in board.GetDrawings():
         if d.GetLayer() == pcbnew.Edge_Cuts and d.GetShape() == pcbnew.SHAPE_T_SEGMENT:
@@ -525,9 +677,18 @@ if __name__ == "__main__":
         f"board {w}x{h} != {BOARD_W}x{BOARD_H}"
     assert abs(min(xs) - EDGE_X0) < 1e-6 and abs(min(ys) - EDGE_Y0) < 1e-6, \
         "board fora do centro (100,100)"
-    # Courtyard de cada footprint dentro da borda; J1 (item da correção)
-    # exige >= 0,5 mm de margem (tocava/cruzava y=116 em y=112).
+    # Courtyard de J1/R1/SW1 >= 0,5 mm dentro da borda. U1: quirk do
+    # footprint (courtyard desenhado perpendicular ao campo de pads) —
+    # valida o corpo real do módulo 54,4×27,9 (X/Y) com margem ≥2,5 mm.
     for ref, fp in placed.items():
+        if ref == "U1":
+            ux, uy, _urot, _uflip = PLACEMENT["U1"]
+            for mx0, mx1, my0, my1 in [(
+                    ux - 54.4 / 2, ux + 54.4 / 2, uy - 27.9 / 2, uy + 27.9 / 2)]:
+                assert mx0 >= EDGE_X0 + 2.5 and mx1 <= EDGE_X1 - 2.5 and \
+                    my0 >= EDGE_Y0 + 2.5 and my1 <= EDGE_Y1 - 2.5, \
+                    f"corpo do módulo U1 fora da margem: x[{mx0:.2f},{mx1:.2f}] y[{my0:.2f},{my1:.2f}]"
+            continue
         for ly in (pcbnew.F_CrtYd, pcbnew.B_CrtYd):
             cr = fp.GetCourtyard(ly)
             if cr.IsEmpty():
@@ -535,7 +696,7 @@ if __name__ == "__main__":
             bbx = cr.BBox()
             x0, x1 = bb._mm(bbx.GetLeft()), bb._mm(bbx.GetRight())
             y0, y1 = bb._mm(bbx.GetTop()), bb._mm(bbx.GetBottom())
-            margem = 0.5 if ref == "J1" else 0.0
+            margem = 0.5
             assert x0 >= EDGE_X0 + margem and x1 <= EDGE_X1 - margem and \
                 y0 >= EDGE_Y0 + margem and y1 <= EDGE_Y1 - margem, \
                 (f"courtyard de {ref} fora da margem {margem} mm: "
@@ -553,7 +714,6 @@ if __name__ == "__main__":
     print(f"nets atribuídas: {nets_assigned} pads")
     print(f"keepout antena: x∈[{KEEPOUT_ANT[0]},{KEEPOUT_ANT[2]}] mm "
           f"(isenção pads U1: {_KEEPOUT_PAD_EXEMPT_MM} mm)")
-    print(f"assert 60x32: Edge.Cuts {w:.6f}x{h:.6f} mm, "
+    print(f"assert 62x36: Edge.Cuts {w:.6f}x{h:.6f} mm, "
           f"x∈[{min(xs):.3f},{max(xs):.3f}] y∈[{min(ys):.3f},{max(ys):.3f}] OK")
-    print(f"assert courtyard: todos os footprints >= 0,5 mm dentro da borda OK")
     print(f"board salvo em: {out}")

@@ -78,42 +78,75 @@ def parse_footprints(path) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Placement (mm relativos ao centro do disco; rotação 0 em todos)
+# Placement (mm relativos ao centro do disco)
 # ---------------------------------------------------------------------------
 CENTER_X, CENTER_Y = 100.0, 100.0   # centro do disco Ø32 mm
 
+# Rotação por ref (graus). BT1 = Keystone 1060 (3 pads): corpo 28,4×22 com
+# abas em ±14,655 mm no eixo X nativo. Rot 270° põe a aba VDD (pad 1) no
+# NORTE e a aba GND no SUL — com rot 90 a aba GND ficava a 0,11 mm dos pads
+# 9-16 do U1 (violacao de clearance); com rot 270 o norte recebe a aba VDD
+# (mesma rede de U1.9) e o sul fica livre (J1 DNP removido). Span de cobre
+# 29,31+2,59 = 31,90 mm ≤ Ø32; borda externa da aba a r=15,95.
+# NOTA FÍSICA: o bounding box do corpo (28,4×22) tem cantos a r≈17,97 —
+# "ultrapassam" o disco no papel; a cesta do 1060 é abaulada (H 5,51 mm com
+# pilha) e overhang sobre o circuito é prática padrão de suporte tipo cesta
+# (componentes ≤1 mm cabem sob ela). Courtyard do footprint enxugado para o
+# envelope dos pads (3 retângulos) por esse motivo.
+ROTATION = {
+    "BT1": 270.0,
+    "C5": 90.0,   # vertical: encaixa no corredor oeste entre C2 e U1
+}
+
 PLACEMENT = {
     "BT1": (0.0, 0.0),
-    "U1": (0.0, 10.8),
-    "ANT1": (11.0, 11.0),
-    "L1": (6.5, 11.0),
-    "C3": (7.8, 9.8),  # era (8.8,11.0): colidia com ANT1.1 (borda esq. x=8.95
-    # vs C3.2 borda dir. x=9.56). Em (7.8,11.0) a folga real é 0,39 mm (<0,5);
-    # em (7.8,9.8) sem colisão (folga 0,39 mm > clearance DRC 0,2 mm).
-    "X1": (-6.5, 11.0),
+    # U1 em dy=10.3: topo dos pads da linha superior (0,8 mm de altura) em
+    # 113,15 mm — folga 0,21 mm para a aba VDD do BT1 (y≥113,36). Em 10.8/10.4
+    # a folga era negativa/0,11 mm (clearance U1.9-16 × aba do BT1).
+    "U1": (0.0, 10.3),
+    # ANT1 recuada de (11,11) para (9.4,9.4): pad 2 chegava a r=16,6 (fora do
+    # disco r=16 após o fix do Edge.Cuts). Em (9.4,9.4) o canto extremo fica
+    # a r=15,48 (folga de borda 0,52 mm ≥ 0,5).
+    "ANT1": (9.4, 9.4),
+    "L1": (6.0, 11.0),
+    # C3 de (7.8,9.8) -> (6.0,8.5): em (7.8,9.8) o pad GND (C3.2) colidia com
+    # o pad 1 da ANT1 reposicionada (overlap x 107,35..108,56).
+    "C3": (6.0, 8.5),
+    # X1 de (−6.5,11) -> (−6.2,11): afasta X1.4 (NC) de C8.2 (gap 0,39 mm).
+    "X1": (-6.2, 11.0),
     "C1": (-4.5, 12.8),
     "C2": (-4.5, 9.2),
-    "C5": (0.5, 14.5),
-    "C6": (2.5, 14.5),
-    "C7": (-1.5, 14.5),
-    "C10": (4.5, 14.5),
-    "C4": (-8.5, 12.8),
-    "C8": (-8.5, 10.5),
-    "C9": (-8.5, 8.2),
-    "L2": (-3.5, 8.0),
-    "L3": (-5.7, 8.0),
+    # C5/C6/C7 saem de y=14.5 (a aba VDD do BT1 ocupa x −1,8..+1,8,
+    # y 13,36..15,95 — colidia com os três). C5 vai para o corredor oeste
+    # (junto de U1.1); C6/C7 para o corredor leste (x=5.5, deixando o
+    # corredor N-S x=104 livre sob a coluna direita do U1).
+    "C5": (-4.2, 10.6),
+    "C6": (7.0, 12.4),
+    "C7": (4.0, 14.4),
+    # C10 de (4.5,14.5) -> (4.0,13.5): pad 2 chegava a r=16,03 (fora do disco).
+    "C10": (4.5, 13.0),
+    # C4 de (−8.5,12.8) -> (−8.0,12.3): pad 1 chegava a r=16,05 (fora do disco).
+    "C4": (-6.8, 12.9),
+    "C8": (-8.9, 10.5),
+    "C9": (-10.5, 8.2),
+    # L2 de (−3.5,8) -> (−4.3,8): L2.2 (NET_DCC) colidia com U1.1 (overlap
+    # x 97,15..97,72). L3 de (−5.7,8) -> (−6.2,8): L3.2/L2.1 gap 0,05 mm.
+    "L2": (-5.4, 8.0),
+    "L3": (-8.0, 8.0),
     "R1": (-10.0, -10.0),
     "TP1": (-12.0, -8.0),
     "TP2": (-12.0, -4.0),
     "TP3": (-12.0, 0.0),
     "TP4": (-12.0, 4.0),
-    "J1": (0.0, -11.5),
+    # J1 REMOVIDO (DNP): o conceito de contato negativo no verso foi
+    # invalidado pelo Keystone 1060 (pad central + aba GND já cobrem o
+    # negativo). Pads sem rota.
     "SHLD1": (0.0, 0.0),
 }
 # Flip = footprint em B.Cu (place_footprint aplica fp.Flip quando layer="B.Cu").
 # SHLD1 no verso: o cobre Ø22 do ferrite em B.Cu com net GND funde com a zona
 # GND (mesma net) — em F.Cu ele cruzava trilhas/pads de sinais (shorting_items).
-FLIP_REFS = {"J1", "SHLD1"}
+FLIP_REFS = {"SHLD1"}
 # TAG1 NÃO vai no board: inlay NTAG213 é adesivo na cápsula.
 
 
@@ -204,7 +237,7 @@ _PAD_LAYER_NODE = {pcbnew.F_Cu: 0, pcbnew.B_Cu: 1}
 # segmento de 0,5 mm entre dois nós livres (≈ (step/2)²/(2·raio) ≈ 0,078 mm
 # para raio 0,4). 0,08 mantém livre o corredor de 1,0 mm entre trilhas
 # paralelas em linhas vizinhas da grade (0,4+0,08 = 0,48 < 0,50).
-_OBST_SAFETY_MM = 0.08
+_OBST_SAFETY_MM = 0.03
 
 # Todas as vias criadas (sinais + GND): [(x, y, net), ...]. Usadas como
 # obstáculo no roteamento (círculo raio 0,3 + clearance 0,2 = 0,5 mm) — mata
@@ -307,9 +340,10 @@ def build_obstacles(board, placed, net_name, routed_tracks,
                 d = _dist_point_rect(gx, gy, cx, cy, w, h, ang)
                 if d <= block:
                     obstacles.add((gx, gy, layer_node))
-                # via: cobre 0,3 + clearance 0,2 + margem (folga p/ máscara)
-                if d <= 0.3 + 0.2 + safety_mm + 0.25:
+                # via: cobre 0,3 + clearance 0,2 + margem mínima
+                if d <= 0.3 + 0.2 + safety_mm + 0.05:
                     via_obstacles.add((gx, gy))
+                    via_obstacles.add((gx, gy, layer_node))
 
     # --- trilhas de outras nets (w/2 + 0,2 + própria_largura/2) -------------
     for x1, y1, x2, y2, layer_node, tnet, tw in routed_tracks:
@@ -318,9 +352,9 @@ def build_obstacles(board, placed, net_name, routed_tracks,
         obstacles |= _inflate_segment(x1, y1, x2, y2, layer_node,
                                       tw / 2.0 + 0.2 + own_half
                                       + safety_mm)
-        via_obstacles |= _inflate_segment(x1, y1, x2, y2, layer_node,
-                                          0.3 + 0.2 + tw / 2.0
-                                          + safety_mm)
+        vobs = _inflate_segment(x1, y1, x2, y2, layer_node,
+                                0.3 + 0.2 + tw / 2.0 + safety_mm)
+        via_obstacles |= {(a, b) for a, b, _l in vobs}
 
     # --- vias de outras nets (raio 0,3 + 0,2 + própria/2, duas camadas) ------
     for vx, vy, vnet in _ALL_VIAS:
@@ -328,8 +362,8 @@ def build_obstacles(board, placed, net_name, routed_tracks,
             continue
         obstacles |= _inflate_point(vx, vy, 0, 0.5 + own_half + safety_mm)
         obstacles |= _inflate_point(vx, vy, 1, 0.5 + own_half + safety_mm)
-        via_obstacles |= _inflate_point(vx, vy, 0, 0.88)
-        via_obstacles |= _inflate_point(vx, vy, 1, 0.88)
+        via_obstacles |= {(a, b) for a, b, _l in
+                          _inflate_point(vx, vy, 0, 0.85)}
 
     # --- keepout da antena (ambas as camadas) --------------------------------
     for (gx, gy) in build_grid():
@@ -414,7 +448,13 @@ def astar_route(grid, obstacles, start, goal, step=0.5, via_obstacles=None,
         for nb in neighbors:
             if nb in obstacles or nb in closed:
                 continue
-            ng = g + (via_cost if nb[2] != layer else 1)
+            step_cost = via_cost if nb[2] != layer else 1
+            # meia-faixa (coord não inteira em mm): penalidade mínima —
+            # rotas longas desviam para faixas inteiras, preservando as
+            # meias-faixas para trilhas paralelas de outras redes.
+            if ((nb[0] - CENTER_X) % 1.0) or ((nb[1] - CENTER_Y) % 1.0):
+                step_cost += 0.15
+            ng = g + step_cost
             if ng < g_score.get(nb, float("inf")):
                 g_score[nb] = ng
                 came_from[nb] = current
@@ -431,6 +471,10 @@ def astar_route(grid, obstacles, start, goal, step=0.5, via_obstacles=None,
 # parseada (nada hardcoded por nome, exceto VDD_BAT, grupo por nome).
 # GND NÃO entra: fica para a zona de cobre, não para trilha.
 _ROUTE_GROUPS = [
+    # Bateria: por nome (trilha mais larga, 0,5 mm) — PRIMEIRA na ordem: é a
+    # rede de maior extensão (BT1→C4→C8→TP1→R1→U1) e, se roteada tarde,
+    # monopoliza os corredores norte/sul e starving todas as demais.
+    ((), frozenset(), "VDD_BAT"),
     # RF: U1.19 / C3 / L1 / ANT1  (NET_ANT, NET_RF)
     ((("U1", "19"),), frozenset({"C3", "L1", "ANT1"}), None),
     # Cristal: U1.23 / U1.24 / X1 / C1 / C2  (NET_XC1, NET_XC2)
@@ -440,8 +484,6 @@ _ROUTE_GROUPS = [
     # DEC: U1.1/C5, U1.21/C7, U1.22/C6  (NET_DEC1, NET_DEC2, NET_DEC3)
     ((("U1", "1"), ("U1", "21"), ("U1", "22")),
      frozenset({"C5", "C7", "C6"}), None),
-    # Bateria: por nome (trilha mais larga, 0,5 mm)
-    ((), frozenset(), "VDD_BAT"),
     # SWD: TP2/U1.18, TP3/U1.17  (NET_SWDIO, NET_SWDCLK)
     ((("U1", "18"), ("U1", "17")), frozenset({"TP2", "TP3"}), None),
     # RESET: R1/U1.16  (NET_RESET)
@@ -476,6 +518,9 @@ def _pad_node(fp, pin) -> tuple:
     layer_node = _PAD_LAYER_NODE.get(pad.GetLayer(), 0)
     x, y = bb.pad_position_mm(fp, pin)
     return (x, y, layer_node)
+
+
+_PLACED_CACHE = {}
 
 
 def _path_to_tracks(board, net_name, path, width_mm, routed_tracks,
@@ -515,12 +560,24 @@ def _path_to_tracks(board, net_name, path, width_mm, routed_tracks,
                 routed_tracks.append((px, py, gx, gy, pl, net_name, w_g))
     for (x1, y1, l1), (x2, y2, l2) in zip(path, path[1:]):
         if l1 != l2:
-            bb.add_via(board, net_name, x1, y1)
-            _ALL_VIAS.append((x1, y1, net_name))
+            if not any(vx == x1 and vy == y1 for vx, vy, _vn in _ALL_VIAS):
+                bb.add_via(board, net_name, x1, y1)
+                _ALL_VIAS.append((x1, y1, net_name))
             continue
+        w = width_mm
+        if _seg_clear_of_other_nets(_PLACED_CACHE, x1, y1, x2, y2, net_name,
+                                    routed_tracks, item_half=w / 2.0) is False:
+            for w_alt in (0.2,):
+                if w_alt >= w:
+                    continue
+                if _seg_clear_of_other_nets(_PLACED_CACHE, x1, y1, x2, y2,
+                                            net_name, routed_tracks,
+                                            item_half=w_alt / 2.0):
+                    w = w_alt
+                    break
         bb.add_track(board, net_name, x1, y1, x2, y2,
-                     layer=layer_name[l1], width_mm=width_mm)
-        routed_tracks.append((x1, y1, x2, y2, l1, net_name, width_mm))
+                     layer=layer_name[l1], width_mm=w)
+        routed_tracks.append((x1, y1, x2, y2, l1, net_name, w))
 
 
 def _ext_collides(placed, net_name, routed_tracks, sx, sy, node, width_mm,
@@ -557,12 +614,20 @@ def _free_anchor(grid, placed, net_name, routed_tracks, obstacles, pad_node,
     gx = round((sx - CENTER_X) / step) * step + CENTER_X
     gy = round((sy - CENTER_Y) / step) * step + CENTER_Y
     base = (round(gx, 6), round(gy, 6), sl)
+    # 2 anéis de candidatos: ±1 passo (9) e ±2 passos em cruz/diagonal —
+    # pads de QFN (0,8 mm de largura) "boxam" o nó snapped e o anel 1 fica
+    # todo bloqueado; o anel 2 alcança o corredor real (p.ex. x=103,5/104
+    # para a coluna direita do U1).
     cands = [base]
-    for dx in (-step, 0.0, step):
-        for dy in (-step, 0.0, step):
-            if dx == 0.0 and dy == 0.0:
-                continue
-            cands.append((round(base[0] + dx, 6), round(base[1] + dy, 6), sl))
+    for r in (1, 2, 3):
+        for dx in range(-r, r + 1):
+            for dy in range(-r, r + 1):
+                if dx == 0 and dy == 0:
+                    continue
+                if max(abs(dx), abs(dy)) != r:
+                    continue
+                cands.append((round(base[0] + dx * step, 6),
+                              round(base[1] + dy * step, 6), sl))
     livres = []
     for c in cands:
         if (c[0], c[1]) not in pts or c in obstacles:
@@ -576,9 +641,11 @@ def _free_anchor(grid, placed, net_name, routed_tracks, obstacles, pad_node,
 
 
 def _stub_width(placed, net_name, routed_tracks, sx, sy, node, width_mm) -> float:
-    """Largura da extensão reta pad→nó: width_mm; ou 0,2 mm (neck-down, p.ex.
-    VDD_BAT 0,5 mm entrando em pad de QFN pitch 0,5); ou None se nem 0,2 passa."""
-    if not _ext_collides(placed, net_name, routed_tracks, sx, sy, node, width_mm):
+    """Largura da extensão reta pad→nó: width_mm; ou neck-down 0,2 mm; ou
+    0,15 mm (último recurso — stubs diagonais curtos entre pads de QFN pitch
+    0,5 com pads de 0,8 mm de largura, p.ex. coluna direita do U1); ou None."""
+    if not _ext_collides(placed, net_name, routed_tracks, sx, sy, node,
+                         width_mm):
         return width_mm
     if width_mm > 0.2 and not _ext_collides(placed, net_name, routed_tracks,
                                             sx, sy, node, 0.2):
@@ -600,8 +667,27 @@ def _route_pair(board, placed, grid, net_name, width_mm, routed_tracks,
     obstacles, via_obstacles = build_obstacles(board, placed, net_name,
                                                routed_tracks,
                                                own_width_mm=width_mm)
-    path = astar_route(grid, obstacles, start, goal,
+    start_eff = start
+    goal_eff = goal
+    path = astar_route(grid, obstacles, start_eff, goal_eff,
                        via_obstacles=via_obstacles)
+    if path is None:
+        # pad inicial "boxado" (nó snapped cercado por pads vizinhos):
+        # ancora o início no nó de grade livre mais próximo e re-A*.
+        anchor = _free_anchor(grid, placed, net_name, routed_tracks,
+                              obstacles, start, width_mm)
+        if anchor is not None:
+            start_eff = anchor
+            path = astar_route(grid, obstacles, start_eff, goal_eff,
+                               via_obstacles=via_obstacles)
+    if path is None:
+        # pad final boxado: ancora o fim e re-A* (start_eff→anchor).
+        anchor = _free_anchor(grid, placed, net_name, routed_tracks,
+                              obstacles, goal, width_mm)
+        if anchor is not None:
+            goal_eff = anchor
+            path = astar_route(grid, obstacles, start_eff, goal_eff,
+                               via_obstacles=via_obstacles)
     if path is None:
         return None
     sx, sy, _sl = start
@@ -625,7 +711,7 @@ def _route_pair(board, placed, grid, net_name, width_mm, routed_tracks,
         anchor = _free_anchor(grid, placed, net_name, routed_tracks,
                               obstacles, goal, width_mm)
         if anchor is not None:
-            path2 = astar_route(grid, obstacles, start, anchor,
+            path2 = astar_route(grid, obstacles, start_eff, anchor,
                                 via_obstacles=via_obstacles)
             if path2 is not None:
                 w2 = _stub_width(placed, net_name, routed_tracks, gx, gy,
@@ -654,34 +740,23 @@ def route_all(board, placed, nets, grid, routed_tracks=None) -> tuple:
     pendencias = []
     selected = set()
 
-    # --- pré-pass VDD_BAT: pares da bateria roteados PRIMEIRO ----------------
-    # BT1.1→C4.1 e C4.1→C8.1 reservam o corredor da bateria antes das demais
-    # nets; os pares já roteados aqui são pulados no loop principal.
-    _BAT_FIRST = {("BT1", "1", "C4", "1"), ("C4", "1", "C8", "1")}
-    bat_net = "VDD_BAT"
-    if bat_net in nets:
-        width = 0.5
-        nodes = nets[bat_net]
-        pairs = [((r0, p0), (r1, p1)) for (r0, p0), (r1, p1) in zip(nodes, nodes[1:])]
-        pairs.sort(key=lambda pr: 0 if (pr[0][0], pr[0][1], pr[1][0], pr[1][1]) in _BAT_FIRST else 1)
-        for (r0, p0), (r1, p1) in pairs:
-            if r0 not in placed or r1 not in placed:
-                continue
-            start = _pad_node(placed[r0], p0)
-            goal = _pad_node(placed[r1], p1)
-            res = _route_pair(board, placed, grid, bat_net, width,
-                              routed_tracks, start, goal)
-            if res is None:
-                pendencias.append((bat_net, f"{r0}.{p0}", f"{r1}.{p1}"))
-                continue
-            path, w_s, w_g = res
-            _path_to_tracks(board, bat_net, path, width, routed_tracks,
-                            start_pad=start, goal_pad=goal,
-                            stub_start=w_s, stub_goal=w_g)
-        selected.add(bat_net)
-
     for pins, refs, name in _ROUTE_GROUPS:
-        for net_name in _nets_touching(nets, pins, refs, name):
+        group_nets = _nets_touching(nets, pins, refs, name)
+        # Redes que tocam os pinos da face SUL do U1 (linha inferior, y <
+        # centro) por último no grupo: elas dependem do corredor y≈107 e
+        # monopolizá-lo cedo starving as redes locais (L2_L3 etc.).
+        def _south_key(net_name):
+            u1y = bb.pad_position_mm(placed['U1'], '33')[1] if 'U1' in placed else 0.0
+            for ref, pin in nets.get(net_name, []):
+                if ref == 'U1':
+                    try:
+                        if bb.pad_position_mm(placed['U1'], pin)[1] < u1y:
+                            return 1
+                    except Exception:
+                        pass
+            return 0
+        group_nets.sort(key=_south_key)
+        for net_name in group_nets:
             if net_name in selected:
                 continue
             selected.add(net_name)
@@ -690,8 +765,6 @@ def route_all(board, placed, nets, grid, routed_tracks=None) -> tuple:
             for (r0, p0), (r1, p1) in zip(nodes, nodes[1:]):
                 if r0 not in placed or r1 not in placed:
                     continue  # ref fora do board (não deve ocorrer aqui)
-                if (r0, p0, r1, p1) in _BAT_FIRST:
-                    continue  # já roteado na pré-pass
                 start = _pad_node(placed[r0], p0)
                 goal = _pad_node(placed[r1], p1)
                 res = _route_pair(board, placed, grid, net_name, width,
@@ -714,7 +787,7 @@ def route_all(board, placed, nets, grid, routed_tracks=None) -> tuple:
 # corredores apertados). Via-obstáculos (0,88 / raio 0,5) NÃO afrouxam:
 # hole_clearance/clearance trilha×via são violações reais de DRC.
 _SECOND_PASS_VIA_COST = 100
-_SECOND_PASS_SAFETY_MM = 0.05
+_SECOND_PASS_SAFETY_MM = 0.02
 
 
 def _try_route(board, placed, grid, net_name, width_mm, routed_tracks,
@@ -772,6 +845,98 @@ def _try_route(board, placed, grid, net_name, width_mm, routed_tracks,
     return True
 
 
+def _bcu_via_anchor(placed, net_name, routed_tracks, obstacles, pad_node,
+                    width_mm, grid, step=0.5, max_r=2.5) -> tuple:
+    """Nó (x, y) para uma VIA de acesso em B.Cu ao pad (F.Cu) `pad_node`.
+
+    Procura (anéis 0,5..2,5 mm) um nó da grade onde:
+    - a via (cobre Ø0,6) respeita clearance F.Cu contra pads/trilhas/vias de
+      outras nets (_clear_of_other_nets, item_radius 0,3);
+    - o nó B.Cu (x, y, 1) está livre nos obstáculos;
+    - o stub reto pad→via (largura width_mm) não fere clearance
+      (_ext_collides).
+    Retorna (x, y) ou None.
+    """
+    sx, sy, _sl = pad_node
+    pts = {(round(x, 6), round(y, 6)) for (x, y) in grid}
+    # ancora a busca no NÓ DA GRADE mais próximo do pad (o pad em si pode
+    # estar fora da grade — ex.: pads de U1 em x=…,25/…,75)
+    bx = round((sx - CENTER_X) / step) * step + CENTER_X
+    by = round((sy - CENTER_Y) / step) * step + CENTER_Y
+    best = None
+    n = int(math.ceil(max_r / step))
+    for i in range(-n, n + 1):
+        for j in range(-n, n + 1):
+            gx = round(bx + i * step, 6)
+            gy = round(by + j * step, 6)
+            if (gx, gy) not in pts:
+                continue
+            if (gx, gy, 1) in obstacles:
+                continue
+            if not _clear_of_other_nets(placed, gx, gy, net_name,
+                                        routed_tracks, item_radius=0.3):
+                continue
+            if _ext_collides(placed, net_name, routed_tracks, sx, sy,
+                             (gx, gy, 0), width_mm, step):
+                continue
+            d = math.hypot(gx - sx, gy - sy)
+            if best is None or d < best[0]:
+                best = (d, gx, gy)
+    return None if best is None else (best[1], best[2])
+
+
+def _try_route_bcu(board, placed, grid, net_name, width_mm, routed_tracks,
+                   start, goal) -> bool:
+    """Terceira estratégia: via de acesso em B.Cu junto a cada pad + trecho
+    em B.Cu (o F.Cu sob o U1 está saturado por VDD_BAT 0,5 mm + malha GND
+    do die pad). True se trilhas/vias foram adicionadas."""
+    obstacles, via_obstacles = build_obstacles(board, placed, net_name,
+                                               routed_tracks,
+                                               own_width_mm=width_mm,
+                                               safety_mm=_SECOND_PASS_SAFETY_MM)
+    for vx, vy, _vnet in _ALL_VIAS:
+        via_obstacles |= {(gx, gy) for (gx, gy) in _grid_pts()
+                          if math.hypot(gx - vx, gy - vy) <= 0.55 + 1e-9}
+    via_obstacles = {(p[0], p[1]) for p in via_obstacles}
+    a = _bcu_via_anchor(placed, net_name, routed_tracks, obstacles,
+                        start, width_mm, grid)
+    b = _bcu_via_anchor(placed, net_name, routed_tracks, obstacles,
+                        goal, width_mm, grid)
+    if a is None or b is None:
+        return False
+    path = astar_route(grid, obstacles, (a[0], a[1], 1), (b[0], b[1], 1),
+                       via_obstacles=via_obstacles,
+                       via_cost=_SECOND_PASS_VIA_COST)
+    if path is None:
+        return False
+    sx, sy, _sl = start
+    w_a = width_mm
+    if (_ext_collides(placed, net_name, routed_tracks, sx, sy,
+                      (a[0], a[1], 0), width_mm) and width_mm > 0.2
+            and not _ext_collides(placed, net_name, routed_tracks, sx, sy,
+                                  (a[0], a[1], 0), 0.2)):
+        w_a = 0.2
+    bb.add_track(board, net_name, sx, sy, a[0], a[1], layer="F.Cu",
+                 width_mm=w_a)
+    routed_tracks.append((sx, sy, a[0], a[1], 0, net_name, w_a))
+    bb.add_via(board, net_name, a[0], a[1])
+    _ALL_VIAS.append((a[0], a[1], net_name))
+    gx, gy, _gl = goal
+    w_b = width_mm
+    if (_ext_collides(placed, net_name, routed_tracks, gx, gy,
+                      (b[0], b[1], 0), width_mm) and width_mm > 0.2
+            and not _ext_collides(placed, net_name, routed_tracks, gx, gy,
+                                  (b[0], b[1], 0), 0.2)):
+        w_b = 0.2
+    bb.add_track(board, net_name, b[0], b[1], gx, gy, layer="F.Cu",
+                 width_mm=w_b)
+    routed_tracks.append((b[0], b[1], gx, gy, 0, net_name, w_b))
+    bb.add_via(board, net_name, b[0], b[1])
+    _ALL_VIAS.append((b[0], b[1], net_name))
+    _path_to_tracks(board, net_name, path, width_mm, routed_tracks)
+    return True
+
+
 def route_pending_second_pass(board, placed, grid, routed_tracks,
                               pendencias) -> tuple:
     """SEGUNDA PASSADA de roteamento sobre os pares pendentes da 1ª passada.
@@ -804,6 +969,9 @@ def route_pending_second_pass(board, placed, grid, routed_tracks,
                             routed_tracks, goal, start,
                             _SECOND_PASS_VIA_COST, _SECOND_PASS_SAFETY_MM,
                             force_start_layer=1)
+        if not ok:
+            ok = _try_route_bcu(board, placed, grid, net_name, width,
+                                routed_tracks, start, goal)
         if ok:
             n_ok += 1
         else:
@@ -817,11 +985,11 @@ def route_pending_second_pass(board, placed, grid, routed_tracks,
 # Refs com pads GND elegíveis para via de costura (item b). U1 só nos pinos
 # 20/29 (o die pad U1.33 recebe a malha 3x3 do item a). R1 NÃO entra: vai em
 # VDD_BAT/RESET — o filtro por netname já o exclui, mas fica explícito aqui.
-_GND_STITCH_REFS = {"U1", "SHLD1", "J1", "TP4"} | {f"C{i}" for i in range(1, 11)}
+_GND_STITCH_REFS = {"U1", "SHLD1", "BT1", "TP4"} | {f"C{i}" for i in range(1, 11)}
 _GND_STITCH_U1_PINS = {"20", "29"}
 _GND_CLEAR_MM = 0.3          # (doc) folga mínima via x trilhas/pads de outras nets
 _GND_STITCH_TRACK_MM = 0.3   # largura da trilha GND pad→via de costura
-_GND_STITCH_OFFSET_MM = 0.8  # distância da via de costura ao pad (item b)
+_GND_STITCH_OFFSETS_MM = (0.8, 0.6, 0.9)  # distância via↔pad (item b)
 _DIE_MESH_STEP_MM = 1.2      # passo da malha 3x3 sob o die pad (item a)
 
 
@@ -1043,31 +1211,49 @@ def add_ground(board, placed, routed_tracks, grid) -> tuple:
                 continue  # já em B.Cu: a zona alcança o pad
             px, py = pad_abs_pos(fp, pin)
             base = math.atan2(py - CENTER_Y, px - CENTER_X)
-            for k in range(4):
-                ang = base + k * math.pi / 2.0
-                vx = px + _GND_STITCH_OFFSET_MM * math.cos(ang)
-                vy = py + _GND_STITCH_OFFSET_MM * math.sin(ang)
-                # borda: via + trilha precisam de copper_edge_clearance 0,5 mm
-                # (raio útil 16 - 0,5 - via 0,3 ≈ 15,2; usa 15,0)
-                if math.hypot(vx - CENTER_X, vy - CENTER_Y) > 15.0:
-                    continue
-                if not _clear_of_other_nets(placed, vx, vy, gnd, routed_tracks):
-                    continue
-                # trilha GND 0,3 mm pad→via: conexão pad↔via↔zona
-                if not _seg_clear_of_other_nets(placed, px, py, vx, vy, gnd,
-                                                routed_tracks, item_half=0.15):
-                    continue
-                bb.add_track(board, gnd, px, py, vx, vy, layer="F.Cu",
-                             width_mm=_GND_STITCH_TRACK_MM)
-                routed_tracks.append((px, py, vx, vy, 0, gnd,
-                                      _GND_STITCH_TRACK_MM))
-                bb.add_via(board, gnd, vx, vy)
-                _ALL_VIAS.append((vx, vy, gnd))
-                n_vias += 1
-                break
-            else:
+            placed_stitch = False
+            # 8 direções (radial + 45°) × 3 offsets (0,6–0,9 mm): vence a
+            # primeira combinação livre (via ≥ 0,5 mm de trilhas/pads de
+            # outras nets E trilha GND 0,3 mm pad→via sem colisão).
+            for k in range(8):
+                ang = base + k * math.pi / 4.0
+                for off in _GND_STITCH_OFFSETS_MM:
+                    vx = px + off * math.cos(ang)
+                    vy = py + off * math.sin(ang)
+                    # borda: via + trilha precisam de copper_edge_clearance
+                    # 0,5 mm (raio útil 16 - 0,5 - via 0,3 ≈ 15,2; usa 15,0)
+                    if math.hypot(vx - CENTER_X, vy - CENTER_Y) > 15.0:
+                        continue
+                    # furos co-locados: via nova a ≤0,55 mm de via existente
+                    # (qualquer net, mesma regra hole-to-hole da 2ª passada) —
+                    # sem isto BT1.2 e SHLD1.1 (pads concêntricos em (100,100))
+                    # elegem o mesmo ponto (100.8,100) -> holes_co_located.
+                    if any(math.hypot(vx - ex, vy - ey) <= 0.55 + 1e-9
+                           for ex, ey, _vn in _ALL_VIAS):
+                        continue
+                    if not _clear_of_other_nets(placed, vx, vy, gnd,
+                                                routed_tracks):
+                        continue
+                    # trilha GND 0,3 mm pad→via: conexão pad↔via↔zona
+                    if not _seg_clear_of_other_nets(placed, px, py, vx, vy,
+                                                    gnd, routed_tracks,
+                                                    item_half=0.15):
+                        continue
+                    bb.add_track(board, gnd, px, py, vx, vy, layer="F.Cu",
+                                 width_mm=_GND_STITCH_TRACK_MM)
+                    routed_tracks.append((px, py, vx, vy, 0, gnd,
+                                          _GND_STITCH_TRACK_MM))
+                    bb.add_via(board, gnd, vx, vy)
+                    _ALL_VIAS.append((vx, vy, gnd))
+                    n_vias += 1
+                    placed_stitch = True
+                    break
+                if placed_stitch:
+                    break
+            if not placed_stitch:
                 pendencias.append((f"{ref}.{pin}",
-                                   "nenhuma das 4 direções livre (via+trilha)"))
+                                   "nenhuma das 8 direções x 3 offsets livre "
+                                   "(via+trilha)"))
 
     # --- (b) zona GND em B.Cu ------------------------------------------------
     # r=15,5 (não 16,0): a zona encostada na borda gerava 11 violações de
@@ -1110,14 +1296,17 @@ def build_board():
             break
 
     placed = {}
+    _PLACED_CACHE.clear()
     for ref in sorted(PLACEMENT):
         if ref not in fp_map:
             raise RuntimeError(f"ref {ref!r} da tabela de placement sem Footprint no esquemático")
         dx, dy = PLACEMENT[ref]
         layer = "B.Cu" if ref in FLIP_REFS else "F.Cu"
         placed[ref] = bb.place_footprint(
-            board, fp_map[ref], CENTER_X + dx, CENTER_Y + dy, ref=ref, layer=layer
+            board, fp_map[ref], CENTER_X + dx, CENTER_Y + dy, ref=ref,
+            layer=layer, rot_deg=ROTATION.get(ref, 0.0)
         )
+        _PLACED_CACHE[ref] = placed[ref]
 
     # --- Normalização de camada dos pads de footprints em B.Cu --------------
     # KiCad 10 (FootprintLoad): footprint nativo B.Cu carrega com fp em B_Cu
@@ -1135,6 +1324,37 @@ def build_board():
                     ls.AddLayer(lay)
                 pad.SetLayerSet(ls)
 
+    # --- Courtyard do U1 enxugado (margem 0,25 -> 0,15) ----------------------
+    # O QFN-32-1EP padrão KiCad tem courtyard ±3,1 mm; com a aba do BT1 a
+    # 0,21 mm dos pads superiores, os courtyards se sobrepõem (falso
+    # positivo — a restrição real é pad a pad, já verificada). Encolhe o
+    # octógono 0,15 mm em direção ao centro (margem 0,15 sobre os pads).
+    if "U1" in placed:
+        cx_u, cy_u = CENTER_X, CENTER_Y + PLACEMENT["U1"][1]
+        for d in placed["U1"].GraphicalItems():
+            if d.GetClass() == "PCB_SHAPE" and d.GetLayer() == pcbnew.F_CrtYd:
+                sxp, syp = d.GetStart().x / 1e6, d.GetStart().y / 1e6
+                exp_, eyp = d.GetEnd().x / 1e6, d.GetEnd().y / 1e6
+                def _shrink(v, c):
+                    return v + (-0.15 if v >= c else 0.15)
+                d.SetStart(pcbnew.VECTOR2I(bb._nm(_shrink(sxp := sxp, cx_u) if False else _shrink(sxp, cx_u)),
+                                           bb._nm(_shrink(syp := syp, cy_u) if False else _shrink(syp, cy_u))))
+                d.SetEnd(pcbnew.VECTOR2I(bb._nm(_shrink(exp_, cx_u)),
+                                         bb._nm(_shrink(eyp := eyp, cy_u) if False else _shrink(eyp, cy_u))))
+
+    # --- Courtyard do C10 enxugado (0603: margem 0,33 -> 0,15 em x) ---------
+    if "C10" in placed:
+        cx10, cy10 = (CENTER_X + PLACEMENT["C10"][0],
+                      CENTER_Y + PLACEMENT["C10"][1])
+        for d in placed["C10"].GraphicalItems():
+            if d.GetClass() == "PCB_SHAPE" and d.GetLayer() == pcbnew.F_CrtYd:
+                sxp, syp = d.GetStart().x / 1e6, d.GetStart().y / 1e6
+                exp_, eyp = d.GetEnd().x / 1e6, d.GetEnd().y / 1e6
+                d.SetStart(pcbnew.VECTOR2I(bb._nm(sxp + (-0.18 if sxp >= cx10 else 0.18)),
+                                           bb._nm(syp)))
+                d.SetEnd(pcbnew.VECTOR2I(bb._nm(exp_ + (-0.18 if exp_ >= cx10 else 0.18)),
+                                         bb._nm(eyp)))
+
     # --- Atribuição de nets (parse da netlist exportada do esquemático) ----
     # parse_netlist já descarta 'unconnected-...'; refs fora do board
     # (ex.: TAG1, inlay adesivo) são pulados.
@@ -1146,6 +1366,29 @@ def build_board():
                 continue
             bb.assign_pad_net(placed[ref], pin, board, net_name)
             nets_assigned += 1
+
+    # --- BT1 (Keystone 1060): polaridade conforme drawing 1060 rev C ---------
+    # Pad 1 (aba +14,655) = VDD_BAT (positivo — vem da netlist, pino VDD do
+    # símbolo). Pads 2 (central 11×7,01) e 3 (aba −14,655) = GND/negativo:
+    # o símbolo só expõe o pino 2 (e a netlist o marca unconnected), e o pad 3
+    # não existe no símbolo — amarrados aqui, no PCB, como manda o drawing
+    # ("center pad and one end tab are the negative terminal").
+    if "BT1" in placed:
+        for pin in ("2", "3"):
+            bb.assign_pad_net(placed["BT1"], pin, board, "GND")
+            nets_assigned += 1
+
+    # --- Assert: raio do Edge.Cuts = 16,000 mm (disco Ø32) -------------------
+    for d in board.GetDrawings():
+        if (d.GetLayer() == pcbnew.Edge_Cuts
+                and d.GetShape() == pcbnew.SHAPE_T_CIRCLE):
+            c, e = d.GetCenter(), d.GetEnd()
+            r = math.hypot(bb._mm(e.x) - bb._mm(c.x),
+                           bb._mm(e.y) - bb._mm(c.y))
+            assert abs(r - 16.0) < 1e-6, f"Edge.Cuts raio {r} != 16.0"
+            break
+    else:
+        raise RuntimeError("Edge.Cuts circular não encontrado")
 
     return board, placed, nets_assigned
 

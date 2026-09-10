@@ -144,7 +144,7 @@
       (at 0 0 0)
       (effects (font (size 1.27 1.27)) (justify left) (hide yes))
     )
-    (property "Description" "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1059 positive holder"
+    (property "Description" "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1060 positive end tab"
       (at 0 0 0)
       (effects (font (size 1.27 1.27)) (justify left) (hide yes))
     )
@@ -175,7 +175,7 @@
     )
     (embedded_fonts no)
   )
-  (symbol "Keystone_1059"
+  (symbol "Keystone_1060"
     (pin_numbers (hide yes))
     (pin_names (offset 0) (hide yes))
     (exclude_from_sim no)
@@ -187,46 +187,52 @@
       (at 0 7.62 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "Keystone_1059"
+    (property "Value" "Keystone_1060"
       (at 0 -7.62 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "nibas_wristband:Keystone_1059_CR2032_SMT"
+    (property "Footprint" "nibas_wristband:Keystone_1060_CR2032_SMT"
       (at 0 0 0)
       (effects (font (size 1.27 1.27)) (justify left) (hide yes))
     )
-    (property "Datasheet" "http://www.keyelco.com/product.cfm/THM-20mm-Holders-All-sizes/1059/product_id/725"
+    (property "Datasheet" "https://www.keyelco.com/product-pdf.cfm?p=726"
       (at 0 0 0)
       (effects (font (size 1.27 1.27)) (justify left) (hide yes))
     )
-    (property "Description" "Keystone 1059 SMT coin cell holder for CR2032/CR2025, positive contact only (negative via J1). UNVERIFIED dims."
+    (property "Description" "Keystone 1060 SMT (Vibra-Fit) coin cell holder for CR2032/CR2025. Dims verified per official Keystone drawing 1060 rev C (keyelco.com/product-pdf.cfm?p=726). Pin 1 = positive end tab; pin 2 = negative (center contact + second end tab, tied together on PCB). Battery inserts with + face up."
       (at 0 0 0)
       (effects (font (size 1.27 1.27)) (justify left) (hide yes))
     )
-    (property "ki_keywords" "coin cell holder CR2032 SMT Keystone 1059"
+    (property "ki_keywords" "coin cell holder CR2032 SMT Keystone 1060"
       (at 0 0 0)
       (effects (font (size 1.27 1.27)) (justify left) (hide yes))
     )
-    (property "ki_fp_filters" "Keystone_1059*"
+    (property "ki_fp_filters" "Keystone_1060*"
       (at 0 0 0)
       (effects (font (size 1.27 1.27)) (justify left) (hide yes))
     )
-    (symbol "Keystone_1059_0_1"
+    (symbol "Keystone_1060_0_1"
       (rectangle
         (start -7.62 -5.08)
         (end 7.62 5.08)
         (stroke (width 0.254) (type default))
         (fill (type none))
       )
-      (text "+" (at 0 0 0) (effects (font (size 1.27 1.27))))
-      (text "UNVERIFIED" (at 0 -6.35 0) (effects (font (size 1.016 1.016))))
+      (text "+" (at 2.54 1.905 0) (effects (font (size 1.27 1.27))))
+      (text "-" (at 2.54 -1.905 0) (effects (font (size 1.27 1.27))))
     )
-    (symbol "Keystone_1059_1_1"
+    (symbol "Keystone_1060_1_1"
       (pin power_in line
         (at 0 5.08 90)
         (length 2.54)
         (name "VDD")
         (number "1")
+      )
+      (pin power_in line
+        (at 0 -5.08 270)
+        (length 2.54)
+        (name "GND")
+        (number "2")
       )
     )
     (embedded_fonts no)

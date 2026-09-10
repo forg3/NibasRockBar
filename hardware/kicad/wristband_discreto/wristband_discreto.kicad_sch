@@ -2093,7 +2093,7 @@
 		)
 		(embedded_fonts no)
 	)
-(symbol "nibas_wristband:Keystone_1059"
+(symbol "nibas_wristband:Keystone_1060"
 		(pin_numbers
 			(hide yes)
 		)
@@ -2117,7 +2117,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Keystone_1059"
+		(property "Value" "Keystone_1060"
 			(at 0 -7.62 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2128,7 +2128,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "nibas_wristband:Keystone_1059_CR2032_SMT"
+		(property "Footprint" "nibas_wristband:Keystone_1060_CR2032_SMT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2140,7 +2140,7 @@
 				(justify left)
 			)
 		)
-		(property "Datasheet" "http://www.keyelco.com/product.cfm/THM-20mm-Holders-All-sizes/1059/product_id/725"
+		(property "Datasheet" "https://www.keyelco.com/product-pdf.cfm?p=726"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2152,7 +2152,7 @@
 				(justify left)
 			)
 		)
-		(property "Description" "Keystone 1059 SMT coin cell holder for CR2032/CR2025, positive contact only (negative via J1). UNVERIFIED dims."
+		(property "Description" "Keystone 1060 SMT (Vibra-Fit) coin cell holder for CR2032/CR2025. Dims verified per official Keystone drawing 1060 rev C (keyelco.com/product-pdf.cfm?p=726). Pin 1 = positive end tab; pin 2 = negative (center contact + second end tab, tied together on PCB). Battery inserts with + face up."
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2164,7 +2164,7 @@
 				(justify left)
 			)
 		)
-		(property "ki_keywords" "coin cell holder CR2032 SMT Keystone 1059"
+		(property "ki_keywords" "coin cell holder CR2032 SMT Keystone 1060"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2175,7 +2175,7 @@
 				)
 			)
 		)
-		(property "ki_fp_filters" "Keystone_1059*"
+		(property "ki_fp_filters" "Keystone_1060*"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2186,7 +2186,7 @@
 				)
 			)
 		)
-		(symbol "Keystone_1059_0_1"
+		(symbol "Keystone_1060_0_1"
 			(rectangle
 				(start -7.62 -5.08)
 				(end 7.62 5.08)
@@ -2199,7 +2199,7 @@
 				)
 			)
 			)
-		(symbol "Keystone_1059_1_1"
+		(symbol "Keystone_1060_1_1"
 			(pin power_in line
 				(at 0 5.08 90)
 				(length 2.54)
@@ -2211,6 +2211,24 @@
 					)
 				)
 				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 0 -5.08 270)
+				(length 2.54)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -2280,7 +2298,7 @@
 				(justify left)
 			)
 		)
-		(property "Description" "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1059 positive holder"
+		(property "Description" "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1060 positive end tab"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2692,7 +2710,7 @@
     )
   )
   (symbol
-    (lib_id "nibas_wristband:Keystone_1059")
+    (lib_id "nibas_wristband:Keystone_1060")
     (at 63.5 63.5 0)
     (unit 1)
     (exclude_from_sim no)
@@ -2704,10 +2722,10 @@
     (property "Reference" "BT1" (at 71.12 57.15 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "Keystone_1059" (at 71.12 74.93 0)
+    (property "Value" "Keystone_1060" (at 71.12 74.93 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "nibas_wristband:Keystone_1059_CR2032_SMT" (at 63.5 63.5 0)
+    (property "Footprint" "nibas_wristband:Keystone_1060_CR2032_SMT" (at 63.5 63.5 0)
       (effects (font (size 1.27 1.27)) (justify left) (hide yes))
     )
     (property "Datasheet" "" (at 63.5 63.5 0)
@@ -2717,6 +2735,7 @@
       (effects (font (size 1.27 1.27)) (justify left) (hide yes))
     )
     (pin "1" (uuid "e53b90fa-e09e-4e98-aa46-589e4e3b08ff"))
+    (pin "2" (uuid "98ba1a2f-d7f0-4563-b03d-79369188c779"))
     (instances
       (project ""
         (path "/467e13de-433b-47b3-a8c5-5a5cfd7da1ca"
@@ -2801,9 +2820,9 @@
     (at 63.5 96.52 0)
     (unit 1)
     (exclude_from_sim no)
-    (in_bom yes)
+    (in_bom no)
     (on_board yes)
-    (dnp no)
+    (dnp yes)
     (fields_autoplaced yes)
     (uuid "2f54eefd-1cbe-4490-8574-9b266cb67c97")
     (property "Reference" "J1" (at 55.88 92.71 0)
@@ -4707,6 +4726,47 @@
     (exclude_from_sim no)
     (at 25.4 281.94 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid "90c6952f-fde0-4871-a325-5c14a35ef02b")
+    (uuid "90c6952f-fde0-4899-b861-8bfa18def02b")
   )
+  (symbol
+    (lib_id "power:GND")
+    (at 63.5 81.28 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid "e5bf943a-8ae1-43de-9caa-f0e24ac86b34")
+    (property "Reference" "#PWR0115" (at 63.5 76.2 0)
+      (effects (font (size 1.27 1.27)) (justify left) (hide yes))
+    )
+    (property "Value" "GND" (at 63.5 85.09 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "" (at 63.5 81.28 0)
+      (effects (font (size 1.27 1.27)) (justify left) (hide yes))
+    )
+    (property "Datasheet" "" (at 63.5 81.28 0)
+      (effects (font (size 1.27 1.27)) (justify left) (hide yes))
+    )
+    (property "Description" "" (at 63.5 81.28 0)
+      (effects (font (size 1.27 1.27)) (justify left) (hide yes))
+    )
+    (pin "1" (uuid "d569fc10-df94-4bb5-8f3b-9b690225fc46"))
+    (instances
+      (project ""
+        (path "/467e13de-433b-47b3-a8c5-5a5cfd7da1ca"
+          (reference "#PWR0115")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts (xy 63.5 68.58) (xy 63.5 81.28))
+    (stroke (width 0) (type default))
+    (uuid "b7515f3f-22dc-46aa-9e39-63dea7bb1187")
+  )
+)
 )

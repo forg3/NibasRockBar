@@ -302,7 +302,7 @@
     (uuid "01513233-37d8-43a6-97fe-7f8939a1e18b")
     (property "Reference" "U1" (at 177.8 124.46000000000001 0) (effects (font (size 1.27 1.27)) (justify left)))
     (property "Value" "ESP32-DevKitC-32E" (at 177.8 181.61 0) (effects (font (size 1.27 1.27)) (justify left)))
-    (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_2x19_P2.54mm_Vertical" (at 177.8 162.56 0) (effects (font (size 1.27 1.27)) (justify left)) (hide yes))
+    (property "Footprint" "nibas_gateway:ESP32-DevKitC-32E_Carrier" (at 177.8 162.56 0) (effects (font (size 1.27 1.27)) (justify left)) (hide yes))
     (property "Datasheet" "https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32/esp32-devkitc/user_guide.html" (at 177.8 165.1 0) (effects (font (size 1.27 1.27)) (justify left)) (hide yes))
     (pin "J2-1" (uuid "fe74f072-8436-4983-8763-5dc114baa042"))
     (pin "J2-2" (uuid "1d9b77db-a30c-45bb-b747-d4eb7c211872"))

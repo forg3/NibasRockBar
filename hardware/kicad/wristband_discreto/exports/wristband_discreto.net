@@ -2,7 +2,7 @@
 	(version "E")
 	(design
 		(source "/home/forg3/projetos/NibasRockBar/hardware/kicad/wristband_discreto/wristband_discreto.kicad_sch")
-		(date "2026-09-09T14:54:16")
+		(date "2026-09-10T14:59:06")
 		(tool "Eeschema 10.0.6-1.fc44")
 		(sheet
 			(number "1")
@@ -106,12 +106,12 @@
 		)
 		(comp
 			(ref "BT1")
-			(value "Keystone_1059")
-			(footprint "nibas_wristband:Keystone_1059_CR2032_SMT")
+			(value "Keystone_1060")
+			(footprint "nibas_wristband:Keystone_1060_CR2032_SMT")
 			(description "Suporte CR2032 polo positivo (negativo via J1)")
 			(fields
 				(field
-					(name "Footprint") "nibas_wristband:Keystone_1059_CR2032_SMT")
+					(name "Footprint") "nibas_wristband:Keystone_1060_CR2032_SMT")
 				(field
 					(name "Datasheet")
 				)
@@ -120,8 +120,8 @@
 			)
 			(libsource
 				(lib "nibas_wristband")
-				(part "Keystone_1059")
-				(description "Keystone 1059 SMT coin cell holder for CR2032/CR2025, positive contact only (negative via J1). UNVERIFIED dims.")
+				(part "Keystone_1060")
+				(description "Keystone 1060 SMT (Vibra-Fit) coin cell holder for CR2032/CR2025. Dims verified per official Keystone drawing 1060 rev C (keyelco.com/product-pdf.cfm?p=726). Pin 1 = positive end tab; pin 2 = negative (center contact + second end tab, tied together on PCB). Battery inserts with + face up.")
 			)
 			(property
 				(name "Sheetname")
@@ -133,11 +133,11 @@
 			)
 			(property
 				(name "ki_keywords")
-				(value "coin cell holder CR2032 SMT Keystone 1059")
+				(value "coin cell holder CR2032 SMT Keystone 1060")
 			)
 			(property
 				(name "ki_fp_filters")
-				(value "Keystone_1059*")
+				(value "Keystone_1060*")
 			)
 			(sheetpath
 				(names "/")
@@ -150,6 +150,9 @@
 					(pins
 						(pin
 							(num "1")
+						)
+						(pin
+							(num "2")
 						)
 					)
 				)
@@ -715,7 +718,7 @@
 			(libsource
 				(lib "nibas_wristband")
 				(part "J1_Battery_Negative")
-				(description "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1059 positive holder")
+				(description "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1060 positive end tab")
 			)
 			(property
 				(name "Sheetname")
@@ -724,6 +727,12 @@
 			(property
 				(name "Sheetfile")
 				(value "wristband_discreto.kicad_sch")
+			)
+			(property
+				(name "exclude_from_bom")
+			)
+			(property
+				(name "dnp")
 			)
 			(property
 				(name "ki_keywords")
@@ -1873,7 +1882,7 @@
 		(libpart
 			(lib "nibas_wristband")
 			(part "J1_Battery_Negative")
-			(description "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1059 positive holder")
+			(description "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1060 positive end tab")
 			(docs "https://energy.panasonic.com/dam/master/pdf/en/datasheet/lithium/CR2032_Datasheet_EN.pdf")
 			(footprints
 				(fp "Battery_Contact*")
@@ -1888,7 +1897,7 @@
 				(field
 					(name "Datasheet") "https://energy.panasonic.com/dam/master/pdf/en/datasheet/lithium/CR2032_Datasheet_EN.pdf")
 				(field
-					(name "Description") "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1059 positive holder")
+					(name "Description") "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1060 positive end tab")
 			)
 			(pins
 				(pin
@@ -1900,28 +1909,33 @@
 		)
 		(libpart
 			(lib "nibas_wristband")
-			(part "Keystone_1059")
-			(description "Keystone 1059 SMT coin cell holder for CR2032/CR2025, positive contact only (negative via J1). UNVERIFIED dims.")
-			(docs "http://www.keyelco.com/product.cfm/THM-20mm-Holders-All-sizes/1059/product_id/725")
+			(part "Keystone_1060")
+			(description "Keystone 1060 SMT (Vibra-Fit) coin cell holder for CR2032/CR2025. Dims verified per official Keystone drawing 1060 rev C (keyelco.com/product-pdf.cfm?p=726). Pin 1 = positive end tab; pin 2 = negative (center contact + second end tab, tied together on PCB). Battery inserts with + face up.")
+			(docs "https://www.keyelco.com/product-pdf.cfm?p=726")
 			(footprints
-				(fp "Keystone_1059*")
+				(fp "Keystone_1060*")
 			)
 			(fields
 				(field
 					(name "Reference") "BT1")
 				(field
-					(name "Value") "Keystone_1059")
+					(name "Value") "Keystone_1060")
 				(field
-					(name "Footprint") "nibas_wristband:Keystone_1059_CR2032_SMT")
+					(name "Footprint") "nibas_wristband:Keystone_1060_CR2032_SMT")
 				(field
-					(name "Datasheet") "http://www.keyelco.com/product.cfm/THM-20mm-Holders-All-sizes/1059/product_id/725")
+					(name "Datasheet") "https://www.keyelco.com/product-pdf.cfm?p=726")
 				(field
-					(name "Description") "Keystone 1059 SMT coin cell holder for CR2032/CR2025, positive contact only (negative via J1). UNVERIFIED dims.")
+					(name "Description") "Keystone 1060 SMT (Vibra-Fit) coin cell holder for CR2032/CR2025. Dims verified per official Keystone drawing 1060 rev C (keyelco.com/product-pdf.cfm?p=726). Pin 1 = positive end tab; pin 2 = negative (center contact + second end tab, tied together on PCB). Battery inserts with + face up.")
 			)
 			(pins
 				(pin
 					(num "1")
 					(name "VDD")
+					(type "power_in")
+				)
+				(pin
+					(num "2")
+					(name "GND")
 					(type "power_in")
 				)
 			)
@@ -2253,6 +2267,12 @@
 				(pin "2")
 				(pinfunction "PCB_Trace_2")
 				(pintype "passive")
+			)
+			(node
+				(ref "BT1")
+				(pin "2")
+				(pinfunction "GND_2")
+				(pintype "power_in")
 			)
 			(node
 				(ref "C1")

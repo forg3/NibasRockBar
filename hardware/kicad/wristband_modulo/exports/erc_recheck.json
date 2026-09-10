@@ -1,0 +1,128 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-09-10T14:59:01",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.6",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/f58b7db1-5022-4b18-8dcd-37416f96cc5e",
+            "violations": [
+                {
+                    "description": "A configuração atual não inclui a biblioteca de footprints 'nibas_wristband'",
+                    "items": [
+                        {
+                            "description": "Símbolo BT1 [Keystone_1060]",
+                            "pos": {
+                                "x": 0.5969,
+                                "y": 0.5969
+                            },
+                            "uuid": "16a5c21a-f62f-4af6-bd24-64abbba841cc"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "A configuração atual não inclui a biblioteca de footprints 'nibas_wristband'",
+                    "items": [
+                        {
+                            "description": "Símbolo J1 [J1_Battery_Negative]",
+                            "pos": {
+                                "x": 0.5969,
+                                "y": 1.2954
+                            },
+                            "uuid": "85402575-863b-42b2-b03c-95593331bfe3"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "A configuração atual não inclui a biblioteca de footprints 'nibas_wristband'",
+                    "items": [
+                        {
+                            "description": "Símbolo U1 [BM832A]",
+                            "pos": {
+                                "x": 1.9939,
+                                "y": 1.2065
+                            },
+                            "uuid": "1101f1e8-1a66-4eea-a4e6-8d5791fb5b36"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "O símbolo BM832A não foi encontrado na biblioteca 'nibas_wristband'",
+                    "items": [
+                        {
+                            "description": "Símbolo U1 [BM832A]",
+                            "pos": {
+                                "x": 1.9939,
+                                "y": 1.2065
+                            },
+                            "uuid": "1101f1e8-1a66-4eea-a4e6-8d5791fb5b36"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_issues"
+                },
+                {
+                    "description": "A configuração atual não inclui a biblioteca de footprints 'nibas_wristband'",
+                    "items": [
+                        {
+                            "description": "Símbolo TAG1 [NTAG213_Inlay]",
+                            "pos": {
+                                "x": 2.9972,
+                                "y": 1.2065
+                            },
+                            "uuid": "43cd962f-d1e3-4658-9b66-f18303c9bb1b"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "A configuração atual não inclui a biblioteca de footprints 'nibas_wristband'",
+                    "items": [
+                        {
+                            "description": "Símbolo SHLD1 [SHLD1_Ferrite_Shield]",
+                            "pos": {
+                                "x": 2.9972,
+                                "y": 1.7018
+                            },
+                            "uuid": "e645e4a2-a6e8-411b-b366-2ac31470edf2"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                }
+            ]
+        }
+    ],
+    "source": "wristband_modulo.kicad_sch"
+}

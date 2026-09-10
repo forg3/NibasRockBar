@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-09-09T18:45:40",
+    "date": "2026-09-10T15:09:49",
     "ignored_checks": [
         {
             "description": "Footprint has no courtyard defined",
@@ -36,20 +36,20 @@
             "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
             "items": [
                 {
-                    "description": "Ilha 30 [<no net>] de U1 no F.Cu",
+                    "description": "Ilha 8 [<no net>] de U1 no F.Cu",
                     "pos": {
-                        "x": 110.06,
-                        "y": 91.25
+                        "x": 98.41,
+                        "y": 96.8
                     },
-                    "uuid": "f8f29bd7-60d8-4bb2-a406-8f6e50ce6a98"
+                    "uuid": "0ba52280-476c-4bc1-88a5-e0085724a40b"
                 },
                 {
-                    "description": "Ilha 1 [NET_SWDCLK] de TP3 no F.Cu",
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
                     "pos": {
-                        "x": 110.5,
-                        "y": 90.0
+                        "x": 100.0,
+                        "y": 100.0
                     },
-                    "uuid": "5aaf7e63-fa9f-4fdd-a657-a61d8639ba9c"
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
                 }
             ],
             "severity": "error",
@@ -58,21 +58,159 @@
         {
             "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
             "items": [
+                {
+                    "description": "Ilha 9 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 99.31,
+                        "y": 96.25
+                    },
+                    "uuid": "e6e0f568-d293-4dc3-9bea-3d4bdcce3276"
+                },
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "items": [
+                {
+                    "description": "Ilha 10 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 98.41,
+                        "y": 95.7
+                    },
+                    "uuid": "51c9ea86-7025-4ed8-abb6-10f6347e89d7"
+                },
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "items": [
+                {
+                    "description": "Ilha 11 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 99.31,
+                        "y": 95.15
+                    },
+                    "uuid": "2c4d0b59-bd7a-4984-8795-551af7ac1dc3"
+                },
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "items": [
+                {
+                    "description": "Ilha 12 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 98.41,
+                        "y": 94.6
+                    },
+                    "uuid": "29c9d48b-99dd-4ff7-9e9f-b74574c28ee4"
+                },
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "items": [
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                },
+                {
+                    "description": "Ilha 2 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 98.41,
+                        "y": 100.1
+                    },
+                    "uuid": "856d2c41-1297-44c3-be48-2493a93953a4"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "items": [
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                },
+                {
+                    "description": "Ilha 3 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 99.31,
+                        "y": 99.55
+                    },
+                    "uuid": "0d59a6b9-2893-4ba8-a312-c697b61191c3"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "items": [
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                },
                 {
                     "description": "Ilha 5 [<no net>] de U1 no F.Cu",
                     "pos": {
-                        "x": 99.9,
-                        "y": 108.75
+                        "x": 99.31,
+                        "y": 98.45
                     },
-                    "uuid": "98c7bd53-c03d-478d-a587-a90183903436"
-                },
-                {
-                    "description": "Ilha 1 [VDD_BAT] de BT1 no F.Cu",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 110.16
-                    },
-                    "uuid": "6114fce0-b3d0-4bf2-abee-135b7133ed97"
+                    "uuid": "d47e4adc-d1a6-4abb-9c57-5954a3270c78"
                 }
             ],
             "severity": "error",
@@ -81,21 +219,67 @@
         {
             "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
             "items": [
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                },
+                {
+                    "description": "Ilha 7 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 99.31,
+                        "y": 97.35
+                    },
+                    "uuid": "9289124d-09b1-4c76-9dd2-cfdf28546f32"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "items": [
+                {
+                    "description": "Ilha 3 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 99.31,
+                        "y": 99.55
+                    },
+                    "uuid": "0d59a6b9-2893-4ba8-a312-c697b61191c3"
+                },
+                {
+                    "description": "Ilha 1 [GND] de SHLD1 no todas as camadas com cobre",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "2a1e0d14-0db5-4a2d-98e2-eac4710660c8"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
+            "items": [
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                },
                 {
                     "description": "Ilha 4 [<no net>] de U1 no F.Cu",
                     "pos": {
-                        "x": 98.63,
-                        "y": 108.75
+                        "x": 98.41,
+                        "y": 99.0
                     },
-                    "uuid": "eadd5178-ea81-459f-b21d-f930bf77f866"
-                },
-                {
-                    "description": "Ilha 1 [VDD_BAT] de BT1 no F.Cu",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 110.16
-                    },
-                    "uuid": "6114fce0-b3d0-4bf2-abee-135b7133ed97"
+                    "uuid": "e0572ad8-7bc7-43f3-bd7c-db47e0e0ca40"
                 }
             ],
             "severity": "error",
@@ -105,20 +289,20 @@
             "description": "A abertura da máscara de solda da frente conecta itens com redes diferentes",
             "items": [
                 {
-                    "description": "Ilha 1 [VDD_BAT] de BT1 no F.Cu",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 110.16
-                    },
-                    "uuid": "6114fce0-b3d0-4bf2-abee-135b7133ed97"
-                },
-                {
                     "description": "Ilha 6 [<no net>] de U1 no F.Cu",
                     "pos": {
-                        "x": 101.17,
-                        "y": 108.75
+                        "x": 98.41,
+                        "y": 97.9
                     },
-                    "uuid": "8ee508d4-1fec-4571-ac5f-cab3b2ba36ac"
+                    "uuid": "2904bbf4-6890-4cc1-80de-c44f1fe25913"
+                },
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
                 }
             ],
             "severity": "error",
@@ -133,15 +317,15 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "7c94dbe4-787e-45ab-93ae-7db61f66b118"
+                    "uuid": "23b201b9-0644-46b0-a517-22c382c2c8f9"
                 },
                 {
-                    "description": "Trilha [VDD_BAT] no F.Cu, comprimento 6,0500 mm",
+                    "description": "Ilha 1 [VDD_BAT] de BT1 no F.Cu",
                     "pos": {
-                        "x": 108.0,
-                        "y": 106.985
+                        "x": 100.0,
+                        "y": 114.655
                     },
-                    "uuid": "bf3fe1fd-e9d9-42e0-8d36-98ef9895effb"
+                    "uuid": "2e0e3597-f33a-4bd9-92d8-8ce12ec3cb0d"
                 }
             ],
             "severity": "error",
@@ -156,222 +340,15 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "7c94dbe4-787e-45ab-93ae-7db61f66b118"
+                    "uuid": "23b201b9-0644-46b0-a517-22c382c2c8f9"
                 },
                 {
-                    "description": "Ilha 15 [GND] de U1 no F.Cu",
-                    "pos": {
-                        "x": 112.6,
-                        "y": 108.75
-                    },
-                    "uuid": "1c847221-258d-4b70-a989-39001eea6966"
-                }
-            ],
-            "severity": "error",
-            "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,0000 mm)",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
+                    "description": "Ilha 3 [GND] de BT1 no F.Cu",
                     "pos": {
                         "x": 100.0,
-                        "y": 100.0
+                        "y": 85.345
                     },
-                    "uuid": "7c94dbe4-787e-45ab-93ae-7db61f66b118"
-                },
-                {
-                    "description": "Ilha 16 [VDD_BAT] de U1 no F.Cu",
-                    "pos": {
-                        "x": 114.35,
-                        "y": 106.985
-                    },
-                    "uuid": "35ee997d-4a10-4d49-94c8-b17e81f06c6a"
-                }
-            ],
-            "severity": "error",
-            "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,0000 mm)",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "7c94dbe4-787e-45ab-93ae-7db61f66b118"
-                },
-                {
-                    "description": "Ilha 17 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 114.35,
-                        "y": 105.715
-                    },
-                    "uuid": "d15cc174-0fac-4a9b-804d-7a5eb383bf08"
-                }
-            ],
-            "severity": "error",
-            "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,0139 mm)",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "7c94dbe4-787e-45ab-93ae-7db61f66b118"
-                },
-                {
-                    "description": "Ilha 18 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 114.35,
-                        "y": 104.445
-                    },
-                    "uuid": "7c46d1fa-22d4-48a7-909f-9c0a9e3a8348"
-                }
-            ],
-            "severity": "error",
-            "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,3479 mm)",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "7c94dbe4-787e-45ab-93ae-7db61f66b118"
-                },
-                {
-                    "description": "Ilha 19 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 114.35,
-                        "y": 103.175
-                    },
-                    "uuid": "691f7d29-5609-4903-af66-64bdc6b19c63"
-                }
-            ],
-            "severity": "error",
-            "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,3479 mm)",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "7c94dbe4-787e-45ab-93ae-7db61f66b118"
-                },
-                {
-                    "description": "Ilha 24 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 114.35,
-                        "y": 96.825
-                    },
-                    "uuid": "1f4b7047-7c46-4b54-99d3-5b8a24159088"
-                }
-            ],
-            "severity": "error",
-            "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,0139 mm)",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "7c94dbe4-787e-45ab-93ae-7db61f66b118"
-                },
-                {
-                    "description": "Ilha 25 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 114.35,
-                        "y": 95.555
-                    },
-                    "uuid": "be5e0a56-38bf-4b0c-ae06-dd6555858d06"
-                }
-            ],
-            "severity": "error",
-            "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,0000 mm)",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "7c94dbe4-787e-45ab-93ae-7db61f66b118"
-                },
-                {
-                    "description": "Ilha 26 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 114.35,
-                        "y": 94.285
-                    },
-                    "uuid": "8855a182-df37-4a70-8ae3-49abe7c53403"
-                }
-            ],
-            "severity": "error",
-            "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,0000 mm)",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "7c94dbe4-787e-45ab-93ae-7db61f66b118"
-                },
-                {
-                    "description": "Ilha 27 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 114.35,
-                        "y": 93.015
-                    },
-                    "uuid": "639fd8b2-924e-48b0-98f9-c02c3a7413d8"
-                }
-            ],
-            "severity": "error",
-            "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Violação do isolamento da borda da placa (configuração das restrições da borda isolamento 0,5000 mm; atual 0,0000 mm)",
-            "items": [
-                {
-                    "description": "Círculo no Edge.Cuts",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "7c94dbe4-787e-45ab-93ae-7db61f66b118"
-                },
-                {
-                    "description": "Ilha 28 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 112.6,
-                        "y": 91.25
-                    },
-                    "uuid": "ddd88faa-429e-45be-b02b-af6c51c279e3"
+                    "uuid": "e27b9b1e-b1dd-49d8-8ca1-360c6f85ff06"
                 }
             ],
             "severity": "error",
@@ -384,9 +361,9 @@
                     "description": "Footprint U1",
                     "pos": {
                         "x": 100.0,
-                        "y": 100.0
+                        "y": 106.2
                     },
-                    "uuid": "38a6691a-b789-4733-99db-54fad4806fc8"
+                    "uuid": "7dcbf2ee-b675-43a7-ac0a-4badc4128a29"
                 },
                 {
                     "description": "Footprint BT1",
@@ -394,99 +371,7 @@
                         "x": 100.0,
                         "y": 100.0
                     },
-                    "uuid": "410c48a2-8b84-45a7-88e1-3dd0b04ed590"
-                }
-            ],
-            "severity": "error",
-            "type": "courtyards_overlap"
-        },
-        {
-            "description": "Courtyards overlap",
-            "items": [
-                {
-                    "description": "Footprint U1",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "38a6691a-b789-4733-99db-54fad4806fc8"
-                },
-                {
-                    "description": "Footprint TP3",
-                    "pos": {
-                        "x": 110.5,
-                        "y": 90.0
-                    },
-                    "uuid": "69299356-d8dd-4936-88cb-fcb96bfac6cf"
-                }
-            ],
-            "severity": "error",
-            "type": "courtyards_overlap"
-        },
-        {
-            "description": "Courtyards overlap",
-            "items": [
-                {
-                    "description": "Footprint U1",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "38a6691a-b789-4733-99db-54fad4806fc8"
-                },
-                {
-                    "description": "Footprint TP1",
-                    "pos": {
-                        "x": 90.5,
-                        "y": 109.9
-                    },
-                    "uuid": "f32ea0db-af3a-4ffd-9d16-4f5ae2b95833"
-                }
-            ],
-            "severity": "error",
-            "type": "courtyards_overlap"
-        },
-        {
-            "description": "Courtyards overlap",
-            "items": [
-                {
-                    "description": "Footprint BT1",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "410c48a2-8b84-45a7-88e1-3dd0b04ed590"
-                },
-                {
-                    "description": "Footprint TP4",
-                    "pos": {
-                        "x": 106.0,
-                        "y": 86.5
-                    },
-                    "uuid": "617ee2e7-c1da-4fe4-a724-4e5b7871268f"
-                }
-            ],
-            "severity": "error",
-            "type": "courtyards_overlap"
-        },
-        {
-            "description": "Courtyards overlap",
-            "items": [
-                {
-                    "description": "Footprint BT1",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 100.0
-                    },
-                    "uuid": "410c48a2-8b84-45a7-88e1-3dd0b04ed590"
-                },
-                {
-                    "description": "Footprint C2",
-                    "pos": {
-                        "x": 107.0,
-                        "y": 111.7
-                    },
-                    "uuid": "bf2518fc-c642-4413-87da-66349f41192f"
+                    "uuid": "d8f01b86-496a-45e3-ac65-0a682c6fe6a9"
                 }
             ],
             "severity": "error",
@@ -496,20 +381,89 @@
             "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,0000 mm)",
             "items": [
                 {
-                    "description": "Ilha 4 [<no net>] de U1 no F.Cu",
+                    "description": "Ilha 2 [<no net>] de U1 no F.Cu",
                     "pos": {
-                        "x": 98.63,
-                        "y": 108.75
+                        "x": 98.41,
+                        "y": 100.1
                     },
-                    "uuid": "eadd5178-ea81-459f-b21d-f930bf77f866"
+                    "uuid": "856d2c41-1297-44c3-be48-2493a93953a4"
                 },
                 {
-                    "description": "Ilha 1 [VDD_BAT] de BT1 no F.Cu",
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
                     "pos": {
                         "x": 100.0,
-                        "y": 110.16
+                        "y": 100.0
                     },
-                    "uuid": "6114fce0-b3d0-4bf2-abee-135b7133ed97"
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,0000 mm)",
+            "items": [
+                {
+                    "description": "Ilha 3 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 99.31,
+                        "y": 99.55
+                    },
+                    "uuid": "0d59a6b9-2893-4ba8-a312-c697b61191c3"
+                },
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,0000 mm)",
+            "items": [
+                {
+                    "description": "Ilha 3 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 99.31,
+                        "y": 99.55
+                    },
+                    "uuid": "0d59a6b9-2893-4ba8-a312-c697b61191c3"
+                },
+                {
+                    "description": "Ilha 1 [GND] de SHLD1 no todas as camadas com cobre",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "2a1e0d14-0db5-4a2d-98e2-eac4710660c8"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,0000 mm)",
+            "items": [
+                {
+                    "description": "Ilha 4 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 98.41,
+                        "y": 99.0
+                    },
+                    "uuid": "e0572ad8-7bc7-43f3-bd7c-db47e0e0ca40"
+                },
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
                 }
             ],
             "severity": "error",
@@ -521,18 +475,18 @@
                 {
                     "description": "Ilha 5 [<no net>] de U1 no F.Cu",
                     "pos": {
-                        "x": 99.9,
-                        "y": 108.75
+                        "x": 99.31,
+                        "y": 98.45
                     },
-                    "uuid": "98c7bd53-c03d-478d-a587-a90183903436"
+                    "uuid": "d47e4adc-d1a6-4abb-9c57-5954a3270c78"
                 },
                 {
-                    "description": "Ilha 1 [VDD_BAT] de BT1 no F.Cu",
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
                     "pos": {
                         "x": 100.0,
-                        "y": 110.16
+                        "y": 100.0
                     },
-                    "uuid": "6114fce0-b3d0-4bf2-abee-135b7133ed97"
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
                 }
             ],
             "severity": "error",
@@ -544,64 +498,41 @@
                 {
                     "description": "Ilha 6 [<no net>] de U1 no F.Cu",
                     "pos": {
-                        "x": 101.17,
-                        "y": 108.75
+                        "x": 98.41,
+                        "y": 97.9
                     },
-                    "uuid": "8ee508d4-1fec-4571-ac5f-cab3b2ba36ac"
+                    "uuid": "2904bbf4-6890-4cc1-80de-c44f1fe25913"
                 },
                 {
-                    "description": "Ilha 1 [VDD_BAT] de BT1 no F.Cu",
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
                     "pos": {
                         "x": 100.0,
-                        "y": 110.16
+                        "y": 100.0
                     },
-                    "uuid": "6114fce0-b3d0-4bf2-abee-135b7133ed97"
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
                 }
             ],
             "severity": "error",
             "type": "clearance"
         },
         {
-            "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,1850 mm)",
+            "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,0000 mm)",
             "items": [
                 {
                     "description": "Ilha 7 [<no net>] de U1 no F.Cu",
                     "pos": {
-                        "x": 102.44,
-                        "y": 108.75
+                        "x": 99.31,
+                        "y": 97.35
                     },
-                    "uuid": "99dd365e-e601-4436-9271-e2a4cd3be68f"
+                    "uuid": "9289124d-09b1-4c76-9dd2-cfdf28546f32"
                 },
                 {
-                    "description": "Ilha 1 [VDD_BAT] de BT1 no F.Cu",
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
                     "pos": {
                         "x": 100.0,
-                        "y": 110.16
+                        "y": 100.0
                     },
-                    "uuid": "6114fce0-b3d0-4bf2-abee-135b7133ed97"
-                }
-            ],
-            "severity": "error",
-            "type": "clearance"
-        },
-        {
-            "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,0941 mm)",
-            "items": [
-                {
-                    "description": "Ilha 29 [<no net>] de U1 no F.Cu",
-                    "pos": {
-                        "x": 111.33,
-                        "y": 91.25
-                    },
-                    "uuid": "753af6f0-d679-4654-818f-74161c67b9bd"
-                },
-                {
-                    "description": "Ilha 1 [NET_SWDCLK] de TP3 no F.Cu",
-                    "pos": {
-                        "x": 110.5,
-                        "y": 90.0
-                    },
-                    "uuid": "5aaf7e63-fa9f-4fdd-a657-a61d8639ba9c"
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
                 }
             ],
             "severity": "error",
@@ -611,20 +542,135 @@
             "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,0000 mm)",
             "items": [
                 {
-                    "description": "Ilha 30 [<no net>] de U1 no F.Cu",
+                    "description": "Ilha 8 [<no net>] de U1 no F.Cu",
                     "pos": {
-                        "x": 110.06,
-                        "y": 91.25
+                        "x": 98.41,
+                        "y": 96.8
                     },
-                    "uuid": "f8f29bd7-60d8-4bb2-a406-8f6e50ce6a98"
+                    "uuid": "0ba52280-476c-4bc1-88a5-e0085724a40b"
                 },
                 {
-                    "description": "Ilha 1 [NET_SWDCLK] de TP3 no F.Cu",
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
                     "pos": {
-                        "x": 110.5,
-                        "y": 90.0
+                        "x": 100.0,
+                        "y": 100.0
                     },
-                    "uuid": "5aaf7e63-fa9f-4fdd-a657-a61d8639ba9c"
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,0000 mm)",
+            "items": [
+                {
+                    "description": "Ilha 9 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 99.31,
+                        "y": 96.25
+                    },
+                    "uuid": "e6e0f568-d293-4dc3-9bea-3d4bdcce3276"
+                },
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,0000 mm)",
+            "items": [
+                {
+                    "description": "Ilha 10 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 98.41,
+                        "y": 95.7
+                    },
+                    "uuid": "51c9ea86-7025-4ed8-abb6-10f6347e89d7"
+                },
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,0000 mm)",
+            "items": [
+                {
+                    "description": "Ilha 11 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 99.31,
+                        "y": 95.15
+                    },
+                    "uuid": "2c4d0b59-bd7a-4984-8795-551af7ac1dc3"
+                },
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,0000 mm)",
+            "items": [
+                {
+                    "description": "Ilha 12 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 98.41,
+                        "y": 94.6
+                    },
+                    "uuid": "29c9d48b-99dd-4ff7-9e9f-b74574c28ee4"
+                },
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Violação do isolamento ( isolamento 0,2000 mm; atual 0,0350 mm)",
+            "items": [
+                {
+                    "description": "Ilha 47 [<no net>] de U1 no F.Cu",
+                    "pos": {
+                        "x": 96.26,
+                        "y": 97.9
+                    },
+                    "uuid": "0a606420-bd5f-46e7-ae0e-933d4f8d5c5c"
+                },
+                {
+                    "description": "Ilha 2 [GND] de BT1 no F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 100.0
+                    },
+                    "uuid": "cf350443-2b0f-46a1-ab76-c7830c0524a6"
                 }
             ],
             "severity": "error",

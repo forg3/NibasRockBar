@@ -2,7 +2,7 @@
 	(version "E")
 	(design
 		(source "/home/forg3/projetos/NibasRockBar/hardware/kicad/gateway_esp32/gateway_esp32.kicad_sch")
-		(date "2026-09-09T17:24:25")
+		(date "2026-09-09T19:33:36")
 		(tool "Eeschema 10.0.6-1.fc44")
 		(sheet
 			(number "1")
@@ -75,7 +75,7 @@
 			)
 			(property
 				(name "Sheetname")
-				(value "Raiz")
+				(value "gateway_esp32")
 			)
 			(property
 				(name "Sheetfile")
@@ -125,7 +125,7 @@
 			)
 			(property
 				(name "Sheetname")
-				(value "Raiz")
+				(value "gateway_esp32")
 			)
 			(property
 				(name "Sheetfile")
@@ -179,7 +179,7 @@
 			)
 			(property
 				(name "Sheetname")
-				(value "Raiz")
+				(value "gateway_esp32")
 			)
 			(property
 				(name "Sheetfile")
@@ -211,11 +211,11 @@
 		(comp
 			(ref "U1")
 			(value "ESP32-DevKitC-32E")
-			(footprint "Connector_PinHeader_2.54mm:PinHeader_2x19_P2.54mm_Vertical")
+			(footprint "nibas_gateway:ESP32-DevKitC-32E_Carrier")
 			(datasheet "https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32/esp32-devkitc/user_guide.html")
 			(fields
 				(field
-					(name "Footprint") "Connector_PinHeader_2.54mm:PinHeader_2x19_P2.54mm_Vertical")
+					(name "Footprint") "nibas_gateway:ESP32-DevKitC-32E_Carrier")
 				(field
 					(name "Datasheet") "https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32/esp32-devkitc/user_guide.html")
 				(field
@@ -229,7 +229,7 @@
 			)
 			(property
 				(name "Sheetname")
-				(value "Raiz")
+				(value "gateway_esp32")
 			)
 			(property
 				(name "Sheetfile")

@@ -76,25 +76,11 @@
     )
   )
 
-  ;; J2 Header Socket (Left side) - 1x19 vertical, pins 1-19
-  ;; Pin 1 (3V3) at top-left of J2
-  ;; J2 spans from y = +22.86mm to y = -22.86mm (18 * 2.54 = 45.72mm total)
-  ;; Centered at x = -13.95mm (half of 27.9mm board width)
   (pad "1" thru_hole circle
     (at -13.97 22.86 0)
     (size 1.524 1.524)
     (drill 0.9)
     (layers "*.Cu" "*.Mask" "F.SilkS")
-    (property "Reference" "U"
-      (at 0 0 0)
-      (layer "F.SilkS")
-      (hide yes)
-      (effects
-        (font
-          (size 1.27 1.27)
-        )
-      )
-    )
   )
   (pad "2" thru_hole circle
     (at -13.97 20.32 0)
@@ -205,10 +191,6 @@
     (layers "*.Cu" "*.Mask" "F.SilkS")
   )
 
-  ;; J3 Header Socket (Right side) - 1x19 vertical, pins 20-38
-  ;; Pin 20 (GND) at bottom-right of J3 (matching DevKitC orientation)
-  ;; J3 spans from y = -22.86mm to y = +22.86mm
-  ;; Centered at x = +13.95mm
   (pad "20" thru_hole circle
     (at 13.97 -22.86 0)
     (size 1.524 1.524)
@@ -324,7 +306,6 @@
     (layers "*.Cu" "*.Mask" "F.SilkS")
   )
 
-  ;; Silkscreen outline for DevKitC board (54.4 x 27.9 mm)
   (fp_line
     (start -27.2 13.95)
     (end 27.2 13.95)
@@ -362,7 +343,6 @@
     )
   )
 
-  ;; Pin 1 markers for J2 and J3
   (fp_circle
     (center -14.732 23.622)
     (end -14.732 24.384)
@@ -382,7 +362,6 @@
     )
   )
 
-  ;; J2 and J3 labels
   (fp_text user "J2"
     (at -13.97 25.4 0)
     (layer "F.SilkS")
@@ -408,7 +387,6 @@
     )
   )
 
-  ;; Courtyard outline (slightly larger than board)
   (fp_line
     (start -28.2 14.95)
     (end 28.2 14.95)
@@ -446,10 +424,4 @@
     )
   )
 
-  ;; 3D model placeholder (optional)
-  (model ""
-    (at 0 0 0)
-    (scale 1 1 1)
-    (rotate 0 0 0)
-  )
 )

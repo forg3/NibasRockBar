@@ -9,906 +9,118 @@
     (date "2026-09-09")
     (rev "A")
     (company "NibasRockBar")
-    (comment 1 "Variante A - modulo certificado Ebyte E73-2G4M04S-52810 (nRF52810, SoftDevice S112)")
-    (comment 2 "Pinout: datasheet Ebyte E73-2G4M04S1A (cdebyte.com/products/E73-2G4M04S1A/2)")
+    (comment 1 "Variante A - modulo certificado Fanstel BM832A (nRF52810, SoftDevice S112)")
+    (comment 2 "Pinout: datasheet Fanstel BM832A Ver 1.04 (fanstel.com)")
     (comment 3 "BOM: BOM_smartbadge_v2.csv - U1 TAG1 SHLD1 BT1 J1 C1 C2 TP1-TP4")
   )
   (lib_symbols
-(symbol "RF_Module:E73-2G4M04S-52810"
-    		(exclude_from_sim no)
-    		(in_bom yes)
-    		(on_board yes)
-    		(in_pos_files yes)
-    		(duplicate_pin_numbers_are_jumpers no)
-    		(property "Reference" "U"
-    			(at 0 1.27 0)
-    			(show_name no)
-    			(do_not_autoplace no)
-    			(effects
-    				(font
-    					(size 1.27 1.27)
-    				)
-    			)
-    		)
-    		(property "Value" "E73-2G4M04S-52810"
-    			(at 0 -1.27 0)
-    			(show_name no)
-    			(do_not_autoplace no)
-    			(effects
-    				(font
-    					(size 1.27 1.27)
-    				)
-    			)
-    		)
-    		(property "Footprint" "RF_Module:E73-2G4M04S"
-    			(at 0 11.43 0)
-    			(show_name no)
-    			(do_not_autoplace no)
-    			(hide yes)
-    			(effects
-    				(font
-    					(size 1.27 1.27)
-    				)
-    			)
-    		)
-    		(property "Datasheet" "http://www.cdebyte.com/en/downpdf.aspx?id=243"
-    			(at 0 11.43 0)
-    			(show_name no)
-    			(do_not_autoplace no)
-    			(hide yes)
-    			(effects
-    				(font
-    					(size 1.27 1.27)
-    				)
-    			)
-    		)
-    		(property "Description" "nRF52810 BLE5 Module"
-    			(at 0 0 0)
-    			(show_name no)
-    			(do_not_autoplace no)
-    			(hide yes)
-    			(effects
-    				(font
-    					(size 1.27 1.27)
-    				)
-    			)
-    		)
-    		(property "ki_keywords" "BLE5, BLE, nRF52810"
-    			(at 0 0 0)
-    			(show_name no)
-    			(do_not_autoplace no)
-    			(hide yes)
-    			(effects
-    				(font
-    					(size 1.27 1.27)
-    				)
-    			)
-    		)
-    		(property "ki_fp_filters" "E73*2G4M04S*"
-    			(at 0 0 0)
-    			(show_name no)
-    			(do_not_autoplace no)
-    			(hide yes)
-    			(effects
-    				(font
-    					(size 1.27 1.27)
-    				)
-    			)
-    		)
-    		(symbol "E73-2G4M04S-52810_0_1"
-    			(rectangle
-    				(start 20.32 38.1)
-    				(end -20.32 -38.1)
-    				(stroke
-    					(width 0.254)
-    					(type default)
-    				)
-    				(fill
-    					(type background)
-    				)
-    			)
-    		)
-    		(symbol "E73-2G4M04S-52810_1_1"
-    			(pin power_in line
-    				(at 0 -40.64 90)
-    				(length 2.54)
-    				(name "GND"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "0"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin passive line
-    				(at 0 -40.64 90)
-    				(length 2.54)
-    				(hide yes)
-    				(name "GND"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "1"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin passive line
-    				(at 0 -40.64 90)
-    				(length 2.54)
-    				(hide yes)
-    				(name "GND"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "2"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin passive line
-    				(at -10.16 40.64 270)
-    				(length 2.54)
-    				(name "DEC2"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "3"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin passive line
-    				(at -7.62 40.64 270)
-    				(length 2.54)
-    				(name "DEC3"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "4"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 -20.32 180)
-    				(length 2.54)
-    				(name "P0.25"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "5"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 -22.86 180)
-    				(length 2.54)
-    				(name "P0.26"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "6"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 -25.4 180)
-    				(length 2.54)
-    				(name "P0.27"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "7"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 -27.94 180)
-    				(length 2.54)
-    				(name "AIN4/P0.28"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "8"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 -30.48 180)
-    				(length 2.54)
-    				(name "AIN5/P0.29"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "9"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 -33.02 180)
-    				(length 2.54)
-    				(name "AIN6/P0.30"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "10"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 -35.56 180)
-    				(length 2.54)
-    				(name "AIN7/P0.31"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "11"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin passive line
-    				(at -5.08 40.64 270)
-    				(length 2.54)
-    				(name "DEC4"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "12"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin power_out line
-    				(at 5.08 40.64 270)
-    				(length 2.54)
-    				(name "DCC"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "13"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin passive line
-    				(at -12.7 40.64 270)
-    				(length 2.54)
-    				(name "DEC1"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "14"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin passive line
-    				(at 0 -40.64 90)
-    				(length 2.54)
-    				(hide yes)
-    				(name "GND"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "15"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin power_in line
-    				(at 0 40.64 270)
-    				(length 2.54)
-    				(name "VCC"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "16"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 35.56 180)
-    				(length 2.54)
-    				(name "AIN0/P0.02"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "17"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 33.02 180)
-    				(length 2.54)
-    				(name "AIN1/P0.03"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "18"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 30.48 180)
-    				(length 2.54)
-    				(name "AIN2/P0.04"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "19"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 27.94 180)
-    				(length 2.54)
-    				(name "AIN3/P0.05"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "20"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 25.4 180)
-    				(length 2.54)
-    				(name "P0.06"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "21"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 22.86 180)
-    				(length 2.54)
-    				(name "P0.07"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "22"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 20.32 180)
-    				(length 2.54)
-    				(name "P0.08"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "23"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 17.78 180)
-    				(length 2.54)
-    				(name "NFC1/P0.09"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "24"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 15.24 180)
-    				(length 2.54)
-    				(name "NFC2/P0.10"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "25"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 12.7 180)
-    				(length 2.54)
-    				(name "P0.11"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "26"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 10.16 180)
-    				(length 2.54)
-    				(name "P0.12"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "27"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 7.62 180)
-    				(length 2.54)
-    				(name "P0.13"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "28"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 5.08 180)
-    				(length 2.54)
-    				(name "P0.14"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "29"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 2.54 180)
-    				(length 2.54)
-    				(name "P0.15"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "30"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 0 180)
-    				(length 2.54)
-    				(name "P0.16"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "31"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 -2.54 180)
-    				(length 2.54)
-    				(name "P0.17"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "32"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 -5.08 180)
-    				(length 2.54)
-    				(name "SWO/P0.18"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "33"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 -7.62 180)
-    				(length 2.54)
-    				(name "P0.19"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "34"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 -10.16 180)
-    				(length 2.54)
-    				(name "P0.20"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "35"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at -22.86 -12.7 0)
-    				(length 2.54)
-    				(name "P0.21/~{RESET}"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "36"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin input line
-    				(at -22.86 -15.24 0)
-    				(length 2.54)
-    				(name "SWDCLK"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "37"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at -22.86 -17.78 0)
-    				(length 2.54)
-    				(name "SWDIO"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "38"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 -12.7 180)
-    				(length 2.54)
-    				(name "P0.22"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "39"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 -15.24 180)
-    				(length 2.54)
-    				(name "P0.23"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "40"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin bidirectional line
-    				(at 22.86 -17.78 180)
-    				(length 2.54)
-    				(name "P0.24"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "41"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin passive line
-    				(at 0 -40.64 90)
-    				(length 2.54)
-    				(hide yes)
-    				(name "GND"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "42"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    			(pin passive line
-    				(at 0 -40.64 90)
-    				(length 2.54)
-    				(hide yes)
-    				(name "GND"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "43"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    		)
-    		(embedded_fonts no)
-    	)
+        (symbol "nibas_wristband:BM832A"
+                (pin_numbers
+                        (hide yes)
+                )
+                (pin_names
+                        (offset 0)
+                )
+                (exclude_from_sim no)
+                (in_bom yes)
+                (on_board yes)
+                (in_pos_files yes)
+                (duplicate_pin_numbers_are_jumpers no)
+                (property "Reference" "U"
+                        (at 0 9.144 0)
+                        (show_name no)
+                        (do_not_autoplace no)
+                        (effects (font (size 1.27 1.27)))
+                )
+                (property "Value" "BM832A"
+                        (at 0 -5.08 0)
+                        (show_name no)
+                        (do_not_autoplace no)
+                        (effects (font (size 1.27 1.27)))
+                )
+                (property "Footprint" "nibas_wristband:BM832A"
+                        (at 0 0 0)
+                        (show_name no)
+                        (do_not_autoplace no)
+                        (hide yes)
+                        (effects (font (size 1.27 1.27)))
+                )
+                (property "Datasheet" "https://www.fanstel.com/s/BM832-p_BM840-Product-Specifications-rr44.pdf"
+                        (at 0 0 0)
+                        (show_name no)
+                        (do_not_autoplace no)
+                        (hide yes)
+                        (effects (font (size 1.27 1.27)))
+                )
+                (property "Description" "Fanstel BM832A BLE 5 module, nRF52810 (192KB flash/24KB RAM), integrated PCB antenna. Pins used: 1 GND, 14 VDD, 40 P0.21/RST, 42 SWDCLK, 43 SWDIO."
+                        (at 0 0 0)
+                        (show_name no)
+                        (do_not_autoplace no)
+                        (hide yes)
+                        (effects (font (size 1.27 1.27)))
+                )
+                (symbol "BM832A_0_1"
+                        (rectangle
+                                (start -10.16 -2.54)
+                                (end 10.16 7.62)
+                                (stroke (width 0.254) (type default))
+                                (fill (type none))
+                        )
+                )
+                (symbol "BM832A_1_1"
+                        (pin power_in line
+                                (at -12.7 5.08 0)
+                                (length 2.54)
+                                (name "GND"
+                                        (effects (font (size 1.27 1.27)))
+                                )
+                                (number "1"
+                                        (effects (font (size 1.27 1.27)))
+                                )
+                        )
+                        (pin power_in line
+                                (at -12.7 2.54 0)
+                                (length 2.54)
+                                (name "VDD"
+                                        (effects (font (size 1.27 1.27)))
+                                )
+                                (number "14"
+                                        (effects (font (size 1.27 1.27)))
+                                )
+                        )
+                        (pin input line
+                                (at 12.7 5.08 180)
+                                (length 2.54)
+                                (name "P0.21/RST"
+                                        (effects (font (size 1.27 1.27)))
+                                )
+                                (number "40"
+                                        (effects (font (size 1.27 1.27)))
+                                )
+                        )
+                        (pin input line
+                                (at 12.7 2.54 180)
+                                (length 2.54)
+                                (name "SWDCLK"
+                                        (effects (font (size 1.27 1.27)))
+                                )
+                                (number "42"
+                                        (effects (font (size 1.27 1.27)))
+                                )
+                        )
+                        (pin bidirectional line
+                                (at 12.7 0 180)
+                                (length 2.54)
+                                (name "SWDIO"
+                                        (effects (font (size 1.27 1.27)))
+                                )
+                                (number "43"
+                                        (effects (font (size 1.27 1.27)))
+                                )
+                        )
+                )
+                (embedded_fonts no)
+        )
 (symbol "Device:C"
     		(pin_numbers
     			(hide yes)
@@ -1329,7 +541,7 @@
           (at 0 0 0)
           (effects (font (size 1.27 1.27)) (justify left) (hide yes))
         )
-        (property "Description" "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1059 positive holder"
+        (property "Description" "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1060 positive end tab"
           (at 0 0 0)
           (effects (font (size 1.27 1.27)) (justify left) (hide yes))
         )
@@ -1360,7 +572,7 @@
         )
         (embedded_fonts no)
       )
-(symbol "nibas_wristband:Keystone_1059"
+(symbol "nibas_wristband:Keystone_1060"
         (pin_numbers (hide yes))
         (pin_names (offset 0) (hide yes))
         (exclude_from_sim no)
@@ -1372,46 +584,52 @@
           (at 0 7.62 0)
           (effects (font (size 1.27 1.27)) (justify left))
         )
-        (property "Value" "Keystone_1059"
+        (property "Value" "Keystone_1060"
           (at 0 -7.62 0)
           (effects (font (size 1.27 1.27)) (justify left))
         )
-        (property "Footprint" "nibas_wristband:Keystone_1059_CR2032_SMT"
+        (property "Footprint" "nibas_wristband:Keystone_1060_CR2032_SMT"
           (at 0 0 0)
           (effects (font (size 1.27 1.27)) (justify left) (hide yes))
         )
-        (property "Datasheet" "http://www.keyelco.com/product.cfm/THM-20mm-Holders-All-sizes/1059/product_id/725"
+        (property "Datasheet" "https://www.keyelco.com/product-pdf.cfm?p=726"
           (at 0 0 0)
           (effects (font (size 1.27 1.27)) (justify left) (hide yes))
         )
-        (property "Description" "Keystone 1059 SMT coin cell holder for CR2032/CR2025, positive contact only (negative via J1). UNVERIFIED dims."
+        (property "Description" "Keystone 1060 SMT (Vibra-Fit) coin cell holder for CR2032/CR2025. Dims verified per official Keystone drawing 1060 rev C (keyelco.com/product-pdf.cfm?p=726). Pin 1 = positive end tab; pin 2 = negative (center contact + second end tab, tied together on PCB). Battery inserts with + face up."
           (at 0 0 0)
           (effects (font (size 1.27 1.27)) (justify left) (hide yes))
         )
-        (property "ki_keywords" "coin cell holder CR2032 SMT Keystone 1059"
+        (property "ki_keywords" "coin cell holder CR2032 SMT Keystone 1060"
           (at 0 0 0)
           (effects (font (size 1.27 1.27)) (justify left) (hide yes))
         )
-        (property "ki_fp_filters" "Keystone_1059*"
+        (property "ki_fp_filters" "Keystone_1060*"
           (at 0 0 0)
           (effects (font (size 1.27 1.27)) (justify left) (hide yes))
         )
-        (symbol "Keystone_1059_0_1"
+        (symbol "Keystone_1060_0_1"
           (rectangle
             (start -7.62 -5.08)
             (end 7.62 5.08)
             (stroke (width 0.254) (type default))
             (fill (type none))
           )
-          (text "+" (at 0 0 0) (effects (font (size 1.27 1.27))))
-          (text "UNVERIFIED" (at 0 -6.35 0) (effects (font (size 1.016 1.016))))
+          (text "+" (at 2.54 1.905 0) (effects (font (size 1.27 1.27))))
+          (text "-" (at 2.54 -1.905 0) (effects (font (size 1.27 1.27))))
         )
-        (symbol "Keystone_1059_1_1"
+        (symbol "Keystone_1060_1_1"
           (pin power_in line
             (at 0 5.08 90)
             (length 2.54)
             (name "VDD")
             (number "1")
+          )
+          (pin power_in line
+            (at 0 -5.08 270)
+            (length 2.54)
+            (name "GND")
+            (number "2")
           )
         )
         (embedded_fonts no)
@@ -1647,8 +865,9 @@
     		(embedded_fonts no)
     	)
   )
+
   (symbol
-    (lib_id "RF_Module:E73-2G4M04S-52810")
+    (lib_id "nibas_wristband:BM832A")
     (at 199.39 120.65 0)
     (unit 1)
     (exclude_from_sim no)
@@ -1660,57 +879,18 @@
     (property "Reference" "U1" (at 175.26 76.2 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "E73-2G4M04S-52810" (at 175.26 166.37 0)
+    (property "Value" "BM832A" (at 175.26 166.37 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "RF_Module:E73-2G4M04S" (at 199.39 120.65 0)
+    (property "Footprint" "nibas_wristband:BM832A" (at 199.39 120.65 0)
       (effects (font (size 1.27 1.27)) (justify left) (hide yes))
     )
-    (property "Datasheet" "https://www.cdebyte.com/products/E73-2G4M04S1A/2" (at 199.39 120.65 0)
+    (property "Datasheet" "https://www.fanstel.com/s/BM832-p_BM840-Product-Specifications-rr44.pdf" (at 199.39 120.65 0)
       (effects (font (size 1.27 1.27)) (justify left) (hide yes))
     )
-    (pin "0" (uuid "75dcb06d-4023-4364-b34c-cc1b4a5b847d"))
     (pin "1" (uuid "45e8146e-2fc5-41ef-ae4b-63d432a7eb92"))
-    (pin "2" (uuid "0a955572-dd7f-4c0a-9ad2-e0403f58e1c8"))
-    (pin "3" (uuid "692f1b0f-fa9c-40ca-a832-541b9b46d0f1"))
-    (pin "4" (uuid "17cee986-89b1-4808-b981-ab3978fd7560"))
-    (pin "5" (uuid "efc09315-33e1-428c-a20e-4664040d3f84"))
-    (pin "6" (uuid "27189b18-66b0-4aef-863b-cf4cd120252b"))
-    (pin "7" (uuid "69c99ed3-6eb9-410c-baaf-7f907db27bc5"))
-    (pin "8" (uuid "8b2eecb7-8f01-4189-a769-204d90655f77"))
-    (pin "9" (uuid "27e145ab-67ab-48c2-b789-a5f52a666bd3"))
-    (pin "10" (uuid "efb97a42-b500-4ddd-a258-526516f2ac07"))
-    (pin "11" (uuid "ad1cc0bd-e529-4301-8d45-09ce4f3ce581"))
-    (pin "12" (uuid "fc290065-ad6f-430d-8498-5413e259e6d0"))
-    (pin "13" (uuid "0edfef8f-cabd-4a8f-912d-e727b9480205"))
     (pin "14" (uuid "3ef9f51e-8f86-4f76-89c3-d35120c676a0"))
-    (pin "15" (uuid "2412adaf-654a-429d-b23b-215169839ec1"))
-    (pin "16" (uuid "fdf01bec-75fa-48b8-9d41-a8b90eeb5da6"))
-    (pin "17" (uuid "e432a962-2d1f-4b9f-b934-0658c54c2c89"))
-    (pin "18" (uuid "374f1d5a-a56b-43fa-91a8-cc0968e04691"))
-    (pin "19" (uuid "0ebf5b94-95f9-4149-a1a1-bbdc7cfb14cd"))
-    (pin "20" (uuid "ad3081bd-02e1-4232-94a5-562bf7cf7ae5"))
-    (pin "21" (uuid "cac9c0f0-e576-4b87-8beb-9f9eb955138b"))
-    (pin "22" (uuid "baf2649d-0305-4b62-acd9-0830be8d07aa"))
-    (pin "23" (uuid "79d529c0-4474-46d5-9a74-961b01558b03"))
-    (pin "24" (uuid "ef57d81d-389c-47f9-9245-26975cf22c2c"))
-    (pin "25" (uuid "126db486-c898-4290-add0-339ddd5b1a0f"))
-    (pin "26" (uuid "e2eaf2bd-c29e-4efc-ab95-3a746cad45af"))
-    (pin "27" (uuid "cad4a029-846d-41c9-9c9c-9c59dcfb0fe6"))
-    (pin "28" (uuid "e538b03e-99f1-413c-bb29-4cb8544769fc"))
-    (pin "29" (uuid "f5ac2786-f446-44ff-828a-4ecabf1fcd97"))
-    (pin "30" (uuid "992fe62a-254d-4e09-8b97-30bf946d9b4d"))
-    (pin "31" (uuid "42251030-ab77-4f8d-a3bb-3662819d2991"))
-    (pin "32" (uuid "b4b3eaec-c0cf-4461-828e-9e0f2405a17a"))
-    (pin "33" (uuid "0be13a8f-b628-41fc-a239-11337477e4ed"))
-    (pin "34" (uuid "afad8d30-b9a6-4daa-b9fd-5790a18fda7e"))
-    (pin "35" (uuid "6fe9d5e0-9b0f-459c-a695-7c55487e922b"))
-    (pin "36" (uuid "74a966d7-b48c-4425-9c81-9232ee052043"))
-    (pin "37" (uuid "732d3a98-9833-4b13-9b9f-2c9f7cfad37a"))
-    (pin "38" (uuid "329ae7d2-5c9d-4a6a-a9a3-d2a94c30747b"))
-    (pin "39" (uuid "bca1253c-a16e-4f4a-8761-2eda7cb653c7"))
     (pin "40" (uuid "8b42cd7a-7989-4912-8f68-5521c1e791c3"))
-    (pin "41" (uuid "ff120004-44e0-41f9-b615-166bb365d68e"))
     (pin "42" (uuid "fc5854c9-fc4b-4f1f-930d-a0fea1c83d91"))
     (pin "43" (uuid "9538ee3e-871b-49c5-9129-ded8cd9269e1"))
     (instances
@@ -1723,7 +903,7 @@
     )
   )
   (symbol
-    (lib_id "nibas_wristband:Keystone_1059")
+    (lib_id "nibas_wristband:Keystone_1060")
     (at 59.69 59.69 0)
     (unit 1)
     (exclude_from_sim no)
@@ -1735,16 +915,17 @@
     (property "Reference" "BT1" (at 60.96 52.07 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "Keystone_1059" (at 60.96 71.12 0)
+    (property "Value" "Keystone_1060" (at 60.96 71.12 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "nibas_wristband:Keystone_1059_CR2032_SMT" (at 59.69 59.69 0)
+    (property "Footprint" "nibas_wristband:Keystone_1060_CR2032_SMT" (at 59.69 59.69 0)
       (effects (font (size 1.27 1.27)) (justify left) (hide yes))
     )
-    (property "Datasheet" "http://www.keyelco.com/product.cfm/THM-20mm-Holders-All-sizes/1059/product_id/725" (at 59.69 59.69 0)
+    (property "Datasheet" "https://www.keyelco.com/product-pdf.cfm?p=726" (at 59.69 59.69 0)
       (effects (font (size 1.27 1.27)) (justify left) (hide yes))
     )
     (pin "1" (uuid "c0b49aa8-0b6a-4183-b2cb-b9d1d208db7b"))
+    (pin "2" (uuid "1f05447b-aa97-4633-b04e-0548d78001ef"))
     (instances
       (project ""
         (path "/f58b7db1-5022-4b18-8dcd-37416f96cc5e"
@@ -2175,7 +1356,7 @@
   )
   (symbol
     (lib_id "power:GND")
-    (at 199.39 166.37 0)
+    (at 179.07 120.65 0)
     (unit 1)
     (exclude_from_sim no)
     (in_bom yes)
@@ -2183,16 +1364,16 @@
     (dnp no)
     (fields_autoplaced yes)
     (uuid "189496ad-df7d-4725-86b4-ed1bb36f3755")
-    (property "Reference" "#PWR0105" (at 199.39 161.29 0)
+    (property "Reference" "#PWR0105" (at 179.07 115.57 0)
       (effects (font (size 1.27 1.27)) (justify left) (hide yes))
     )
-    (property "Value" "GND" (at 199.39 170.18 0)
+    (property "Value" "GND" (at 179.07 124.46 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "" (at 199.39 166.37 0)
+    (property "Footprint" "" (at 179.07 120.65 0)
       (effects (font (size 1.27 1.27)) (justify left) (hide yes))
     )
-    (property "Datasheet" "" (at 199.39 166.37 0)
+    (property "Datasheet" "" (at 179.07 120.65 0)
       (effects (font (size 1.27 1.27)) (justify left) (hide yes))
     )
     (pin "1" (uuid "df15ce2c-4abf-4ce4-8a5c-5ecd79e8d030"))
@@ -2334,6 +1515,65 @@
     )
   )
   (wire
+    (pts (xy 186.69 115.57) (xy 179.07 115.57))
+    (stroke (width 0) (type default))
+    (uuid "edc8c76b-7e79-4867-9796-a013e2a91791")
+  )
+  (wire
+    (pts (xy 179.07 115.57) (xy 179.07 120.65))
+    (stroke (width 0) (type default))
+    (uuid "d04762c1-d213-4f2e-9bc9-1a9713cfe3dd")
+  )
+  (wire
+    (pts (xy 212.09 118.11) (xy 217.17 118.11))
+    (stroke (width 0) (type default))
+    (uuid "d32f3d56-2e45-46fa-bbab-c994665b8cc8")
+  )
+  (wire
+    (pts (xy 217.17 118.11) (xy 217.17 135.89))
+    (stroke (width 0) (type default))
+    (uuid "eb8c1bee-060e-4022-aee5-35339ce2ef90")
+  )
+  (wire
+    (pts (xy 217.17 135.89) (xy 176.53 135.89))
+    (stroke (width 0) (type default))
+    (uuid "690aa21e-b688-4c4d-96bb-423db413b167")
+  )
+  (wire
+    (pts (xy 212.09 120.65) (xy 219.71 120.65))
+    (stroke (width 0) (type default))
+    (uuid "c88d4dc7-5f36-4c8b-b9b6-a68f1f7746c1")
+  )
+  (wire
+    (pts (xy 219.71 120.65) (xy 219.71 138.43))
+    (stroke (width 0) (type default))
+    (uuid "6372ada8-5a86-4de8-a992-acb8c4e84d92")
+  )
+  (wire
+    (pts (xy 219.71 138.43) (xy 176.53 138.43))
+    (stroke (width 0) (type default))
+    (uuid "1ec19fde-dc75-4da6-9bb7-1c3a5593666a")
+  )
+  (no_connect
+    (at 212.09 115.57)
+    (uuid "6f715aed-4031-46de-b075-70ae995e7aef")
+  )
+  (label
+    "VDD_BAT"
+    (at 186.69 118.11 0)
+    (fields_autoplaced yes)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid "d2d3a363-a330-4dc3-9cf2-740c404e51c5")
+  )
+  (no_connect
+    (at 294.64 118.11)
+    (uuid "8cc3caa7-57fe-4529-9d0a-e77ae843bda1")
+  )
+  (no_connect
+    (at 294.64 123.19)
+    (uuid "ab5ce2af-b654-4e36-ad95-c81126f93b7b")
+  )
+  (wire
     (pts (xy 59.69 54.61) (xy 59.69 39.37))
     (stroke (width 0) (type default))
     (uuid "fae3064a-bb84-4068-84c5-e1089ed5434e")
@@ -2367,16 +1607,6 @@
     (pts (xy 124.46 71.12) (xy 124.46 77.47))
     (stroke (width 0) (type default))
     (uuid "c5ea6bd7-771f-4db6-90d6-87971b18e016")
-  )
-  (wire
-    (pts (xy 199.39 80.01) (xy 199.39 73.66))
-    (stroke (width 0) (type default))
-    (uuid "f53e813d-91f5-42d4-9073-f516e7113ee7")
-  )
-  (wire
-    (pts (xy 199.39 161.29) (xy 199.39 166.37))
-    (stroke (width 0) (type default))
-    (uuid "34808a98-1e13-4507-ad83-a6d09d567a09")
   )
   (wire
     (pts (xy 176.53 135.89) (xy 162.56 135.89))
@@ -2436,13 +1666,6 @@
   )
   (label
     "VDD_BAT"
-    (at 199.39 73.66 0)
-    (fields_autoplaced yes)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid "561dc216-8ab5-4578-bc0f-cc8a4f1d3677")
-  )
-  (label
-    "VDD_BAT"
     (at 149.86 67.31 0)
     (fields_autoplaced yes)
     (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -2476,179 +1699,31 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid "80835650-e50d-49cb-8dfb-05348c3f05e8")
   )
-  (no_connect
-    (at 186.69 80.01)
-    (uuid "33dbf393-86be-4c5b-a011-137ed4e63991")
-  )
-  (no_connect
-    (at 189.23 80.01)
-    (uuid "115021e6-e932-4e3e-a676-7b31dd6a2c25")
-  )
-  (no_connect
-    (at 191.77 80.01)
-    (uuid "e377706b-76c3-46df-97a1-a6661ffc7462")
-  )
-  (no_connect
-    (at 194.31 80.01)
-    (uuid "c7e58f33-f9ee-48e3-8abb-65460556fe5e")
-  )
-  (no_connect
-    (at 204.47 80.01)
-    (uuid "8b99c8f0-c5bf-45e5-9979-4ed482fd0c78")
-  )
-  (no_connect
-    (at 176.53 133.35)
-    (uuid "905bae1b-caa4-4a3b-a2d4-c7215dd6c210")
-  )
-  (no_connect
-    (at 222.25 140.97)
-    (uuid "59db3c35-7bf1-4dc4-a085-61cbe359d677")
-  )
-  (no_connect
-    (at 222.25 143.51)
-    (uuid "05369114-5bda-4918-94c1-b7f04eeda6af")
-  )
-  (no_connect
-    (at 222.25 146.05)
-    (uuid "748c2b2a-783d-4444-a9e5-3f31380189d4")
-  )
-  (no_connect
-    (at 222.25 148.59)
-    (uuid "f7097936-76ad-41f8-85a3-b03fcbe90876")
-  )
-  (no_connect
-    (at 222.25 151.13)
-    (uuid "7a6ded60-0c7d-4bca-8e26-62e24dab7d69")
-  )
-  (no_connect
-    (at 222.25 153.67)
-    (uuid "6d3ef29d-788a-488a-ae85-56b8208769f7")
-  )
-  (no_connect
-    (at 222.25 156.21)
-    (uuid "df9669db-b08a-4677-827d-bf4ea13ca440")
-  )
-  (no_connect
-    (at 222.25 85.09)
-    (uuid "bec86ff9-9409-4dc2-adc6-efaaf2ef2c16")
-  )
-  (no_connect
-    (at 222.25 87.63)
-    (uuid "d4b057f2-1480-4a15-8bf5-a0b03e51ef21")
-  )
-  (no_connect
-    (at 222.25 90.17)
-    (uuid "13d85971-413a-47e9-9933-79862002c419")
-  )
-  (no_connect
-    (at 222.25 92.71)
-    (uuid "d9c17ea4-5837-4f6e-b4c0-11198f3a60d1")
-  )
-  (no_connect
-    (at 222.25 95.25)
-    (uuid "b62d1693-e8b2-4939-a8da-6019d1670364")
-  )
-  (no_connect
-    (at 222.25 97.79)
-    (uuid "8155d8a9-26c3-4e13-9163-cc359e7636cc")
-  )
-  (no_connect
-    (at 222.25 100.33)
-    (uuid "27f8b0b2-beca-42eb-9e03-1f591a0c4185")
-  )
-  (no_connect
-    (at 222.25 102.87)
-    (uuid "ddb0ff0a-d0a6-40ab-af88-e9456630931a")
-  )
-  (no_connect
-    (at 222.25 105.41)
-    (uuid "65805241-43cb-4e4c-9d0a-d5667387bc2f")
-  )
-  (no_connect
-    (at 222.25 107.95)
-    (uuid "5fac236b-d3a7-4e71-9cc7-8f2ba0818305")
-  )
-  (no_connect
-    (at 222.25 110.49)
-    (uuid "40867ce3-15d5-46c4-9065-4098fad27752")
-  )
-  (no_connect
-    (at 222.25 113.03)
-    (uuid "9ce6d713-188f-4194-9d3a-a4bc57e03e53")
-  )
-  (no_connect
-    (at 222.25 115.57)
-    (uuid "6fe8bb4c-5b9b-4080-9b45-5781fa46593b")
-  )
-  (no_connect
-    (at 222.25 118.11)
-    (uuid "0182fd19-379d-4455-aa6c-a59c7e16217c")
-  )
-  (no_connect
-    (at 222.25 120.65)
-    (uuid "dee848f5-9229-4f71-b6f6-fb0e35cd3386")
-  )
-  (no_connect
-    (at 222.25 123.19)
-    (uuid "ebb81cea-c302-4605-9c25-fb9e3b8517e6")
-  )
-  (no_connect
-    (at 222.25 125.73)
-    (uuid "3baf4230-e466-464e-9ab4-fdd0c478b56d")
-  )
-  (no_connect
-    (at 222.25 128.27)
-    (uuid "90c82978-3dbb-486f-be06-f607e610c3ee")
-  )
-  (no_connect
-    (at 222.25 130.81)
-    (uuid "2c6ad2a6-76c3-42a5-af0b-fbbf22c8ee0b")
-  )
-  (no_connect
-    (at 222.25 133.35)
-    (uuid "69555d28-cb68-4e2d-a3e0-c0f6d8cea706")
-  )
-  (no_connect
-    (at 222.25 135.89)
-    (uuid "edf15c15-952c-45e4-846c-81a7e65855c3")
-  )
-  (no_connect
-    (at 222.25 138.43)
-    (uuid "b94d049b-cad1-4c0f-8997-f2be162c8ae0")
-  )
-  (no_connect
-    (at 294.64 118.11)
-    (uuid "8cc3caa7-57fe-4529-9d0a-e77ae843bda1")
-  )
-  (no_connect
-    (at 294.64 123.19)
-    (uuid "ab5ce2af-b654-4e36-ad95-c81126f93b7b")
-  )
-  (text "NOTA 1: Pinout U1 verificado no datasheet oficial Ebyte E73-2G4M04S1A (nRF52810):"
+  (text "NOTA 1: Pinout U1 verificado no datasheet oficial Fanstel BM832A Ver 1.04 (nRF52810):"
     (exclude_from_sim no)
     (at 31.75 190.5 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid "26ba08db-82f0-488c-8816-e364f1350b6f")
   )
-  (text "  https://www.cdebyte.com/products/E73-2G4M04S1A/2 -> VCC=pad16, GND=pads 0/1/2/15/42/43,"
+  (text "  GND=pino 1, VDD=pino 14, P0.21/RST=pino 40 (NC), SWDCLK=pino 42, SWDIO=pino 43."
     (exclude_from_sim no)
     (at 31.75 195.58 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid "4940d8a0-2206-4ba9-9114-25188f233aa2")
   )
-  (text "  SWDCLK=pad37, SWDIO=pad38, P0.21/RST=pad36. A tabela de pads em docs/pesquisa_modulo_ble.md"
+  (text "  Demais pinos do modulo (47 LGA) nao usados pelo firmware -> NC explicito no eschematico."
     (exclude_from_sim no)
     (at 31.75 200.66 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid "ba687973-f853-4ce5-9a08-e35a85a2094b")
   )
-  (text "  diverge (cita SWD em pads 40/41 e RST no pad 33); prevalece o datasheet oficial."
+  (text "  Fonte: tabela de pinos do datasheet Fanstel BM832A Ver 1.04 p.7."
     (exclude_from_sim no)
     (at 31.75 205.74 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid "9704bca3-67fb-449d-b1fd-913e687d7318")
   )
-  (text "NOTA 2: DEC1/DEC2/DEC3/DEC4/DCC sem conexao: desacoplo e DC/DC internos ao modulo;"
+  (text "NOTA 2: Desacoplo (DEC) e DC/DC integrados ao modulo BM832A, sem conexao externa;"
     (exclude_from_sim no)
     (at 31.75 210.82 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -2666,13 +1741,13 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid "e38d075c-9d9d-4c39-9f65-ef10d590399e")
   )
-  (text "NOTA 4: Layout: keep-out de cobre sob a antena PCB integrada do modulo (y < -8,85 mm do"
+  (text "NOTA 4: Layout: antena PCB integrada do BM832A (lado do pino 1) exige overhang de 4,4 mm"
     (exclude_from_sim no)
     (at 31.75 226.06 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid "6e685e1a-5928-498d-bd03-9648eab42142")
   )
-  (text "  footprint RF_Module:E73-2G4M04S); ferrite SHLD1 entre BT1 e a bobina NFC TAG1; PCB 2"
+  (text "  alem da borda do plano GND da PCB (datasheet Fanstel Ver 1.04 p.11); ferrite SHLD1 entre BT1 e a bobina NFC TAG1; PCB 2"
     (exclude_from_sim no)
     (at 31.75 231.14 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -2714,7 +1789,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid "5edb760a-ae43-453b-8fca-e23448e8a532")
   )
-  (text "NOTA 7: ERC: regra pin_not_driven = ignore (projeto): unico pino input e SWDCLK (pad37),"
+  (text "NOTA 7: ERC: regra pin_not_driven = ignore (projeto): unico pino input e SWDCLK (pino 42),"
     (exclude_from_sim no)
     (at 31.75 266.7 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -2743,5 +1818,42 @@
     (at 31.75 284.48 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid "57afcfec-6643-438b-9e4a-e40b6cff2c95")
+  )
+  (symbol
+    (lib_id "power:GND")
+    (at 59.69 77.47 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid "0204623b-98c3-4dc2-8aca-3e5e7d0a798f")
+    (property "Reference" "#PWR0108" (at 59.69 72.39 0)
+      (effects (font (size 1.27 1.27)) (justify left) (hide yes))
+    )
+    (property "Value" "GND" (at 59.69 81.28 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "" (at 59.69 77.47 0)
+      (effects (font (size 1.27 1.27)) (justify left) (hide yes))
+    )
+    (property "Datasheet" "" (at 59.69 77.47 0)
+      (effects (font (size 1.27 1.27)) (justify left) (hide yes))
+    )
+    (pin "1" (uuid "5577935f-331b-4096-bcef-30ce4ce0ffbb"))
+    (instances
+      (project ""
+        (path "/f58b7db1-5022-4b18-8dcd-37416f96cc5e"
+          (reference "#PWR0108")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts (xy 59.69 64.77) (xy 59.69 77.47))
+    (stroke (width 0) (type default))
+    (uuid "9fe5d87d-0a26-439f-9925-affd53e77662")
   )
 )

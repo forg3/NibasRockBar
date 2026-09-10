@@ -1,0 +1,5 @@
+Ref,Val,Package,PosX,PosY,Rot,Side
+"J1","PinHeader_1x02_P2.54mm_Vertical","PinHeader_1x02_P2.54mm_Vertical",71.320000,-84.500000,0.000000,top
+"R1","R_0603_1608Metric","R_0603_1608Metric",78.500000,-92.000000,-90.000000,top
+"SW1","SW_PUSH_6mm","SW_PUSH_6mm",76.500000,-99.000000,0.000000,top
+"U1","ESP32-DevKitC-32E","ESP32-DevKitC-32E_Carrier",100.000000,-100.000000,-90.000000,top

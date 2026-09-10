@@ -1,0 +1,261 @@
+(footprint "Keystone_1060_CR2032_SMT"
+  (version 20260206)
+  (generator "pcbnew")
+  (generator_version "10.0.6")
+  (layer "F.Cu")
+  (descr "Keystone 1060 SMT (Vibra-Fit) low-profile coin cell holder for CR2032/CR2025. Dims per official Keystone drawing 1060 rev C (https://www.keyelco.com/product-pdf.cfm?p=726): mounting pads 11.00x7.01 mm center + 2.59x3.61 mm end tabs, end-tab centers +/-14.655 mm (29.31 mm c-c); body 28.40x22.00 mm, H 5.51 mm, tabs to 31.90 mm overall. Center pad and one end tab are the negative terminal (spring contact on battery - face); the other end tab is positive (grips battery + can rim; battery inserts + face up). NOTE: Keystone 1059 is the THM variant - this SMT footprint was previously misnumbered 1059 with unverified dims.")
+  (tags "Keystone 1060 CR2032 CR2025 coin cell holder SMT Vibra-Fit")
+  (property "Reference" "REF**"
+    (at 0 12.7 0)
+    (layer "F.SilkS")
+    (uuid "2857d2a8-7394-4817-a9c4-e3c051f89044")
+    (effects
+      (font
+        (size 1 1)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Value" "Keystone_1060"
+    (at 0 -12.7 0)
+    (layer "F.Fab")
+    (uuid "f3e1c417-369b-4c90-a54b-eabdef78bfaf")
+    (effects
+      (font
+        (size 1 1)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Datasheet" "https://www.keyelco.com/product-pdf.cfm?p=726"
+    (at 0 0 0)
+    (unlocked yes)
+    (layer "F.Fab")
+    (hide yes)
+    (uuid "8853d34c-d92d-4eb4-8212-15a3f5509cac")
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Description" "Keystone 1060 SMT (Vibra-Fit) coin cell holder for CR2032/CR2025, dims verified per official Keystone drawing 1060 rev C."
+    (at 0 0 0)
+    (unlocked yes)
+    (layer "F.Fab")
+    (hide yes)
+    (uuid "0ac6dd62-276e-4440-82d4-955d5936217b")
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (attr smd)
+  (duplicate_pad_numbers_are_jumpers no)
+  (fp_line
+    (start -14.3 -11.1)
+    (end 14.3 -11.1)
+    (stroke
+      (width 0.12)
+      (type solid)
+    )
+    (layer "F.SilkS")
+    (uuid "b91e871a-6763-40c8-a3a8-0cfd35957040")
+  )
+  (fp_line
+    (start -14.3 11.1)
+    (end 14.3 11.1)
+    (stroke
+      (width 0.12)
+      (type solid)
+    )
+    (layer "F.SilkS")
+    (uuid "c8bbfab2-98fc-4375-8183-47c3958c0364")
+  )
+  (fp_line
+    (start -14.2 -11)
+    (end -14.2 11)
+    (stroke
+      (width 0.1)
+      (type solid)
+    )
+    (layer "F.Fab")
+    (uuid "079cfc82-761a-4551-8740-76f4d8731456")
+  )
+  (fp_line
+    (start -14.2 11)
+    (end 14.2 11)
+    (stroke
+      (width 0.1)
+      (type solid)
+    )
+    (layer "F.Fab")
+    (uuid "2f16caad-b403-4843-8e64-da0a0befdb26")
+  )
+  (fp_line
+    (start -15.95 -1.805)
+    (end -14.2 -1.805)
+    (stroke
+      (width 0.1)
+      (type solid)
+    )
+    (layer "F.Fab")
+    (uuid "0de8755d-4d14-440e-b1af-3a908f218168")
+  )
+  (fp_line
+    (start -15.95 1.805)
+    (end -15.95 -1.805)
+    (stroke
+      (width 0.1)
+      (type solid)
+    )
+    (layer "F.Fab")
+    (uuid "16f01fbc-9357-42d9-9a4e-d9d1b083cc30")
+  )
+  (fp_line
+    (start -14.2 1.805)
+    (end -15.95 1.805)
+    (stroke
+      (width 0.1)
+      (type solid)
+    )
+    (layer "F.Fab")
+    (uuid "10f9707d-f281-4ddd-8391-8e2861f0768d")
+  )
+  (fp_line
+    (start 14.2 -11)
+    (end -14.2 -11)
+    (stroke
+      (width 0.1)
+      (type solid)
+    )
+    (layer "F.Fab")
+    (uuid "593690af-5e25-4734-ae03-6415bd0a362e")
+  )
+  (fp_line
+    (start 14.2 -1.805)
+    (end 15.95 -1.805)
+    (stroke
+      (width 0.1)
+      (type solid)
+    )
+    (layer "F.Fab")
+    (uuid "8d8d16f4-be76-4f0a-97a2-a8fc7af8ba2b")
+  )
+  (fp_line
+    (start 15.95 -1.805)
+    (end 15.95 1.805)
+    (stroke
+      (width 0.1)
+      (type solid)
+    )
+    (layer "F.Fab")
+    (uuid "b3e25565-2791-4cb8-9d97-a1bdc5545e70")
+  )
+  (fp_line
+    (start 15.95 1.805)
+    (end 14.2 1.805)
+    (stroke
+      (width 0.1)
+      (type solid)
+    )
+    (layer "F.Fab")
+    (uuid "d1207d66-1250-4ae0-8923-462599329515")
+  )
+  (fp_circle
+    (center 0 0)
+    (end 10 0)
+    (stroke
+      (width 0.15)
+      (type solid)
+    )
+    (fill no)
+    (layer "Dwgs.User")
+    (uuid "1091e199-c479-4f86-8e9a-467a5cfc19bd")
+  )
+  (fp_rect
+    (start -5.75 -3.75)
+    (end 5.75 3.75)
+    (stroke
+      (width 0.05)
+      (type solid)
+    )
+    (layer "F.CrtYd")
+    (uuid "a1a37f89-c5c1-4552-8db3-2859dac5d16")
+  )
+  (fp_rect
+    (start 13.31 -2.055)
+    (end 16.2 2.055)
+    (stroke
+      (width 0.05)
+      (type solid)
+    )
+    (layer "F.CrtYd")
+    (uuid "a1a37f89-c5c1-4552-8db3-2859dac5d17")
+  )
+  (fp_rect
+    (start -16.2 -2.055)
+    (end -13.1 2.055)
+    (stroke
+      (width 0.05)
+      (type solid)
+    )
+    (layer "F.CrtYd")
+    (uuid "a1a37f89-c5c1-4552-8db3-2859dac5d18")
+  )
+  (fp_text user "+"
+    (at 14.655 5.8 0)
+    (layer "F.SilkS")
+    (uuid "16f01fbc-9357-42d9-9a4e-d9d1b083cc31")
+    (effects
+      (font
+        (size 1.524 1.524)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text user "-"
+    (at -14.655 5.8 0)
+    (layer "F.SilkS")
+    (uuid "16f01fbc-9357-42d9-9a4e-d9d1b083cc32")
+    (effects
+      (font
+        (size 1.524 1.524)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text user "${REFERENCE}"
+    (at 0 12.7 0)
+    (layer "F.Fab")
+    (uuid "16f01fbc-9357-42d9-9a4e-d9d1b083cc33")
+    (effects
+      (font
+        (size 1 1)
+        (thickness 0.15)
+      )
+    )
+  )
+  (pad "1" smd rect
+    (at 14.655 0)
+    (size 2.59 3.61)
+    (layers "F.Cu" "F.Mask" "F.Paste")
+    (uuid "16f01fbc-9357-42d9-9a4e-d9d1b083cc41")
+  )
+  (pad "2" smd rect
+    (at 0 0)
+    (size 11 7.01)
+    (layers "F.Cu" "F.Mask" "F.Paste")
+    (uuid "16f01fbc-9357-42d9-9a4e-d9d1b083cc42")
+  )
+  (pad "3" smd rect
+    (at -14.655 0)
+    (size 2.59 3.61)
+    (layers "F.Cu" "F.Mask" "F.Paste")
+    (uuid "16f01fbc-9357-42d9-9a4e-d9d1b083cc43")
+  )
+  (embedded_fonts no)
+)

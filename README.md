@@ -27,10 +27,17 @@ identifica o cliente e ajuda a equipe a localizá-lo mais rápido.
 | `netlist_conexoes.md` | Tabela de conexões pino a pino, pronta para KiCad |
 | `RELATORIO_REVISAO_TECNICA.md` | Revisão técnica completa (matemática de bateria, RF, RSSI, NFC) |
 | `firmware/main.c` | Firmware da pulseira (nRF5 SDK) — beacon BLE + leitura de bateria |
-| `gateway_esp32/gateway_esp32.ino` | Firmware do gateway de teto (scan BLE + filtro EWMA + MQTT) |
+| `firmware/nrf/` | Projeto de compilação nRF5 SDK 17.1.0 (pca10040e/s112, nRF52810 + SoftDevice S112 7.2.0) — compila com `make -C firmware/nrf/armgcc` (requer `arm-none-eabi-gcc`) |
+| `gateway_esp32/gateway_esp32.ino` | Firmware do gateway de teto (scan BLE + filtro EWMA + MQTT) — compila no Arduino IDE com esquema de partição Huge APP |
 | `backend/app.py` | Servidor local (FastAPI) — localização por RSSI + inventário de pulseiras |
 | `backend/deli_adapter.py` | Integração real com a API pública do Deli (plataforma Fudo) |
 | `integracao_deli/README.md` | Como habilitar e usar a API do Deli |
+| `hardware/kicad/docs/decisao_forma_fisica.md` | Decisão da variante A: troca do módulo E73 pelo Fanstel BM832A |
+| `hardware/kicad/docs/layout_status.md` | Estado atual dos layouts das placas |
+| `hardware/kicad/docs/procedimento_vna.md` | Procedimento de tuning da antena/RF com VNA |
+| `hardware/kicad/docs/cotacao_fabricacao.md` | Cotação de fabricação (com GATE — nada submetido ainda) |
+| `hardware/kicad/*/exports/fab/` | Pacote de fabricação gerado (Gerbers, furação, BOM, posição) |
+| `docs/security-audit/relatorio-auditoria-seguranca.pdf` | Relatório da auditoria de segurança |
 
 ## Arquitetura (visão geral)
 
@@ -55,6 +62,7 @@ cd backend
 pip install -r requirements.txt
 export DELI_API_KEY="..."
 export DELI_API_SECRET="..."
+export NIBAS_API_KEY="..."  # exigida em toda chamada via header X-API-Key
 uvicorn app:app --host 0.0.0.0 --port 8000
 ```
 
@@ -64,15 +72,38 @@ Requer um broker MQTT local (ex: Mosquitto) publicando em `pub/telemetria/#`.
 
 - Disco Ø32 mm, cápsula IP67, pulseira esportiva de silicone.
 - Identificação: NXP NTAG213 (inlay pronto, 25 mm).
-- Localização: módulo BLE certificado (SoC Nordic nRF52810/832).
-- Bateria: CR2032, ~1,5–2 anos de autonomia estimada.
+- Localização (variante A): módulo **Fanstel BM832A** (SoC Nordic nRF52810) — substitui o
+  Ebyte E73, decisão documentada em `hardware/kicad/docs/decisao_forma_fisica.md`.
+- Bateria: CR2032 com suporte **Keystone 1060** (SMD — o 1059 é THM e não serve),
+  ~1,5–2 anos de autonomia estimada.
 - Fabricação recomendada: PCBWay ou JLCPCB, regime turnkey.
 
 Detalhes completos, matemática de engenharia e decisões de projeto: ver
 `RELATORIO_REVISAO_TECNICA.md` e `PROPOSTA_SMART_BADGE_PUB_v3.md`.
+Estado dos layouts: `hardware/kicad/docs/layout_status.md`.
+Tuning da antena/RF: `hardware/kicad/docs/procedimento_vna.md`.
+
+## Fabricação
+
+- Pacote de fabricação gerado em `hardware/kicad/*/exports/fab/` (Gerbers, furação, BOM, posição).
+- Cotação e checklist de submissão em `hardware/kicad/docs/cotacao_fabricacao.md` —
+  **GATE: nada submetido a fabricante ainda.**
+
+## Segurança
+
+- O backend exige autenticação em toda chamada via header `X-API-Key` (chave em `NIBAS_API_KEY`).
+- Relatório da auditoria de segurança em `docs/security-audit/relatorio-auditoria-seguranca.pdf`.
 
 ## Status
 
 Fase de especificação e protótipo — orçamento para lote de 5 unidades de teste em
 `ORCAMENTO_PROTOTIPAGEM.md`. Integração com o Deli implementada e documentada, pendente de
 credenciais reais (`DELI_API_KEY`/`DELI_API_SECRET`) para teste de ponta a ponta.
+
+## Pendências
+
+- ANATEL: certificado do módulo não localizado — item aberto (não bloqueia bancada;
+  homologação a confirmar antes de operar com público).
+- BOM raiz: corrigir Keystone 1059 → 1060.
+- Alimentação do BM832A: indutores do DC/DC integrados ao módulo (fonte: página oficial
+  Fanstel) — fecha o item aberto #2.

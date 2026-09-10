@@ -3,7 +3,7 @@
   (generator "pcbnew")
   (generator_version "10.0.6")
   (layer "B.Cu")
-  (descr "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1059 positive holder. Design per project requirements (designator_map.md).")
+  (descr "SMT pad ENIG on PCB backside for CR2032 negative contact, pairs with Keystone 1060 positive end tab. Design per project requirements (designator_map.md).")
   (tags "battery contact negative CR2032 SMT pad ENIG")
   (property "Reference" "REF**"
     (at 0 -7.62 0)
