@@ -31,8 +31,7 @@
 // vale por device e sobrevive a reflash (so apaga com erase flash). Sem espacos
 // nos valores (parse simples por espaco). A senha NUNCA e ecoada de volta.
 // Apos salvar, reinicie o ESP32 para reconectar com os novos valores.
-// TODO: provisioning via Preferences/NVS - gravar os valores por device na flash
-// (NVS do ESP32) no primeiro boot e ler aqui; nao commitar credenciais reais.
+// Provisioning via NVS implementado; ver bloco CONFIG.
 char WIFI_SSID[33]     = "PUB_WIFI";       // NVS "nibas"/ssid (max 32 chars)
 char WIFI_PASSWORD[64] = "SENHA_AQUI";     // NVS "nibas"/pass (max 63 chars)
 char MQTT_BROKER[64]   = "192.168.0.10";   // NVS "nibas"/broker - IP do servidor local (Mosquitto)
