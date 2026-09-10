@@ -7,3 +7,9 @@ __pycache__/
 .bob/
 .opencode/
 hardware/kicad/_spike/
+*.db
+*.sqlite
+*.sqlite3
+firmware/**/_build/
+*.bin
+*.hex

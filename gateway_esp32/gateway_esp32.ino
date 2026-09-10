@@ -17,8 +17,8 @@
 #include <BLEScan.h>
 #include <BLEAdvertisedDevice.h>
 #include <WiFi.h>
-#include <PubSubClient.h>
-#include <ArduinoJson.h>
+#include <PubSubClient.h> // compilacao validada com PubSubClient 2.8 (nao trocar sem testar)
+#include <ArduinoJson.h>  // compilacao validada com ArduinoJson 7.4.3; StaticJsonDocument e API v6 com deprecation na v7 (manter ate migracao dedicada para JsonDocument)
 #include <map>
 
 // ---------- CONFIG (placeholders - preencher por device antes do deploy) ----------
@@ -28,11 +28,15 @@ const char* WIFI_SSID      = "PUB_WIFI";
 const char* WIFI_PASSWORD  = "SENHA_AQUI";
 const char* MQTT_BROKER    = "192.168.0.10";     // IP do servidor local (Mosquitto)
 const int   MQTT_PORT      = 1883;
+// TODO: preencher por device antes do deploy; vazio = sem auth (comportamento atual).
+const char* MQTT_USER      = "";
+const char* MQTT_PASSWORD  = "";
 const char* GATEWAY_ID     = "gateway_teto_02";  // TROCAR por gateway - identifica a zona
 const char* MFG_COMPANY_ID_HEX = "FFFF";         // referencial: deve bater com MANUFACTURER_ID em firmware/main.c
 
 // Filtro do manufacturer data - deve bater com MANUFACTURER_ID (0xFFFF) em firmware/main.c
 const uint16_t EXPECTED_COMPANY_ID = 0xFFFF;
+const uint8_t EXPECTED_PROTO = 1;
 
 const unsigned long CONNECT_TIMEOUT_MS = 15000;  // timeout de conexao Wi-Fi/MQTT
 
@@ -72,7 +76,14 @@ bool connectMQTT() {
     uint32_t t0 = millis();
     while (!mqttClient.connected()) {
         String clientId = String("gw_") + GATEWAY_ID;
-        if (mqttClient.connect(clientId.c_str())) return true;
+        // Para TLS usar WiFiClientSecure no lugar de WiFiClient (fora do escopo: requer cert + NTP).
+        bool ok;
+        if (strlen(MQTT_USER) > 0) {
+            ok = mqttClient.connect(clientId.c_str(), MQTT_USER, MQTT_PASSWORD);
+        } else {
+            ok = mqttClient.connect(clientId.c_str());
+        }
+        if (ok) return true;
         if (millis() - t0 >= CONNECT_TIMEOUT_MS) return false;
         delay(1000);
     }
@@ -101,6 +112,9 @@ class GatewayCallback : public BLEAdvertisedDeviceCallbacks {
         // company_id little-endian (mesma ordem escrita pelo ble_advdata_encode no firmware)
         uint16_t company_id = (uint8_t)manuf[0] | ((uint8_t)manuf[1] << 8);
         if (company_id != EXPECTED_COMPANY_ID) return; // advertiser desconhecido: descarta
+
+        uint8_t proto_version = (uint8_t)manuf[2];
+        if (proto_version != EXPECTED_PROTO) return; // versao de protocolo desconhecida: descarta
 
         std::string mac = advertisedDevice.getAddress().toString().c_str(); // toString() = String no core 3.x
         int rssi = advertisedDevice.getRSSI();
@@ -150,6 +164,10 @@ void publishTelemetry(const std::string& mac, float rssi_filt, int rssi_raw,
 // ---------- Setup / Loop ----------
 void setup() {
     Serial.begin(115200);
+    // Aviso de credencial placeholder — nao trava o boot, so alerta via Serial.
+    if (strcmp(WIFI_PASSWORD, "SENHA_AQUI") == 0) {
+        Serial.println("ATENÇÃO: credenciais placeholder — configure antes do deploy");
+    }
     if (!connectWiFi()) {
         // Timeout - nao trava o boot; reconnect e retomado no loop().
         Serial.println("WiFi: timeout na conexao - seguindo sem rede");

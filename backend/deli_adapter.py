@@ -30,9 +30,13 @@ Divisao de responsabilidade (mantida do design anterior):
     venda por conta própria, isso evitaria o controle de pagamento do Deli.
 """
 
+import logging
 import os
+import re
 import time
 import requests
+
+logger = logging.getLogger(__name__)
 
 DELI_AUTH_URL = "https://auth.fu.do/api"
 DELI_BASE_URL = "https://api.fu.do/v1alpha1"
@@ -72,7 +76,13 @@ class DeliClient:
             timeout=10,
         )
         if resp.status_code != 200:
-            raise DeliAuthError(f"Falha ao autenticar no Deli: {resp.status_code} {resp.text}")
+            logger.error(
+                "Falha ao autenticar no Deli: %s %s",
+                resp.status_code, resp.text,
+            )
+            raise DeliAuthError(
+                f"Falha ao autenticar no Deli: {resp.status_code} (POST {DELI_AUTH_URL})"
+            )
         data = resp.json()
         self._token = data["token"]
         self._token_exp = float(data["exp"])
@@ -89,7 +99,11 @@ class DeliClient:
         resp = requests.request(method, f"{DELI_BASE_URL}{path}",
                                  headers=self._headers(), timeout=10, **kwargs)
         if resp.status_code >= 400:
-            raise DeliAPIError(f"{method} {path} -> {resp.status_code}: {resp.text}")
+            logger.error(
+                "%s %s -> %s: %s",
+                method, path, resp.status_code, resp.text,
+            )
+            raise DeliAPIError(f"{method} {path} -> {resp.status_code}")
         return resp.json() if resp.content else None
 
     # ---------------- Operacoes usadas pelo fluxo da pulseira ----------------
@@ -123,6 +137,8 @@ class DeliClient:
 
     def consultar_comanda(self, sale_id: str) -> dict:
         """GET /sales/{id} — retorna saleState e total atual da comanda."""
+        if not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", str(sale_id)):
+            raise DeliAPIError(f"sale_id com formato invalido: {sale_id!r}")
         result = self._request("GET", f"/sales/{sale_id}")
         attrs = result["data"]["attributes"]
         return {

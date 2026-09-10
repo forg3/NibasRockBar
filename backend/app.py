@@ -12,7 +12,9 @@ Executar:  uvicorn app:app --host 0.0.0.0 --port 8000
 Requer:    paho-mqtt, fastapi, uvicorn (ver requirements.txt)
 """
 
+import hmac
 import json
+import os
 import sqlite3
 import threading
 import time
@@ -20,10 +22,29 @@ from contextlib import contextmanager
 from dataclasses import dataclass, field
 
 import paho.mqtt.client as mqtt
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from fastapi import Depends, FastAPI, HTTPException, Path, Request
+from pydantic import BaseModel, Field
 
 from deli_adapter import DeliClient, DeliAPIError, DeliAuthError
+
+# Autenticacao da API: o app do garcom (fora do repo) deve enviar o header
+# "X-API-Key: <NIBAS_API_KEY>" em toda chamada. Chave via env, fail-fast.
+NIBAS_API_KEY = os.environ.get("NIBAS_API_KEY")
+if not NIBAS_API_KEY:
+    raise RuntimeError(
+        "NIBAS_API_KEY nao configurada (variavel de ambiente)"
+    )
+
+
+def verify_api_key(request: Request):
+    """Valida o header X-API-Key contra NIBAS_API_KEY (comparacao constant-time)."""
+    api_key = request.headers.get("X-API-Key")
+    if not api_key or not hmac.compare_digest(api_key, NIBAS_API_KEY):
+        raise HTTPException(
+            status_code=401,
+            detail="API key invalida ou ausente",
+            headers={"WWW-Authenticate": "ApiKey"},
+        )
 
 # Instanciado sob demanda (so falha se realmente for chamado sem credenciais
 # configuradas via DELI_API_KEY/DELI_API_SECRET) — permite rodar o backend
@@ -42,6 +63,14 @@ MQTT_BROKER = "localhost"
 MQTT_PORT = 1883
 MQTT_TOPIC = "pub/telemetria/#"
 DB_PATH = "smartbadge.db"
+
+# Auth MQTT (opcional): se MQTT_USER definido, autentica com usuario/senha.
+# Modo sem auth (default, placeholders vazios) e preservado para dev local.
+# O broker (Mosquitto, fora do repo) precisa de config correspondente
+# (password_file/allow_anonymous) — ver item M4.
+MQTT_USER = os.environ.get("MQTT_USER")
+MQTT_PASSWORD = os.environ.get("MQTT_PASSWORD")
+MQTT_TLS = os.environ.get("MQTT_TLS", "false").lower() == "true"
 
 # Histerese: so troca a mesa atribuida se o novo gateway estiver pelo menos
 # HYSTERESIS_DB mais forte (em dB) do que o gateway atualmente atribuido, e isso
@@ -201,6 +230,10 @@ def start_mqtt_thread():
     client = mqtt.Client()
     client.on_connect = on_connect
     client.on_message = on_message
+    if MQTT_USER:
+        client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
+    if MQTT_TLS:
+        client.tls_set()  # usa certificados CA do sistema
     client.connect(MQTT_BROKER, MQTT_PORT, keepalive=30)
     thread = threading.Thread(target=client.loop_forever, daemon=True)
     thread.start()
@@ -214,8 +247,10 @@ def startup():
     threading.Thread(target=poll_deli_sales, daemon=True).start()
 
 
-@app.get("/localizacao/{mac}")
-def get_localizacao(mac: str):
+@app.get("/localizacao/{mac}", dependencies=[Depends(verify_api_key)])
+def get_localizacao(
+    mac: str = Path(pattern=r"^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$"),
+):
     with _state_lock:
         state = _tag_states.get(mac)
     if state is None or state.current_gateway is None:
@@ -231,19 +266,19 @@ def get_localizacao(mac: str):
 
 
 class CheckinRequest(BaseModel):
-    nfc_uid: str
-    ble_mac: str
-    table_id: str          # id da mesa/recepcao no Deli (GET /tables para listar)
-    waiter_id: str | None = None
-    people: int = 1
-    customer_name: str | None = None
+    nfc_uid: str = Field(pattern=r"^[A-Fa-f0-9]{8,14}$")
+    ble_mac: str = Field(pattern=r"^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$")
+    table_id: str = Field(min_length=1, max_length=64, pattern=r"^[A-Za-z0-9_-]+$")  # id da mesa/recepcao no Deli (GET /tables para listar)
+    waiter_id: str | None = Field(default=None, max_length=64)
+    people: int = Field(default=1, ge=1, le=50)
+    customer_name: str | None = Field(default=None, max_length=120)
 
 
 class CheckoutRequest(BaseModel):
-    nfc_uid: str
+    nfc_uid: str = Field(pattern=r"^[A-Fa-f0-9]{8,14}$")
 
 
-@app.post("/pulseiras/checkin")
+@app.post("/pulseiras/checkin", dependencies=[Depends(verify_api_key)])
 def checkin_pulseira(req: CheckinRequest):
     with db_conn() as conn:
         row = conn.execute(
@@ -275,7 +310,7 @@ def checkin_pulseira(req: CheckinRequest):
     return {"nfc_uid": req.nfc_uid, "status": "em_uso", "comanda_id": comanda_id}
 
 
-@app.post("/pulseiras/checkout")
+@app.post("/pulseiras/checkout", dependencies=[Depends(verify_api_key)])
 def checkout_pulseira(req: CheckoutRequest):
     """Liberacao manual (fallback). O caminho normal é automatico — ver
     poll_deli_sales() abaixo, que libera a pulseira assim que o caixa fecha
@@ -320,7 +355,7 @@ def poll_deli_sales():
                 continue  # tenta de novo no proximo ciclo
 
 
-@app.get("/pulseiras")
+@app.get("/pulseiras", dependencies=[Depends(verify_api_key)])
 def listar_pulseiras():
     with db_conn() as conn:
         rows = conn.execute(
@@ -332,7 +367,7 @@ def listar_pulseiras():
     ]
 
 
-@app.get("/localizacoes")
+@app.get("/localizacoes", dependencies=[Depends(verify_api_key)])
 def get_todas_localizacoes():
     with _state_lock:
         agora = time.time()

@@ -1,3 +1,10 @@
+# Versoes exatas validadas (nao trocar sem testar — upgrades quebrariam o build).
+# Dependencias pinadas abaixo com ==; manter como esta ate revisao dedicada.
+# Nota: paho-mqtt 1.6 e ramo antigo. A migracao para 2.x exige
+# `CallbackAPIVersion` em mqtt.Client() (breaking change da API de callbacks).
+# TODO: planejar migracao paho-mqtt 1.6 -> 2.x (ajustar CallbackAPIVersion + testar reconnect).
+# Nota deploy: gerar lock com `pip freeze > requirements.lock` na maquina de deploy
+# para registrar as versoes transitivas efetivamente instaladas.
 fastapi==0.115.*
 uvicorn[standard]==0.32.*
 paho-mqtt==1.6.*
