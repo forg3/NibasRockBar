@@ -79,3 +79,20 @@ O U1 usa `PinHeader_2x19_P2.54mm_Vertical` com **2,54 mm entre fileiras**, mas o
   - `python3 hardware/kicad/gateway_esp32/gen_board_gateway.py`
 - **Re-checar DRC:** comandos do §1 (JSONs vão para `exports/`).
 - Regra do ambiente segue valendo: geração/validação por `kicad-cli` + `pcbnew`; o GUI KiCad 10 só para acabamento manual (roteador interativo da Discreta).
+
+---
+
+## 6. Migração 4 camadas (variante discreta)
+
+A variante discreta foi migrada de 2 para 4 camadas (F.Cu/In1.Cu/In2.Cu/B.Cu)
+para resolver o bloqueio de roteamento causado pelas autostradas de potência
+(GND e VDD_BAT) nos corredores de sinal.
+
+**Stackup:** F.Cu (sinal) / In1.Cu (plano GND) / In2.Cu (plano VDD_BAT) / B.Cu (sinal+GND)
+**Espessura:** 0,8 mm
+**Mudanças:** GND e VDD_BAT removidos do roteamento por trilha; vias blind F.Cu→In1/In2
+conectam pads de potência aos planos internos. Sinais (RF, cristal, DEC, SWD, DCC, RESET)
+roteados em F.Cu/B.Cu com mais espaço disponível.
+
+**Status:** Script gen_board_v2.py atualizado para 4L; board_builder.py estendido com
+suporte a camadas internas, planos e vias blind/buried.

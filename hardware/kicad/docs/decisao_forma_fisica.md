@@ -84,3 +84,23 @@ resolvida.
 - PCBWay — regras de fabricação (idem)
 - Fanstel — [página oficial BM832A](https://www.fanstel.com/bm832a-bluetooth-5-module) (dimensões, preço, indutores DC/DC
   integrados, certificações)
+
+## Adaptação AirTag (prototipagem)
+
+Para validação mecânica rápida, a pulseira PCB Ø32 mm pode ser instalada em
+shells de pulseira AirTag genéricos (Ø31.9 mm interno ≈ Ø32 mm externo da PCB).
+
+**Especificação AirTag:** 31.9 mm diâmetro × 8.0 mm espessura, IP67, CR2032.
+**Nosso stack-up estimado:** PCB 0,8 mm + bateria 3,2 mm + módulo BLE 1,5–2 mm +
+inlay NFC 0,3 mm + ferrite 0,5 mm ≈ 6,3–7,0 mm (cabe na cavidade de 8,5 mm).
+
+**Produtos identificados:**
+- Silicone waterproof bracelet (Amazon B0C6B2N4WV): ~$8 USD / 2-pack
+- Full-coverage silicone wristband (Amazon B0C4L1YPVR): ~$15 USD / 2-pack
+- Nylon strap + TPU holder (Amazon B09DVTRM4F): ~$10 USD / 2-pack
+
+**Vantagens:** RF-transparente (silicone não bloqueia BLE/NFC), fundo plano para
+inlay NFC adesivo, custo baixo, supply chain existente.
+
+**Recomendação:** Comprar 2–3 shells para teste de encaixe; se OK, encomendar
+molde de silicone customizado para produção (MOQ ~100 un, ~$200–500 molde).
