@@ -29,7 +29,7 @@ Comandos `kicad-cli` validados no 10.0.6 (detalhes em `layout_approach.md` §4):
 | DRC error (`--severity-error`) | **27** | **26** | **0** |
 | Composição dos errors | 12 courtyards_overlap (7 envolvem BT1 — footprint Keystone 1059 com dims UNVERIFIED; 5 outros pares: ANT1×C3, C10×C6, C8×X1, L2×L3, L2×U1) · 8 copper_edge_clearance (pads/trilhas na borda) · 6 clearance · 1 solder_mask_bridge | 11 copper_edge_clearance (10 pads físicos do E73 na periferia + 1 resíduo ~0,02 mm no stub VDD_BAT→U1.16) · 6 clearance · 5 courtyards_overlap (BT1×U1 — física do Ø32) · 4 solder_mask_bridge | — |
 | Unconnected | **22** | **0** | **0** |
-| — rotas de sinal pendentes | **13** (exigem re-placement dos passivos, não mais roteamento — ver §4a) | 0 | 0 |
+| — rotas de sinal pendentes | **7** (com 4L, GND e VDD_BAT saíram dos corredores F.Cu/B.Cu — ver §4a) | 0 | 0 |
 | — GND sem stitch livre | **9** (pads GND em F.Cu sem via para a zona B.Cu; gerador registra 8 pads sem direção livre: C2.2/C4.2/C5.2/C6.2/C7.2/C8.2/U1.20/U1.29) | 0 (punch list fechada: C1.2/C2.2 com via de costura) | 0 |
 | Parity (`--schematic-parity`) | 0 | 0 | 0 |
 | Curtos | 0 (0 `shorting_items` no estado atual) | 0 | 0 |
@@ -52,8 +52,8 @@ Nota de rastreabilidade: a auditoria da Discreta registrou 284 errors no board c
 
 ## 4. Pendências honestas (e o que é preciso para resolver)
 
-### a) Discreta — 13 rotas de sinal pendentes + courtyards BT1
-As 13 pendências (VDD_BAT U1.25↔U1.32↔U1.9, NET_ANT L1.1↔U1.19, NET_XC1 C1.1↔U1.23↔X1.1, NET_DCC L2.2↔U1.31, NET_DEC4 C10.1↔L3.2↔U1.30, NET_DEC1 C5.1↔U1.1, NET_DEC2 C7.1↔U1.21, NET_DEC3 C6.1↔U1.22, NET_SWDCLK TP3.1↔U1.17, NET_SWDIO TP2.1↔U1.18) não são falta de roteador: o A* já fez 2 passadas e não há caminho livre com o placement atual. **Resolver com re-placement dos passivos** (afastar caps de decoupling/cristal do muro de pads do U1) e regenerar, **ou** acabamento manual no GUI KiCad 10 com o roteador interativo. Os 9 GND sem stitch precisam de vias em direções hoje bloqueadas — mesmo tratamento. Os 12 courtyards_overlap: conferir o drawing oficial da **Keystone 1059** (footprint custom `nibas_wristband:Keystone_1059_CR2032_SMT` está marcado **UNVERIFIED** no símbolo) antes de tratar como erro real de placement.
+### a) Discreta — 7 rotas de sinal pendentes + courtyards BT1
+Após a migração para 4 camadas (§6), GND e VDD_BAT saíram dos corredores F.Cu/B.Cu para planos internos, liberando espaço para o A* router. As 7 rotas restantes (NET_XC2, NET_DCC, NET_DEC4, NET_DEC3, NET_SWDCLK, NET_SWDIO, NET_RESET) ainda dependem de **re-placement dos passivos** (afastar caps de decoupling/cristal do muro de pads do U1) e regenerar, **ou** acabamento manual no GUI KiCad 10 com o roteador interativo. Os 9 GND sem stitch precisam de vias em direções hoje bloqueadas — mesmo tratamento. Os 12 courtyards_overlap: conferir o drawing oficial da **Keystone 1059** (footprint custom `nibas_wristband:Keystone_1059_CR2032_SMT` está marcado **UNVERIFIED** no símbolo) antes de tratar como erro real de placement.
 
 ### b) Módulo — E73 não cabe no Ø32
 Os pads U1.15/16/27/28 ficam a r=16,24–16,86 mm do centro — **fisicamente fora do disco Ø32** (módulo 17,5×28,7 mm + holder CR2032 15,24×30,48 mm não cabem lado a lado). É decisão de projeto, não de rota: (1) cápsula maior que Ø32; (2) módulo menor — verificar variante do E73 (ex. E73-2G4M04S é 17,5×28,7; checar se existe variante menor da família E73 que atenda); ou (3) aceitar overhang do módulo na borda. A sobreposição BT1×U1 (5 courtyards + 6 clearance + 4 mask) tem a mesma causa raiz. Os 11 `copper_edge_clearance` restantes são todos essa física documentada.
