@@ -13,3 +13,4 @@ hardware/kicad/_spike/
 firmware/**/_build/
 *.bin
 *.hex
+test4l-drc.rpt

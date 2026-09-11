@@ -16,6 +16,7 @@ Requires: python3 stdlib + pcbnew. No kiutils/skidl (absent on this host).
 from __future__ import annotations
 
 import argparse
+import math
 import os
 import sys
 import traceback
@@ -112,8 +113,10 @@ def create_board(
 
     - shape="rect": width_mm x height_mm rectangle (origin = centre).
     - shape="circle": diameter_mm disk (origin = centre) — wristband form factor.
-    - layers: copper layer count (2 for all NibasRockBar boards).
-    - thickness_mm: board thickness (design setting, used by STEP export).
+    - layers: copper layer count (2 for all NibasRockBar boards; 4 enables
+      the default KiCad stackup F.Cu, In1.Cu, In2.Cu, B.Cu).
+    - thickness_mm: board thickness (design setting, used by STEP export;
+      0.8 mm for both 2L and 4L wristband boards).
     """
     if shape not in ("rect", "circle"):
         raise BoardBuilderError(f"shape must be 'rect' or 'circle', got {shape!r}")
@@ -121,11 +124,21 @@ def create_board(
         raise BoardBuilderError("rect board needs width_mm and height_mm")
     if shape == "circle" and diameter_mm is None:
         raise BoardBuilderError("circle board needs diameter_mm")
+    if int(layers) not in (2, 4):
+        raise BoardBuilderError(f"layers must be 2 or 4, got {layers!r}")
 
     board = pcbnew.CreateEmptyBoard()
     ds = board.GetDesignSettings()
     ds.SetCopperLayerCount(int(layers))
     ds.SetBoardThickness(_nm(thickness_mm))
+
+    if int(layers) == 4:
+        # Default KiCad 4L stackup order: F.Cu, In1.Cu, In2.Cu, B.Cu.
+        # SetCopperLayerCount(4) enables exactly these four; verify so a
+        # future default change cannot silently break us.
+        for _name in ("F.Cu", "In1.Cu", "In2.Cu", "B.Cu"):
+            if not board.IsLayerEnabled(_layer_id(_name)):
+                raise BoardBuilderError(f"4L stackup: layer {_name} not enabled after setup")
 
     if shape == "rect":
         hw, hh = float(width_mm) / 2.0, float(height_mm) / 2.0
@@ -285,14 +298,37 @@ def add_via(
     *,
     drill_mm: float = DEFAULT_VIA_DRILL_MM,
     diameter_mm: float = DEFAULT_VIA_DIAMETER_MM,
+    layer_top="F.Cu",
+    layer_bottom="B.Cu",
 ) -> "pcbnew.PCB_VIA":
-    """Add a through via (F.Cu <-> B.Cu) at (x, y)."""
+    """Add a via at (x, y) spanning an arbitrary copper layer pair.
+
+    Defaults to a through via (F.Cu <-> B.Cu) — the pre-4L behaviour.
+    Blind/buried pairs pick the matching type automatically:
+    - F.Cu <-> B.Cu -> VIATYPE_THROUGH (e.g. F.Cu->B.Cu)
+    - one side outer (F.Cu/B.Cu), other inner -> VIATYPE_BLIND
+      (e.g. F.Cu->In1.Cu, F.Cu->In2.Cu)
+    - both sides inner -> VIATYPE_BURIED (e.g. In1.Cu->In2.Cu)
+    """
+    top_id = _layer_id(layer_top)
+    bot_id = _layer_id(layer_bottom)
+    if top_id == bot_id:
+        raise BoardBuilderError(
+            f"via layer pair must span two different layers, got {layer_top!r} -> {layer_bottom!r}"
+        )
+    outer = {pcbnew.F_Cu, pcbnew.B_Cu}
+    if {top_id, bot_id} == outer:
+        via_type = pcbnew.VIATYPE_THROUGH
+    elif top_id in outer or bot_id in outer:
+        via_type = pcbnew.VIATYPE_BLIND
+    else:
+        via_type = pcbnew.VIATYPE_BURIED
     via = pcbnew.PCB_VIA(board)
     via.SetPosition(_vec(x_mm, y_mm))
-    via.SetViaType(pcbnew.VIATYPE_THROUGH)
+    via.SetViaType(via_type)
     via.SetDrill(_nm(drill_mm))
     via.SetWidth(_nm(diameter_mm))
-    via.SetLayerPair(pcbnew.F_Cu, pcbnew.B_Cu)
+    via.SetLayerPair(top_id, bot_id)
     via.SetNetCode(get_or_create_net(board, net_name).GetNetCode())
     board.Add(via)
     return via
@@ -344,6 +380,52 @@ def add_rect_zone(
         board,
         net_name,
         [(x1_mm, y1_mm), (x2_mm, y1_mm), (x2_mm, y2_mm), (x1_mm, y2_mm)],
+        layer=layer,
+        priority=priority,
+    )
+
+
+def add_plane(
+    board: "pcbnew.BOARD",
+    net_name: str,
+    layer,
+    *,
+    center_mm: tuple[float, float] = (100.0, 100.0),
+    radius_mm: float = 16.0,
+    segments: int = 64,
+    priority: int = DEFAULT_ZONE_PRIORITY,
+) -> "pcbnew.ZONE":
+    """Add a solid copper plane on an inner layer (In1.Cu or In2.Cu).
+
+    The plane is a circle of radius_mm centred on center_mm, approximated
+    as a `segments`-gon zone outline (defaults: r=16 at (100, 100)).
+    Continuous pour — no keepouts are added. Call fill_zones(board)
+    afterwards to run ZONE_FILLER.
+    """
+    key = layer if isinstance(layer, int) else str(layer)
+    if key not in ("In1.Cu", "In2.Cu") and key not in (
+        COPPER_LAYERS["In1.Cu"],
+        COPPER_LAYERS["In2.Cu"],
+    ):
+        raise BoardBuilderError(
+            f"plane layer must be 'In1.Cu' or 'In2.Cu', got {layer!r}"
+        )
+    if board.GetCopperLayerCount() < 4:
+        raise BoardBuilderError(
+            "add_plane needs a 4-layer board (create_board(..., layers=4))"
+        )
+    cx, cy = float(center_mm[0]), float(center_mm[1])
+    points = [
+        (
+            cx + float(radius_mm) * math.cos(2.0 * math.pi * i / int(segments)),
+            cy + float(radius_mm) * math.sin(2.0 * math.pi * i / int(segments)),
+        )
+        for i in range(int(segments))
+    ]
+    return add_zone(
+        board,
+        net_name,
+        points,
         layer=layer,
         priority=priority,
     )

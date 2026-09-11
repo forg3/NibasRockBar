@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+"""Placa 4 camadas Ø32 mm — stackup: F.Cu=sinal / In1.Cu=GND / In2.Cu=VDD_BAT
+/ B.Cu=sinal+GND.
+
+Potência (GND, VDD_BAT) vai em planos internos com vias blind a partir de
+F.Cu (nunca em trilha); sinais (XC1/XC2, ANT/RF, DEC1-4, DCC, SWD, RESET)
+roteados em F.Cu/B.Cu pelo mesmo A* em grade 0,5 mm.
+"""
 import heapq
 import itertools
 import sys
@@ -11,6 +18,7 @@ import pcbnew
 
 sys.path.append("/home/forg3/projetos/NibasRockBar/hardware/kicad/tools")
 import board_builder as bb
+from board_builder import add_plane, add_via, fill_zones, _layer_id
 
 # Raiz das libs custom primeiro: resolve 'nibas_wristband:...' por caminho
 # completo (<root>/<Lib>.pretty/<Fp>.kicad_mod); libs padrão caem para
@@ -82,6 +90,7 @@ def parse_footprints(path) -> dict:
 # Placement (mm relativos ao centro do disco)
 # ---------------------------------------------------------------------------
 CENTER_X, CENTER_Y = 100.0, 100.0   # centro do disco Ø32 mm
+BOARD_CENTER = (CENTER_X, CENTER_Y)  # (100, 100) — centro do disco p/ add_plane
 
 # Rotação por ref (graus). BT1 = Keystone 1060 (3 pads): corpo 28,4×22 com
 # abas em ±14,655 mm no eixo X nativo. Rot 270° põe a aba VDD (pad 1) no
@@ -470,12 +479,10 @@ def astar_route(grid, obstacles, start, goal, step=0.5, via_obstacles=None,
 # nome): a net entra se tocar algum pin exato (ref, pin), qualquer pino de
 # algum ref em refs, ou ter o nome exato. Os NOMES reais vêm da netlist
 # parseada (nada hardcoded por nome, exceto VDD_BAT, grupo por nome).
-# GND NÃO entra: fica para a zona de cobre, não para trilha.
+# GND e VDD_BAT NÃO entram: potência vai nos planos internos (In1.Cu=GND,
+# In2.Cu=VDD_BAT) com vias blind a partir de F.Cu (add_power_vias) — nunca
+# em trilha. Sem a potência nas trilhas, os corredores abrem p/ os sinais.
 _ROUTE_GROUPS = [
-    # Bateria: por nome (trilha mais larga, 0,5 mm) — PRIMEIRA na ordem: é a
-    # rede de maior extensão (BT1→C4→C8→TP1→R1→U1) e, se roteada tarde,
-    # monopoliza os corredores norte/sul e starving todas as demais.
-    ((), frozenset(), "VDD_BAT"),
     # RF: U1.19 / C3 / L1 / ANT1  (NET_ANT, NET_RF)
     ((("U1", "19"),), frozenset({"C3", "L1", "ANT1"}), None),
     # Cristal: U1.23 / U1.24 / X1 / C1 / C2  (NET_XC1, NET_XC2)
@@ -497,12 +504,13 @@ def _nets_touching(nets, pins, refs, name=None) -> list:
 
     pins: {(ref, pin), ...} exatos; refs: {ref, ...} (qualquer pino);
     name: nome exato da net (grupo por nome, com pins/refs vazios).
-    GND é sempre excluído — senão seria pego pelos refs de RF/cristal/
-    DC/DC/DEC (C3.2, C1.2, L2, C10, C5... são todos GND).
+    GND e VDD_BAT são sempre excluídos — senão o GND seria pego pelos
+    refs de RF/cristal/DC/DC/DEC (C3.2, C1.2, L2, C10, C5... são todos GND);
+    potência vai em planos, não em trilha.
     """
     out = []
     for net_name, nodes in nets.items():
-        if net_name == "GND":
+        if net_name in ("GND", "VDD_BAT"):
             continue
         if name is not None:
             if net_name == name:
@@ -724,6 +732,85 @@ def _route_pair(board, placed, grid, net_name, width_mm, routed_tracks,
     return path, w_s, w_g
 
 
+# ---------------------------------------------------------------------------
+# Power planes (internal) + blind vias (F.Cu -> In1.Cu / In2.Cu)
+# ---------------------------------------------------------------------------
+# Micro-via parameters for power stitching (QFN-friendly).
+_PWR_VIA_DRILL_MM = 0.2
+_PWR_VIA_DIA_MM = 0.4
+_PWR_GRID_STEP_MM = 0.8    # 3×3 grid spacing
+_PWR_GRID_MIN_PAD_MM = 1.8  # pad ≥1.8 mm ambos → 3×3; senão via única
+
+
+def add_power_planes_and_vias(board, placed):
+    """Planos internos de potência: In1.Cu = GND, In2.Cu = VDD_BAT.
+
+    Zonas circulares r=16 mm centradas em BOARD_CENTER. O keepout da
+    antena (KEEPOUT_ANT, centro ~11 mm, r ≈ 3.5 mm) é reforçado pelo
+    sistema de obstáculos durante o A*; não é necessário cutout na zona
+    porque a rede da antena (NET_ANT/NET_RF) é isolada em F.Cu e não
+    encosta nos planos internos. Chamar fill_zones() depois desta função.
+    """
+    add_plane(board, "GND", "In1.Cu",
+              center_mm=BOARD_CENTER, radius_mm=16)
+    add_plane(board, "VDD_BAT", "In2.Cu",
+              center_mm=BOARD_CENTER, radius_mm=16)
+
+
+def add_power_vias(board, net_name, layer_bottom, placed, grid_3x3=True):
+    """Vias cegas F.Cu → plano interno para cada pad F.Cu de net_name.
+
+    Pads grandes (≥ _PWR_GRID_MIN_PAD_MM em ambas as dimensões) recebem
+    grade 3×3 de micro-vias (espaçamento _PWR_GRID_STEP_MM); pads menores
+    recebem via única no centro. Parâmetros: furo 0,2 mm, diâmetro 0,4 mm.
+
+    Posições com via existente a ≤ 0,55 mm (regra hole-to-hole) são
+    puladas — evita conflito com as vias da malha do die pad (add_die_mesh).
+
+    Retorna o nº de vias cegas adicionadas.
+    """
+    n = 0
+    for ref, fp in placed.items():
+        for pad in fp.Pads():
+            if pad.GetNetname() != net_name:
+                continue
+            if pad.GetLayer() != pcbnew.F_Cu:
+                continue  # somente pads F.Cu recebem via cega p/ camada interna
+            px, py = pad_abs_pos(fp, pad.GetNumber())
+            pw = bb._mm(pad.GetSizeX())
+            ph = bb._mm(pad.GetSizeY())
+            if grid_3x3 and min(pw, ph) >= _PWR_GRID_MIN_PAD_MM:
+                offsets = [
+                    (-_PWR_GRID_STEP_MM, -_PWR_GRID_STEP_MM),
+                    (0.0, -_PWR_GRID_STEP_MM),
+                    (_PWR_GRID_STEP_MM, -_PWR_GRID_STEP_MM),
+                    (-_PWR_GRID_STEP_MM, 0.0),
+                    (0.0, 0.0),
+                    (_PWR_GRID_STEP_MM, 0.0),
+                    (-_PWR_GRID_STEP_MM, _PWR_GRID_STEP_MM),
+                    (0.0, _PWR_GRID_STEP_MM),
+                    (_PWR_GRID_STEP_MM, _PWR_GRID_STEP_MM),
+                ]
+            else:
+                offsets = [(0.0, 0.0)]
+            for ox, oy in offsets:
+                vx, vy = px + ox, py + oy
+                if math.hypot(vx - CENTER_X, vy - CENTER_Y) > 15.0:
+                    continue
+                # hole-to-hole ≥ 0,55 mm contra qualquer via existente
+                if any(math.hypot(vx - ex, vy - ey) <= 0.55 + 1e-9
+                       for ex, ey, _vn in _ALL_VIAS):
+                    continue
+                add_via(board, net_name, vx, vy,
+                        drill_mm=_PWR_VIA_DRILL_MM,
+                        diameter_mm=_PWR_VIA_DIA_MM,
+                        layer_top="F.Cu",
+                        layer_bottom=layer_bottom)
+                _ALL_VIAS.append((vx, vy, net_name))
+                n += 1
+    return n
+
+
 def route_all(board, placed, nets, grid, routed_tracks=None) -> tuple:
     """Roteia todas as nets (exceto GND) na ordem de _ROUTE_GROUPS.
 
@@ -740,6 +827,12 @@ def route_all(board, placed, nets, grid, routed_tracks=None) -> tuple:
     routed_tracks = [] if routed_tracks is None else list(routed_tracks)
     pendencias = []
     selected = set()
+
+    # --- Power planes + blind vias (F.Cu -> inner layers) -------------------
+    add_power_planes_and_vias(board, placed)
+    add_power_vias(board, "GND", "In1.Cu", placed)
+    add_power_vias(board, "VDD_BAT", "In2.Cu", placed)
+    fill_zones(board)
 
     for pins, refs, name in _ROUTE_GROUPS:
         group_nets = _nets_touching(nets, pins, refs, name)
@@ -1763,7 +1856,7 @@ def build_board():
     """
     fp_map = parse_footprints(SCH_FILE)
 
-    board = bb.create_board(shape="circle", diameter_mm=32.0, layers=2, thickness_mm=0.8)
+    board = bb.create_board(shape="circle", diameter_mm=32.0, layers=4, thickness_mm=0.8)
     # create_board centra na origem; move o círculo Edge.Cuts p/ (100,100).
     # Círculo KiCad = centro (start) + ponto na borda (end). SetCenter sozinho
     # deixa o `end` em (16,0) absoluto e o raio vira ~130,6 mm (bug da
